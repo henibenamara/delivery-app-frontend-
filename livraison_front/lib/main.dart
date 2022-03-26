@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_livraison/views/auth/login.dart';
 import 'package:front_livraison/views/client.dart';
+import 'package:front_livraison/views/client/clientList.dart';
 import 'package:front_livraison/views/livraison/AddLivraison.dart';
 import 'package:front_livraison/views/livraison/DetailLivraison.dart';
 import 'package:front_livraison/views/livraison/livraisonList.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
           '/livraison': (context) => LivraisonPage(),
           '/Addlivraison': (context) => AddLivraisonWidget(),
            '/responsable' : (context) => responsable(),
+          '/client' : (context) => ClientPage(),
+
 
         },
       ),

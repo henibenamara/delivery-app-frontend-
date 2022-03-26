@@ -30,29 +30,27 @@ class _LivraisonPageState extends State<LivraisonPage> {
           print('snapshot is : ${snapshot.data}');
 
           if ((snapshot.hasData)) {
-
-            return ListView.builder(itemBuilder: (context, index) {
-
-              return ListTile(
-                title: Text(snapshot.data![index]['numLivraison'].toString()),
-                subtitle: Text(snapshot.data![index]['AdressseDes']),
-                onTap:() {
-                  Navigator.push(context,
-                      MaterialPageRoute (builder: (context)=> DetailLivraison(snapshot.data![index])));
-
-                },
-              );
-
-            },
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(snapshot.data![index]['numLivraison'].toString()),
+                  subtitle: Text(snapshot.data![index]['AdressseDes']),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                DetailLivraison(snapshot.data![index])));
+                  },
+                );
+              },
               itemCount: snapshot.data?.length,
-
             );
           } else {
             return Center(
               child: Text('data is null'),
             );
           }
-
         },
       ),
     );

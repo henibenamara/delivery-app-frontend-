@@ -47,6 +47,12 @@ Widget createDrawer(BuildContext context) {
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/Addlivraison");
               }),
+          ListTile(
+              leading: Icon(Icons.monetization_on),
+              title: Text('list client'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/client");
+              }),
         ],
       ));
 }
