@@ -6,6 +6,7 @@ import 'package:front_livraison/views/livraison/AddLivraison.dart';
 import 'package:front_livraison/views/livraison/DetailLivraison.dart';
 import 'package:front_livraison/views/livraison/livraisonList.dart';
 import 'package:front_livraison/views/livreur.dart';
+import 'package:front_livraison/views/livreur/livreurList.dart';
 import 'package:front_livraison/views/resp.dart';
 
 
@@ -30,6 +31,8 @@ class MyApp extends StatelessWidget {
           '/Addlivraison': (context) => AddLivraisonWidget(),
            '/responsable' : (context) => responsable(),
           '/client' : (context) => ClientPage(),
+          '/livreur' : (context) => LivreurPage(),
+
 
 
         },

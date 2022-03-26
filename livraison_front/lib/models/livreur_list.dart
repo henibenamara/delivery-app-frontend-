@@ -11,6 +11,7 @@ class LivreurList {
     required this.nom,
     required this.prenom,
     required this.userId,
+    required this.livcin,
     required this.livTelephone,
     required this.livAdresse,
     required this.livMatVecu,
@@ -22,6 +23,7 @@ class LivreurList {
   late final String nom;
   late final String prenom;
   late final String userId;
+  late final String livcin;
   late final String livTelephone;
   late final String livAdresse;
   late final String livMatVecu;
@@ -37,6 +39,7 @@ class LivreurList {
     nom = json['prenom'];
     prenom = json['prenom'];
     userId = json['userId'];
+    livcin = json['livcin'];
     livTelephone = json['livTelephone'];
     livAdresse = json['livAdresse'];
     livMatVecu = json['livMatVecu'];
@@ -52,6 +55,7 @@ class LivreurList {
     _data['nom'] = nom;
     _data['prenom'] = prenom;
     _data['userId'] = userId;
+    _data['livcin'] = livcin;
     _data['livTelephone'] = livTelephone;
     _data['livAdresse'] = livAdresse;
     _data['livMatVecu'] = livMatVecu;
