@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front_livraison/models/livraison.dart';
-import 'package:front_livraison/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer.dart';
+import '../../widgets/drawer_client.dart';
 
 class AddLivraisonWidget extends StatefulWidget {
 
@@ -33,7 +33,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: createDrawer(context),
+      drawer: clientDrawer(context),
       appBar: AppBar(
         title: Text('Add livraison'),
       ),
@@ -192,7 +192,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                         poidsColis:int.parse(_poidsColisController.text),idClient: userId
                                     ));
 
-                                    Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(context, "/livraison");
                                   }
                                 },
                                 child: Text('Save',

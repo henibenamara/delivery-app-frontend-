@@ -1,6 +1,6 @@
 
 import 'dart:convert';
-import 'package:front_livraison/models/client_list.dart';
+
 import 'package:http/http.dart' as http;
 
 import '../constant/app_constants.dart';

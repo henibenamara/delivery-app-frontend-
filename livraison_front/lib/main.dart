@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:front_livraison/views/auth/login.dart';
-import 'package:front_livraison/views/client.dart';
-import 'package:front_livraison/views/client/clientList.dart';
-import 'package:front_livraison/views/livraison/AddLivraison.dart';
-import 'package:front_livraison/views/livraison/DetailLivraison.dart';
-import 'package:front_livraison/views/livraison/livraisonList.dart';
-import 'package:front_livraison/views/livreur.dart';
-import 'package:front_livraison/views/livreur/livreurList.dart';
-import 'package:front_livraison/views/resp.dart';
+import 'package:livraison_front/views/auth/login.dart';
+import 'package:livraison_front/views/client/clientList.dart';
+import 'package:livraison_front/views/livraison/AddLivraison.dart';
+import 'package:livraison_front/views/livraison/livraisonList.dart';
+import 'package:livraison_front/views/livreur.dart';
+import 'package:livraison_front/views/livreur/livreurList.dart';
+import 'package:livraison_front/views/resp.dart';
 
 
 void main() {
@@ -25,12 +23,13 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => LoginScreen(),
+
           //'/client': (context) => client(),
           '/livreur': (context) => livreur(),
-          '/livraison': (context) => LivraisonPage(),
+          '/livraison': (context) => const LivraisonPage(),
           '/Addlivraison': (context) => AddLivraisonWidget(),
            '/responsable' : (context) => responsable(),
-          '/client' : (context) => ClientPage(),
+          '/client' : (context) => const ClientPage(),
           '/livreur' : (context) => LivreurPage(),
 
 

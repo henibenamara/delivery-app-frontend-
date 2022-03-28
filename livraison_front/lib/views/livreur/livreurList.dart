@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:front_livraison/constant/message_constants.dart';
 
+
+import '../../constant/message_constants.dart';
 import '../../models/livreur_list.dart';
 import '../../services/livreurService.dart';
 import '../../widgets/custom_card.dart';
@@ -157,6 +158,7 @@ class ErrorOccurred extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: const Text(MessageConstants.ERROR_OCCURED),
+
     );
   }
 }
@@ -176,6 +178,7 @@ class NoSavedData extends StatelessWidget {
         const SizedBox(height: 15),
         Text(
           MessageConstants.NO_SAVED_DATA,
+
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,

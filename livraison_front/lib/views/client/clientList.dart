@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:front_livraison/constant/message_constants.dart';
 
+
+import '../../constant/message_constants.dart';
 import '../../models/client_list.dart';
 import '../../services/clientService.dart';
 import '../../widgets/custom_card.dart';

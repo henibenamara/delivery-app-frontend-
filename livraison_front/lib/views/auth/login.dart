@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:front_livraison/constant/app_constants.dart';
-import 'package:front_livraison/views/auth/register.dart';
-import 'package:front_livraison/views/livreur.dart';
-import 'package:front_livraison/widgets/background.dart';
+import 'package:livraison_front/constant/app_constants.dart';
+import 'package:livraison_front/views/auth/register.dart';
+import 'package:livraison_front/views/livreur.dart';
+import 'package:livraison_front/widgets/background.dart';
 
 
 

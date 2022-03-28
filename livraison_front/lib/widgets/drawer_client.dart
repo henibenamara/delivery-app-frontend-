@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-Widget createDrawer(BuildContext context) {
+Widget clientDrawer(BuildContext context) {
 
   return Drawer(
       child: ListView(
@@ -11,25 +11,14 @@ Widget createDrawer(BuildContext context) {
             color: Theme.of(context).canvasColor,
             child: DrawerHeader(
               child: Text(
-                'Navigation Drawer',
+                'Client',
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
             ),
           ),
-          ListTile(
-              leading: Icon(Icons.monetization_on),
-              title: Text('livreur'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/livreur");
-              }),
-          ListTile(
-              leading: Icon(Icons.pie_chart),
-              title: Text('responsable'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/responsable");
-              }),
+
           ListTile(
               leading: Icon(Icons.category),
               title: Text('client'),
@@ -50,12 +39,7 @@ Widget createDrawer(BuildContext context) {
                 Navigator.pushReplacementNamed(context, "/Addlivraison");
 
               }),
-          ListTile(
-              leading: Icon(Icons.monetization_on),
-              title: Text('list client'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/client");
-              }),
+
         ],
       ));
 }
