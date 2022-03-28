@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_livraison/models/livraison.dart';
 
 import '../../constant/message_constants.dart';
 import '../../models/livraison_list.dart';
@@ -36,11 +37,20 @@ class _LivraisonPageState extends State<LivraisonPage> {
                   title: Text(snapshot.data![index]['numLivraison'].toString()),
                   subtitle: Text(snapshot.data![index]['AdressseDes']),
                   onTap: () {
+                    Livraison livraison = new Livraison(
+                        adresseExp: snapshot.data![index]['AdresseExp'],
+                        adressseDes: snapshot.data![index]['AdressseDes'],
+                        dateDeLivraison: snapshot.data![index]
+                            ['DateDeLivraison'],
+                        DesColis: snapshot.data![index]['colisId']['DesColis'],
+                        numLivraison: snapshot.data![index]['numLivraison'],
+                        typeColis: snapshot.data![index]['colisId']['typeColis'],
+                        poidsColis: snapshot.data![index]['colisId']['poidsColis'],sId:snapshot.data![index]['_id'] );
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                DetailLivraison(snapshot.data![index])));
+                                DetailLivraison(livraison)));
                   },
                 );
               },
@@ -185,7 +195,7 @@ class NoSavedData extends StatelessWidget {
       ],
     );
   }
-  /*
+/*
 class ListLivraison extends StatefulWidget {
   const ListLivraison({Key? key}) : super(key: key);
 

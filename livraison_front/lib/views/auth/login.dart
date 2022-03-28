@@ -3,14 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:front_livraison/constant/app_constants.dart';
 import 'package:front_livraison/views/auth/register.dart';
+import 'package:front_livraison/views/livreur.dart';
 import 'package:front_livraison/widgets/background.dart';
 
 
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../../models/user.dart';
+import '../client.dart';
 
 
 
@@ -197,11 +200,17 @@ class _SignInState extends State<LoginScreen> {
 
 
       if(u.user.role =="client"){
-        Navigator.of(context).pushNamed('/client');
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userId', u.user.id);
+       Navigator.of(context).pushNamed('/client');
         debugPrint('data from server is : ${u.toString()}');
+
       }
       if(u.user.role =="livreur"){
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userId', u.user.id);
         Navigator.pushNamed(context, '/livreur');
+
         debugPrint('data from server is : ${u.toString()}');
 
       }if(u.user.role =="responsable"){

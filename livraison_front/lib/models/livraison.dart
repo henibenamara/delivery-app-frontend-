@@ -8,6 +8,7 @@ class Livraison {
   int? poidsColis;
   String? sId;
   int? iV;
+  String? idClient;
 
   Livraison(
       {this.numLivraison,
@@ -18,7 +19,8 @@ class Livraison {
         this.DesColis,
         this.poidsColis,
         this.sId,
-        this.iV, });
+        this.iV,
+        this.idClient });
 
   Livraison.fromJson(Map<String, dynamic> json) {
     numLivraison = json['numLivraison'];

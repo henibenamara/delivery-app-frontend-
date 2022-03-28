@@ -100,17 +100,20 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                           ],
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: Column(
-                          children: <Widget>[
-                            Text('DesColis',
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.8))),
-                            Text(
-                              widget.livraison.DesColis.toString(),
-                            )
-                          ],
+                      Visibility(
+                        visible: widget.livraison.DesColis != null,
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text('DesColis',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.8))),
+                              Text(
+                                widget.livraison.DesColis.toString(),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       Container(

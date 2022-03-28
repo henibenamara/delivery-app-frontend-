@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front_livraison/models/livraison.dart';
+import 'package:front_livraison/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer.dart';
 
 class AddLivraisonWidget extends StatefulWidget {
-  AddLivraisonWidget();
+
+
+
+  AddLivraisonWidget({Key? key}) : super(key: key);
 
   @override
   _AddLivraisonWidget createState() => _AddLivraisonWidget();
@@ -169,10 +174,14 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                             children: <Widget>[
                               RaisedButton(
                                 splashColor: Colors.red,
-                                onPressed: () {
+                                onPressed: () async{
+                                  final prefs = await SharedPreferences.getInstance();
+                                  final String? userId = prefs.getString('userId');
+                                  print('userId is : $userId');
                                   if (_addFormKey.currentState!.validate()) {
                                     _addFormKey.currentState?.save();
-                                    api.addNewLivraison(Livraison(
+                                    api.addNewLivraison(
+                                        Livraison(
                                         numLivraison:
                                             int.parse(_numController.text),
                                         adressseDes: _adressdesController.text,
@@ -180,7 +189,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                         dateDeLivraison: _dateController.text,
                                         typeColis: _typeColisController.text,
                                         DesColis :_desColisController.text,
-                                        poidsColis:int.parse(_poidsColisController.text)
+                                        poidsColis:int.parse(_poidsColisController.text),idClient: userId
                                     ));
 
                                     Navigator.pop(context);

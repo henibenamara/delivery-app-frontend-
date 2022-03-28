@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:front_livraison/models/user.dart';
+import 'package:front_livraison/views/client.dart';
+import 'package:front_livraison/views/livraison/AddLivraison.dart';
 
 Widget createDrawer(BuildContext context) {
 
@@ -34,6 +37,7 @@ Widget createDrawer(BuildContext context) {
               title: Text('client'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/client");
+
               }),
           ListTile(
               leading: Icon(Icons.category),
@@ -46,6 +50,7 @@ Widget createDrawer(BuildContext context) {
               title: Text('Add livraison'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/Addlivraison");
+
               }),
           ListTile(
               leading: Icon(Icons.monetization_on),
