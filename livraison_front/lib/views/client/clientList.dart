@@ -6,6 +6,7 @@ import '../../models/client_list.dart';
 import '../../services/clientService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
+import '../../widgets/drawer_responsable.dart';
 
 class ClientPage extends StatefulWidget {
   const ClientPage({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _ClientPageState extends State<ClientPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
-      drawer: createDrawer(context),
+      drawer: ResponsableDrawer(context),
       body: FutureBuilder(
         future: ClientService().getAllClient(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -35,6 +36,8 @@ class _ClientPageState extends State<ClientPage> {
                 return ListTile(
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
+                  trailing: Icon(Icons.star),
+                    leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
                 );
               },
               itemCount: snapshot.data?.length,

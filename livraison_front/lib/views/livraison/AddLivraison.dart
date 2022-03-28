@@ -6,6 +6,7 @@ import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer.dart';
 import '../../widgets/drawer_client.dart';
+import '../../widgets/drawer_responsable.dart';
 
 class AddLivraisonWidget extends StatefulWidget {
 
@@ -33,7 +34,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: clientDrawer(context),
+      drawer: ResponsableDrawer(context),
       appBar: AppBar(
         title: Text('Add livraison'),
       ),

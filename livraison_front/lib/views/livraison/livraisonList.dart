@@ -7,6 +7,7 @@ import '../../models/livraison_list.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
+import '../../widgets/drawer_responsable.dart';
 import 'DetailLivraison.dart';
 
 class LivraisonPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _LivraisonPageState extends State<LivraisonPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
-      drawer: createDrawer(context),
+      drawer: ResponsableDrawer(context),
       body: FutureBuilder(
         future: LivraisonService().getAllTLivraison(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -35,8 +36,29 @@ class _LivraisonPageState extends State<LivraisonPage> {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(snapshot.data![index]['numLivraison'].toString()),
-                  subtitle: Text(snapshot.data![index]['AdressseDes']),
+                  leading: new Image.asset(
+                    "images/col.jpg",
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                  ),
+
+                  title: new Text(
+                    snapshot.data![index]['AdresseExp'],
+                    style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: new Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        new Text(snapshot.data![index]['numLivraison'].toString(),
+                            style: new TextStyle(
+                                fontSize: 13.0, fontWeight: FontWeight.normal)),
+                        new Text('Population: ${snapshot.data![index]['AdressseDes']}',
+                            style: new TextStyle(
+                                fontSize: 11.0, fontWeight: FontWeight.normal)),
+                      ]),
+              //    title: Text(snapshot.data![index]['numLivraison'].toString()),
+              //    subtitle: Text(snapshot.data![index]['AdressseDes']),
                   onTap: () {
                     Livraison livraison = new Livraison(
                         adresseExp: snapshot.data![index]['AdresseExp'],

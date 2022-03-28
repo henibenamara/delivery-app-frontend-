@@ -6,6 +6,7 @@ import '../../models/livreur_list.dart';
 import '../../services/livreurService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
+import '../../widgets/drawer_responsable.dart';
 
 class LivreurPage extends StatefulWidget {
   const LivreurPage({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _LivreurPageState extends State<LivreurPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
-      drawer: createDrawer(context),
+      drawer: ResponsableDrawer(context),
       body: FutureBuilder(
         future: LivreurService().getAllLivreur(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -35,6 +36,8 @@ class _LivreurPageState extends State<LivreurPage> {
                 return ListTile(
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
+                    trailing: Icon(Icons.star),
+                    leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
                 );
               },
               itemCount: snapshot.data?.length,

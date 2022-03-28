@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer.dart';
+import '../widgets/drawer_responsable.dart';
 
 class responsable extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class responsable extends StatelessWidget {
       appBar: AppBar(
         title: Text('responsable'),
       ),
-      drawer: createDrawer(context),
+      drawer: ResponsableDrawer(context),
       body: Container(
         child: Center(
             child:

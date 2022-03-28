@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer.dart';
+import '../../widgets/drawer_responsable.dart';
 import 'EditLivraisont.dart';
 
 class DetailLivraison extends StatefulWidget {
@@ -23,7 +24,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: createDrawer(context),
+      drawer: ResponsableDrawer(context),
       appBar: AppBar(
         title: Text('Details'),
       ),
