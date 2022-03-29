@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +23,7 @@ class AddLivraisonWidget extends StatefulWidget {
 class _AddLivraisonWidget extends State<AddLivraisonWidget> {
   _AddLivraisonWidget();
 
+  Random random = new Random();
   final LivraisonService api = LivraisonService();
   final _addFormKey = GlobalKey<FormState>();
   final _numController = TextEditingController();
@@ -30,9 +33,12 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
   final _typeColisController = TextEditingController();
   final _desColisController = TextEditingController();
   final _poidsColisController = TextEditingController();
-
+  String? _dropDownValue;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       drawer: ResponsableDrawer(context),
       appBar: AppBar(
@@ -50,125 +56,104 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                     child: Column(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
-                                controller: _numController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  hintText: 'numero ',
+                          /**CONTROLLERUR DE LA TYPE **/
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(horizontal: 40),
+                            child: DropdownButton<String>(
+                                hint: _dropDownValue == null
+                                    ? Text('Type colis')
+                                    : Text(
+                                  _dropDownValue!,
+                                  style: TextStyle(color: Colors.blue),
                                 ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
-                          ),
-                        ),
+                                isExpanded: true,
+                                iconSize: 30.0,
+                                style: TextStyle(color: Colors.blue),
+                                items: ['type 1', 'type 2', 'type3'].map(
+                                      (val) {
+                                    return DropdownMenuItem<String>(
+                                      value: val,
+                                      child: Text(val),
+                                    );
+                                  },
+                                ).toList(),
+                                onChanged: (val) {
+                                  setState(
+                                        () {
+                                      _dropDownValue = val!;
+                                    },
+                                  );
+                                })),
+                        SizedBox(height: size.height * 0.03),
+
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          child: TextField(
+
                                 controller: _adressdesController,
                                 decoration: const InputDecoration(
-                                  hintText: 'adresse des',
+                                  labelText: 'adresse destinataire',
                                 ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
+
+
                           ),
                         ),
+                        SizedBox(height: size.height * 0.03),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          child: TextField(
                                 controller: _addressexpController,
                                 decoration: const InputDecoration(
-                                  hintText: 'Address expe',
+                                  labelText: 'Address expeditaire',
                                 ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
+
+
                           ),
                         ),
+                        SizedBox(height: size.height * 0.03),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          child: TextField(
                                 controller: _dateController,
+
                                 decoration: const InputDecoration(
-                                  hintText: 'date de livraison',
+                                  labelText: 'date de livraison',
                                 ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
+
+
                           ),
                         ),
+
+                        SizedBox(height: size.height * 0.03),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
-                                controller: _typeColisController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Type colis ',
-                                ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          child: TextField(
                                 controller: _desColisController,
                                 decoration: const InputDecoration(
-                                  hintText: 'Description colis ',
+                                  labelText: 'Description colis ',
                                 ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
+
                           ),
                         ),
+                        SizedBox(height: size.height * 0.03),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          child: TextField(
+                            keyboardType: TextInputType.number,
                                 controller: _poidsColisController,
                                 decoration: const InputDecoration(
-                                  hintText: 'poids colis ',
+                                  labelText: 'poid de colis en Kg ',
                                 ),
-                                validator: (value) {
-                                  return null;
-                                },
-                                onChanged: (value) {},
-                              ),
-                            ],
+
                           ),
                         ),
+                        SizedBox(height: size.height * 0.03),
+                        SizedBox(height: size.height * 0.03),
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                           child: Column(
@@ -184,11 +169,11 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                     api.addNewLivraison(
                                         Livraison(
                                         numLivraison:
-                                            int.parse(_numController.text),
+                                        random.nextInt(10000),
                                         adressseDes: _adressdesController.text,
                                         adresseExp: _addressexpController.text,
                                         dateDeLivraison: _dateController.text,
-                                        typeColis: _typeColisController.text,
+                                        typeColis: _dropDownValue,
                                         DesColis :_desColisController.text,
                                         poidsColis:int.parse(_poidsColisController.text),idClient: userId
                                     ));
@@ -196,9 +181,9 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                     Navigator.pushReplacementNamed(context, "/livraison");
                                   }
                                 },
-                                child: Text('Save',
+                                child: Text('Ajouter',
                                     style: TextStyle(color: Colors.white)),
-                                color: Colors.blue,
+                                color: Colors.purple,
                               )
                             ],
                           ),

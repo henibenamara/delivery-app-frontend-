@@ -26,6 +26,7 @@ class _LivraisonPageState extends State<LivraisonPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
+
       drawer: ResponsableDrawer(context),
       body: FutureBuilder(
         future: LivraisonService().getAllTLivraison(),
@@ -94,6 +95,10 @@ class _LivraisonPageState extends State<LivraisonPage> {
         child: AppBar(
           title: const Text("liste de livraison"),
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.menu_rounded),
+          ),
         ),
       );
 

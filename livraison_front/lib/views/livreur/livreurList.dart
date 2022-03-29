@@ -24,7 +24,7 @@ class _LivreurPageState extends State<LivreurPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
-      drawer: ResponsableDrawer(context),
+      drawer: createDrawer(context),
       body: FutureBuilder(
         future: LivreurService().getAllLivreur(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
