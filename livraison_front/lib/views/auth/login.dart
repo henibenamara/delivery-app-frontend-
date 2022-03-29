@@ -202,7 +202,7 @@ class _SignInState extends State<LoginScreen> {
       if(u.user.role =="client"){
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('userId', u.user.id);
-       Navigator.of(context).pushNamed('/client');
+       Navigator.of(context).pushNamed('/clientHome');
         debugPrint('data from server is : ${u.toString()}');
 
       }
