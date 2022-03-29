@@ -40,7 +40,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
         .of(context)
         .size;
     return Scaffold(
-      drawer: ResponsableDrawer(context),
+      drawer: clientDrawer(context),
       appBar: AppBar(
         title: Text('Add livraison'),
       ),
@@ -93,7 +93,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
 
                                 controller: _adressdesController,
                                 decoration: const InputDecoration(
-                                  labelText: 'adresse destinataire',
+                                  labelText: 'Adresse destinataire',
                                 ),
 
 
@@ -120,7 +120,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                 controller: _dateController,
 
                                 decoration: const InputDecoration(
-                                  labelText: 'date de livraison',
+                                  labelText: 'Date de livraison',
                                 ),
 
 
@@ -147,7 +147,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                             keyboardType: TextInputType.number,
                                 controller: _poidsColisController,
                                 decoration: const InputDecoration(
-                                  labelText: 'poid de colis en Kg ',
+                                  labelText: 'Poid de colis en Kg ',
                                 ),
 
                           ),
@@ -183,7 +183,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                 },
                                 child: Text('Ajouter',
                                     style: TextStyle(color: Colors.white)),
-                                color: Colors.purple,
+                                color: Colors.blue,
                               )
                             ],
                           ),

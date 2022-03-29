@@ -6,6 +6,7 @@ class Livraison {
   String? typeColis;
   String? DesColis;
   int? poidsColis;
+  String? etatLivraison;
   String? sId;
   int? iV;
   String? idClient;
@@ -20,6 +21,7 @@ class Livraison {
         this.poidsColis,
         this.sId,
         this.iV,
+        this.etatLivraison,
         this.idClient });
 
   Livraison.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class Livraison {
     typeColis = json['typeColis'];
     DesColis = json['DesColis'];
     poidsColis = json['poidsColis'];
+    etatLivraison=json['etatLivraison'];
     sId = json['_id'];
     iV = json['__v'];
   }
@@ -43,6 +46,7 @@ class Livraison {
     data['typeColis'] = this.typeColis;
     data['DesColis'] = this.DesColis;
     data['poidsColis'] = this.poidsColis;
+    data['etatLivraison']=this.etatLivraison;
     data['_id'] = this.sId;
     data['__v'] = this.iV;
     return data;

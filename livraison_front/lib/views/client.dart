@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-import '../widgets/drawer.dart';
+import '../widgets/drawer_client.dart';
 
 class client extends StatelessWidget {
 
@@ -15,7 +15,7 @@ class client extends StatelessWidget {
       appBar: AppBar(
         title: Text('Client'),
       ),
-      drawer: createDrawer(context),
+      drawer: clientDrawer(context),
       body: Container(
         child: Center(
             child:

@@ -20,21 +20,15 @@ Widget clientDrawer(BuildContext context) {
           ),
 
           ListTile(
-              leading: Icon(Icons.category),
-              title: Text('client'),
+              leading: Icon(Icons.monetization_on),
+              title: Text('Add livraison'),
               onTap: () {
-                Navigator.pushReplacementNamed(context, "/client");
+                Navigator.pushReplacementNamed(context, "/Addlivraison");
 
               }),
           ListTile(
-              leading: Icon(Icons.category),
-              title: Text('livraison'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/livraison");
-              }),
-          ListTile(
               leading: Icon(Icons.monetization_on),
-              title: Text('Add livraison'),
+              title: Text(''),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/Addlivraison");
 
