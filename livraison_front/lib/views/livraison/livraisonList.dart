@@ -58,14 +58,14 @@ class _LivraisonPageState extends State<LivraisonPage> {
                             style: new TextStyle(
                                 fontSize: 11.0, fontWeight: FontWeight.normal)),
                       ]),
-              //    title: Text(snapshot.data![index]['numLivraison'].toString()),
-              //    subtitle: Text(snapshot.data![index]['AdressseDes']),
+                  //    title: Text(snapshot.data![index]['numLivraison'].toString()),
+                  //    subtitle: Text(snapshot.data![index]['AdressseDes']),
                   onTap: () {
                     Livraison livraison = new Livraison(
                         adresseExp: snapshot.data![index]['AdresseExp'],
                         adressseDes: snapshot.data![index]['AdressseDes'],
                         dateDeLivraison: snapshot.data![index]
-                            ['DateDeLivraison'],
+                        ['DateDeLivraison'],
                         DesColis: snapshot.data![index]['colisId']['DesColis'],
                         numLivraison: snapshot.data![index]['numLivraison'],
                         typeColis: snapshot.data![index]['colisId']['typeColis'],
@@ -91,70 +91,70 @@ class _LivraisonPageState extends State<LivraisonPage> {
   }
 
   PreferredSize get appbar => PreferredSize(
-        preferredSize: Size(double.infinity, 50),
-        child: AppBar(
-          title: const Text("liste de livraison"),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.menu_rounded),
-          ),
-        ),
-      );
+    preferredSize: Size(double.infinity, 50),
+    child: AppBar(
+      title: const Text("liste de livraison"),
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.menu_rounded),
+      ),
+    ),
+  );
 
   Widget get showData => Column(
-        children: <Widget>[
-          newTaskPanel,
-          crudPanel,
-        ],
-      );
+    children: <Widget>[
+      newTaskPanel,
+      crudPanel,
+    ],
+  );
 
   Widget get newTaskPanel => TaskPanel(
-        widget: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children: <Widget>[
-                const SizedBox(height: 10),
-                _livraisonList.length > 0
-                    ? Expanded(
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return showCard(
-                              index,
-                              _livraisonList[index].numLivraison,
-                              _livraisonList[index].adressseDes,
-                              _livraisonList[index].adresseExp,
-                              _livraisonList[index].dateDeLivraison,
-                              _livraisonList[index].typeColis,
-                              _livraisonList[index].DesColis,
-                              _livraisonList[index].poidsColis,
-                            );
-                          },
-                          itemCount: _livraisonList.length,
-                        ),
-                      )
-                    : const NoSavedData(),
-              ],
-            ),
-          ),
+    widget: Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 10),
+            _livraisonList.length > 0
+                ? Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return showCard(
+                    index,
+                    _livraisonList[index].numLivraison,
+                    _livraisonList[index].adressseDes,
+                    _livraisonList[index].adresseExp,
+                    _livraisonList[index].dateDeLivraison,
+                    _livraisonList[index].typeColis,
+                    _livraisonList[index].DesColis,
+                    _livraisonList[index].poidsColis,
+                  );
+                },
+                itemCount: _livraisonList.length,
+              ),
+            )
+                : const NoSavedData(),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 
   Widget get crudPanel => Padding(
-        padding: const EdgeInsets.only(bottom: 15),
-      );
+    padding: const EdgeInsets.only(bottom: 15),
+  );
 
   Widget showCard(
-    int index,
-    String numLivraison,
-    String adressseDes,
-    String adresseExp,
-    String dateDeLivraison,
-    String sId,
-    String desColis,
-    String poidsColis,
-  ) =>
+      int index,
+      String numLivraison,
+      String adressseDes,
+      String adresseExp,
+      String dateDeLivraison,
+      String sId,
+      String desColis,
+      String poidsColis,
+      ) =>
       GestureDetector(
         onTap: () {
           _livraisonList[index].numLivraison;
@@ -226,13 +226,10 @@ class NoSavedData extends StatelessWidget {
 /*
 class ListLivraison extends StatefulWidget {
   const ListLivraison({Key? key}) : super(key: key);
-
   @override
   State<ListLivraison> createState() => _ListLivraison();
 }
-
 class _ListLivraison extends State<ListLivraison> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -243,7 +240,6 @@ class _ListLivraison extends State<ListLivraison> {
   @override
   Widget build(BuildContext context) {
     context.read<getData>().getListData();
-
     return Scaffold(
       appBar:AppBar(
         title: Text("List View Page"),
@@ -280,14 +276,10 @@ class _ListLivraison extends State<ListLivraison> {
       ),
     );
   }
-
-
   Future<void> _onRefresh() async{
     await Future.delayed(const Duration(seconds: 2));
     await context.read<getData>().getListData();
-
     setState(() {
-
     });
   }
 }*/

@@ -4,6 +4,7 @@ import 'package:livraison_front/views/client.dart';
 import 'package:livraison_front/views/client/clientList.dart';
 import 'package:livraison_front/views/livraison/AddLivraison.dart';
 import 'package:livraison_front/views/livraison/livraisonList.dart';
+import 'package:livraison_front/views/livraisonRequest.dart';
 import 'package:livraison_front/views/livreur.dart';
 import 'package:livraison_front/views/livreur/livreurList.dart';
 import 'package:livraison_front/views/resp.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
           '/Addlivraison': (context) => AddLivraisonWidget(),
            '/responsable' : (context) => responsable(),
           '/client' : (context) => const ClientPage(),
-          '/livreur' : (context) => LivreurPage(),
+          '/livreur' : (context) => LivraisonRequest(),
           '/clientHome' : (context) => client(),
+
 
         },
       ),

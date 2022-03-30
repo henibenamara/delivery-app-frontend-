@@ -37,7 +37,7 @@ dependencies:
   get:
   http:
   shared_preferences: ^2.0.13
-
+  sliding_card: ^0.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
