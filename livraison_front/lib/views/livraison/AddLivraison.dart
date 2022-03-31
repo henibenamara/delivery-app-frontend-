@@ -166,8 +166,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                   print('userId is : $userId');
                                   if (_addFormKey.currentState!.validate()) {
                                     _addFormKey.currentState?.save();
-                                    api.addNewLivraison(
-                                        Livraison(
+                                 var livraison = Livraison(
                                         numLivraison:
                                         random.nextInt(10000),
                                         adressseDes: _adressdesController.text,
@@ -176,9 +175,13 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                         typeColis: _dropDownValue,
                                         DesColis :_desColisController.text,
                                         poidsColis:int.parse(_poidsColisController.text),idClient: userId
-                                    ));
+                                    );
+                                 print('livraison is :${livraison.toString()}');
+                                    api.addNewLivraison(
+                                        livraison
+                                    );
 
-                                    Navigator.pushReplacementNamed(context, "/livraison");
+
                                   }
                                 },
                                 child: Text('Ajouter',

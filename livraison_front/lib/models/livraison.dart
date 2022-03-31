@@ -10,6 +10,7 @@ class Livraison {
   String? sId;
   int? iV;
   String? idClient;
+  String? idLivreur;
 
   Livraison(
       {this.numLivraison,
@@ -22,7 +23,8 @@ class Livraison {
         this.sId,
         this.iV,
         this.etatLivraison,
-        this.idClient });
+        this.idClient,
+      this.idLivreur});
 
   Livraison.fromJson(Map<String, dynamic> json) {
     numLivraison = json['numLivraison'];
@@ -47,8 +49,14 @@ class Livraison {
     data['DesColis'] = this.DesColis;
     data['poidsColis'] = this.poidsColis;
     data['etatLivraison']=this.etatLivraison;
-    data['_id'] = this.sId;
+    data['client'] = this.idClient;
+    data['livreur'] = this.idLivreur;
     data['__v'] = this.iV;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Livraison{numLivraison: $numLivraison, adressseDes: $adressseDes, adresseExp: $adresseExp, dateDeLivraison: $dateDeLivraison, typeColis: $typeColis, DesColis: $DesColis, poidsColis: $poidsColis, etatLivraison: $etatLivraison, sId: $sId, iV: $iV, idClient: $idClient, idLivreur: $idLivreur}';
   }
 }

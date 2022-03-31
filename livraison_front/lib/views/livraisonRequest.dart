@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constant/message_constants.dart';
 import '../../models/livraison.dart';
@@ -7,7 +8,6 @@ import '../../services/livraisonService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
-
 
 class LivraisonRequest extends StatefulWidget {
   const LivraisonRequest({Key? key}) : super(key: key);
@@ -19,12 +19,11 @@ class LivraisonRequest extends StatefulWidget {
 class _LivraisonRequest extends State<LivraisonRequest> {
   List<LivraisonList> _livraisonList = [];
   String _id = "";
-
+  final LivraisonService api = LivraisonService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-
         drawer: ResponsableDrawer(context),
         body: FutureBuilder(
             future: LivraisonService().getAllTLivraison(),
@@ -35,20 +34,16 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                   child: new ListView.builder(
                       itemCount: snapshot.data?.length,
                       itemBuilder: (BuildContext context, int index) =>
-                          buildCard(context, index)
-                  ),
+                          buildCard(context, index)),
                 );
               } else {
                 return Container(
                   child: Center(
-                      child:
-                      Text("data is null",
+                      child: Text("data is null",
                           style: TextStyle(fontSize: 20))), // Center
                 );
               }
-            }
-        )
-    );
+            }));
   }
 
   Widget buildCard(BuildContext context, int index) {
@@ -64,41 +59,49 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 8.0, bottom: 4.0),
-                        child: Row(children: <Widget>[
-                          Text("Numero :" +
-                              snapshot.data![index]['numLivraison']
-                                  .toString(),
-                            style: new TextStyle(fontSize: 20.0),),
-                          Spacer(),
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 4.0, bottom: 80.0),
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                         child: Row(children: <Widget>[
                           Text(
-                              "${"de : " + snapshot.data![index]['AdresseExp']
-                                  .toString()} ----> ${snapshot
-                                  .data![index]['AdressseDes']
-                                  .toString()
-                              }", style: new TextStyle(fontSize: 20.0)),
+                            "Numero :" +
+                                snapshot.data![index]['numLivraison']
+                                    .toString(),
+                            style: new TextStyle(fontSize: 20.0),
+                          ),
                           Spacer(),
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 8.0, bottom: 8.0),
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
+                        child: Row(children: <Widget>[
+                          Text(
+                              "${"de : " + snapshot.data![index]['AdresseExp'].toString()} ----> ${snapshot.data![index]['AdressseDes'].toString()}",
+                              style: new TextStyle(fontSize: 20.0)),
+                          Spacer(),
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Row(
                           children: <Widget>[
-                            Text("${snapshot
-                                .data![index]['colisId']
-                            ['poidsColis'] } Kg",
-                              style: new TextStyle(
-                                  fontSize: 20.0),),
+                            Text(
+                              "${snapshot.data![index]['colisId']['poidsColis']} Kg",
+                              style: new TextStyle(fontSize: 20.0),
+                            ),
                             Spacer(),
-                            Icon(Icons.directions_car),
+                            RaisedButton.icon(
+                                onPressed: () async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+                                  final String? userId =
+                                      prefs.getString('LivreurId');
+                                  print('livreurId is :$userId');
+                                  print(
+                                      'sId is : ${snapshot.data![index]['_id']}');
+                                  api.updateLivraison(
+                                      snapshot.data![index]['_id'], userId!);
+                                },
+                                icon: Icon(Icons.apartment),
+                                label: Text("accepter")),
                           ],
                         ),
                       )
@@ -110,14 +113,10 @@ class _LivraisonRequest extends State<LivraisonRequest> {
           } else {
             return Container(
               child: Center(
-                  child:
-                  Text("data is null",
+                  child: Text("data is null",
                       style: TextStyle(fontSize: 20))), // Center
             );
           }
-        }
-
-
-    );
+        });
   }
 }

@@ -66,4 +66,28 @@ class LivraisonService {
     }
     return listLivraison;
   }
+  //update livraison
+  Future<Response> updateLivraison(
+
+     String sId,String idLivreur) async {
+    final json =
+        {"sId" : sId,"livreur": idLivreur};
+    var data = jsonEncode(json);
+    final url =
+    Uri.parse(AppConstants.API_URL +" /livraison/$sId");
+    final request =
+    await http.put(url, body: data, headers: AppConstants.HEADERS);
+    Response response = Response();
+
+    try {
+      if (request.statusCode == 201) {
+        response = responseFromJson(request.body);
+      } else {
+        print(request.statusCode);
+      }
+    } catch (e) {
+      return Response();
+    }
+    return response;
+  }
 }
