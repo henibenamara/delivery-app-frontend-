@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:livraison_front/views/client/DetailClient.dart';
-
-
 import '../../constant/message_constants.dart';
-import '../../models/client.dart';
-import '../../models/client.dart';
 import '../../models/client_list.dart';
-import '../../models/user.dart';
-import '../../models/user.dart';
 import '../../services/clientService.dart';
 import '../../widgets/custom_card.dart';
-import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 
 class ClientPage extends StatefulWidget {

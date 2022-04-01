@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/': (context) => takephoto(),
+          '/': (context) => LoginScreen(),
 
           //'/client': (context) => client(),
           '/livreur': (context) => livreur(),
