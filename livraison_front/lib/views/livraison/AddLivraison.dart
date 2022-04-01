@@ -11,9 +11,6 @@ import '../../widgets/drawer_client.dart';
 import '../../widgets/drawer_responsable.dart';
 
 class AddLivraisonWidget extends StatefulWidget {
-
-
-
   AddLivraisonWidget({Key? key}) : super(key: key);
 
   @override
@@ -34,11 +31,11 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
   final _desColisController = TextEditingController();
   final _poidsColisController = TextEditingController();
   String? _dropDownValue;
+  String? _dropDownValue1;
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: clientDrawer(context),
       appBar: AppBar(
@@ -56,21 +53,21 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                     child: Column(
                       children: <Widget>[
                         Container(
-                          /**CONTROLLERUR DE LA TYPE **/
+                            /**CONTROLLERUR DE LA TYPE **/
                             alignment: Alignment.center,
                             margin: EdgeInsets.symmetric(horizontal: 40),
                             child: DropdownButton<String>(
                                 hint: _dropDownValue == null
                                     ? Text('Type colis')
                                     : Text(
-                                  _dropDownValue!,
-                                  style: TextStyle(color: Colors.blue),
-                                ),
+                                        _dropDownValue!,
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
                                 isExpanded: true,
                                 iconSize: 30.0,
                                 style: TextStyle(color: Colors.blue),
                                 items: ['type 1', 'type 2', 'type3'].map(
-                                      (val) {
+                                  (val) {
                                     return DropdownMenuItem<String>(
                                       value: val,
                                       child: Text(val),
@@ -79,24 +76,20 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                 ).toList(),
                                 onChanged: (val) {
                                   setState(
-                                        () {
+                                    () {
                                       _dropDownValue = val!;
                                     },
                                   );
                                 })),
                         SizedBox(height: size.height * 0.03),
-
                         Container(
                           alignment: Alignment.center,
                           margin: EdgeInsets.symmetric(horizontal: 40),
                           child: TextField(
-
-                                controller: _adressdesController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Adresse destinataire',
-                                ),
-
-
+                            controller: _adressdesController,
+                            decoration: const InputDecoration(
+                              labelText: 'Adresse destinataire',
+                            ),
                           ),
                         ),
                         SizedBox(height: size.height * 0.03),
@@ -104,12 +97,10 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                           alignment: Alignment.center,
                           margin: EdgeInsets.symmetric(horizontal: 40),
                           child: TextField(
-                                controller: _addressexpController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Address expeditaire',
-                                ),
-
-
+                            controller: _addressexpController,
+                            decoration: const InputDecoration(
+                              labelText: 'Address expeditaire',
+                            ),
                           ),
                         ),
                         SizedBox(height: size.height * 0.03),
@@ -117,26 +108,21 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                           alignment: Alignment.center,
                           margin: EdgeInsets.symmetric(horizontal: 40),
                           child: TextField(
-                                controller: _dateController,
-
-                                decoration: const InputDecoration(
-                                  labelText: 'Date de livraison',
-                                ),
-
-
+                            controller: _dateController,
+                            decoration: const InputDecoration(
+                              labelText: 'Date de livraison',
+                            ),
                           ),
                         ),
-
                         SizedBox(height: size.height * 0.03),
                         Container(
                           alignment: Alignment.center,
                           margin: EdgeInsets.symmetric(horizontal: 40),
                           child: TextField(
-                                controller: _desColisController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Description colis ',
-                                ),
-
+                            controller: _desColisController,
+                            decoration: const InputDecoration(
+                              labelText: 'Description colis ',
+                            ),
                           ),
                         ),
                         SizedBox(height: size.height * 0.03),
@@ -145,13 +131,46 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                           margin: EdgeInsets.symmetric(horizontal: 40),
                           child: TextField(
                             keyboardType: TextInputType.number,
-                                controller: _poidsColisController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Poid de colis en Kg ',
-                                ),
-
+                            controller: _poidsColisController,
+                            decoration: const InputDecoration(
+                              labelText: 'Poid de colis en Kg ',
+                            ),
                           ),
                         ),
+                        SizedBox(height: size.height * 0.03),
+                        Container(
+                            /**CONTROLLERUR d'etat  **/
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(horizontal: 40),
+                            child: DropdownButton<String>(
+                                hint: _dropDownValue1 == null
+                                    ? Text('Etat livraison')
+                                    : Text(
+                                        _dropDownValue1!,
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                isExpanded: true,
+                                iconSize: 30.0,
+                                style: TextStyle(color: Colors.blue),
+                                items: [
+                                  'non livrée',
+                                  'en cours de livraison',
+                                  'livraison livrée'
+                                ].map(
+                                  (val) {
+                                    return DropdownMenuItem<String>(
+                                      value: val,
+                                      child: Text(val),
+                                    );
+                                  },
+                                ).toList(),
+                                onChanged: (val) {
+                                  setState(
+                                    () {
+                                      _dropDownValue1 = val!;
+                                    },
+                                  );
+                                })),
                         SizedBox(height: size.height * 0.03),
                         SizedBox(height: size.height * 0.03),
                         Container(
@@ -160,28 +179,28 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                             children: <Widget>[
                               RaisedButton(
                                 splashColor: Colors.red,
-                                onPressed: () async{
-                                  final prefs = await SharedPreferences.getInstance();
-                                  final String? userId = prefs.getString('userId');
+                                onPressed: () async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+                                  final String? userId =
+                                      prefs.getString('userId');
                                   print('userId is : $userId');
                                   if (_addFormKey.currentState!.validate()) {
                                     _addFormKey.currentState?.save();
-                                 var livraison = Livraison(
-                                        numLivraison:
-                                        random.nextInt(10000),
+                                    var livraison = Livraison(
+                                        numLivraison: random.nextInt(10000),
                                         adressseDes: _adressdesController.text,
                                         adresseExp: _addressexpController.text,
                                         dateDeLivraison: _dateController.text,
                                         typeColis: _dropDownValue,
-                                        DesColis :_desColisController.text,
-                                        poidsColis:int.parse(_poidsColisController.text),idClient: userId
-                                    );
-                                 print('livraison is :${livraison.toString()}');
-                                    api.addNewLivraison(
-                                        livraison
-                                    );
-
-
+                                        DesColis: _desColisController.text,
+                                        poidsColis: int.parse(
+                                            _poidsColisController.text),
+                                        etatLivraison:_dropDownValue1,
+                                        idClient: userId);
+                                    print(
+                                        'livraison is :${livraison.toString()}');
+                                    api.addNewLivraison(livraison);
                                   }
                                 },
                                 child: Text('Ajouter',

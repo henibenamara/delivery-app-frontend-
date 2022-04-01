@@ -13,7 +13,7 @@ class EditDataWidget extends StatelessWidget {
       body: Container(
         child: Center(
             child:
-            Text("Hello edit list livraisson", style: TextStyle(fontSize: 20))), // Center
+            Text("Hello edit list livraison", style: TextStyle(fontSize: 20))), // Center
       ), // Container
     );
   }

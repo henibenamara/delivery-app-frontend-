@@ -69,7 +69,9 @@ class _LivraisonPageState extends State<LivraisonPage> {
                         DesColis: snapshot.data![index]['colisId']['DesColis'],
                         numLivraison: snapshot.data![index]['numLivraison'],
                         typeColis: snapshot.data![index]['colisId']['typeColis'],
-                        poidsColis: snapshot.data![index]['colisId']['poidsColis'],sId:snapshot.data![index]['_id'] );
+                        poidsColis: snapshot.data![index]['colisId']['poidsColis'],
+                        etatLivraison:snapshot.data![index]['etatLivraison'],
+                        sId:snapshot.data![index]['_id'] );
                     Navigator.push(
                         context,
                         MaterialPageRoute(

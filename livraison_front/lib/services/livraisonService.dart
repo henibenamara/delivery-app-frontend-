@@ -90,4 +90,31 @@ class LivraisonService {
     }
     return response;
   }
+  //GET LIST LIVRAISON BY ID CLIENT
+  Future<List<dynamic>> getLivraisonByIdClient() async {
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/client/:client",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listLivraison = x['result'];
+        print('livraisonList is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
 }

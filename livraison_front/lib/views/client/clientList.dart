@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:livraison_front/views/client/DetailClient.dart';
 
 
 import '../../constant/message_constants.dart';
+import '../../models/client.dart';
+import '../../models/client.dart';
 import '../../models/client_list.dart';
+import '../../models/user.dart';
+import '../../models/user.dart';
 import '../../services/clientService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
@@ -38,7 +43,29 @@ class _ClientPageState extends State<ClientPage> {
                   subtitle: Text(snapshot.data![index]['prenom']),
                   trailing: Icon(Icons.star),
                     leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
+                  /*,
+               onTap: (){
+                    Client.UserId user = new UserId(id: snapshot.data![index]['id'], email: snapshot.data![index]['email'], password: snapshot.data![index]['password'], role: snapshot.data![index]['role'], v: snapshot.data![index]['v']) as User;
+                 Client client = new Client(
+                     nom: snapshot.data![index]['nom'],
+                     prenom: snapshot.data![index]['prenom'],
+                     clientTel: snapshot.data![index]
+                     ['clientTel'],
+                     clientAdresse: snapshot.data![index]['clientAdresse'],
+                   v: snapshot.data![index]['__v'],
+                   id: snapshot.data![index]['_id'],
+                   userId: user,
+
+
+                     );
+                 Navigator.push(
+                     context,
+                     MaterialPageRoute(
+                         builder: (context) =>
+                             DetailClient(client)));
+                },*/
                 );
+
               },
               itemCount: snapshot.data?.length,
             );

@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -17,18 +15,13 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class signup extends State<RegisterScreen> {
-
   void displayDialog(BuildContext context, String title, String text) =>
       showDialog(
         context: context,
-        builder: (context) =>
-            AlertDialog(
-                title: Text(title),
-                content: Text(text),
-
-
-            ),
-
+        builder: (context) => AlertDialog(
+          title: Text(title),
+          content: Text(text),
+        ),
       );
   String? _dropDownValue;
 
@@ -55,9 +48,7 @@ class signup extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -168,21 +159,21 @@ class signup extends State<RegisterScreen> {
               if (_livreurFieldVisible) SizedBox(height: size.height * 0.05),
               if (_livreurFieldVisible)
                 Container(
-                  /**CONTROLLERUR DE LA MARQUE **/
+                    /**CONTROLLERUR DE LA MARQUE **/
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: DropdownButton<String>(
                         hint: _dropDownValue == null
                             ? Text('Marque')
                             : Text(
-                          _dropDownValue!,
-                          style: TextStyle(color: Colors.blue),
-                        ),
+                                _dropDownValue!,
+                                style: TextStyle(color: Colors.blue),
+                              ),
                         isExpanded: true,
                         iconSize: 30.0,
                         style: TextStyle(color: Colors.blue),
                         items: ['citroen', 'volkswagen', 'peugeot'].map(
-                              (val) {
+                          (val) {
                             return DropdownMenuItem<String>(
                               value: val,
                               child: Text(val),
@@ -191,7 +182,7 @@ class signup extends State<RegisterScreen> {
                         ).toList(),
                         onChanged: (val) {
                           setState(
-                                () {
+                            () {
                               _dropDownValue = val!;
                             },
                           );
@@ -280,8 +271,7 @@ class signup extends State<RegisterScreen> {
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
-                  onTap: () =>
-                  {
+                  onTap: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()))
                   },
@@ -307,7 +297,8 @@ class signup extends State<RegisterScreen> {
     throw UnimplementedError();
   }
 
-  Future<void> userRegister(String nom,
+  Future<void> userRegister(
+      String nom,
       String prenom,
       String Telephone,
       String Adresse,
@@ -346,14 +337,14 @@ class signup extends State<RegisterScreen> {
     }
     print("$url");
     var res = await http.post(
-      Uri.parse(AppConstants.API_URL+'/api/auth/register/$url'),
+      Uri.parse(AppConstants.API_URL + '/api/auth/register/$url'),
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
         "Access-Control-Allow-Origin": "*",
         // Required for CORS support to work
         "Access-Control-Allow-Headers":
-        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
         "Access-Control-Allow-Methods": "POST, OPTIONS"
       },
       body: json.encode(data),
@@ -366,8 +357,8 @@ class signup extends State<RegisterScreen> {
       // then parse the JSON.
       print("ok");
       debugPrint('register success');
-      displayDialog(context, "felicitation",
-          "votre compte est creer avec succes");
+      displayDialog(
+          context, "felicitation", "votre compte est creer avec succes");
 
       Navigator.of(context).pushNamed('/');
     } else {

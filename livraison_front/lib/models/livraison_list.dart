@@ -12,6 +12,7 @@ class LivraisonList {
     required this.typeColis,
     required this.DesColis,
     required this.poidsColis,
+    required this.etatLivraison,
 
     required this.sId,
 
@@ -23,6 +24,7 @@ class LivraisonList {
   late final String typeColis;
   late final String DesColis;
   late final String poidsColis;
+  late final String etatLivraison;
   late final String sId;
 
 
@@ -34,6 +36,7 @@ class LivraisonList {
     typeColis = json['typeColis'];
     DesColis = json['DesColis'];
     poidsColis = json['poidsColis'];
+    etatLivraison = json['etatLivraison'];
     sId = json['_id'];
 
   }
@@ -47,7 +50,7 @@ class LivraisonList {
     _data['typeColis'] = typeColis;
     _data['DesColis'] = DesColis;
     _data['poidsColis'] = poidsColis;
-
+    _data['etatLivraison'] = etatLivraison;
 
     _data['_id'] = sId;
 
