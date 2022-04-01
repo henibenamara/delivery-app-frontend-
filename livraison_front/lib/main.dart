@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:livraison_front/views/auth/login.dart';
+import 'package:livraison_front/views/camera.dart';
 import 'package:livraison_front/views/client.dart';
 import 'package:livraison_front/views/client/clientList.dart';
 import 'package:livraison_front/views/livraison/AddLivraison.dart';
 import 'package:livraison_front/views/livraison/livraisonList.dart';
 import 'package:livraison_front/views/livraisonRequest.dart';
 import 'package:livraison_front/views/livreur.dart';
-import 'package:livraison_front/views/livreur/livreurList.dart';
 import 'package:livraison_front/views/resp.dart';
 
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginScreen(),
+          '/': (context) => takephoto(),
 
           //'/client': (context) => client(),
           '/livreur': (context) => livreur(),

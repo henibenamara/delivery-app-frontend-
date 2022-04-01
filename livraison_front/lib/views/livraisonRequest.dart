@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../constant/message_constants.dart';
-import '../../models/livraison.dart';
-import '../../models/livraison_list.dart';
 import '../../services/livraisonService.dart';
-import '../../widgets/custom_card.dart';
-import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 
 class LivraisonRequest extends StatefulWidget {
@@ -17,7 +11,6 @@ class LivraisonRequest extends StatefulWidget {
 }
 
 class _LivraisonRequest extends State<LivraisonRequest> {
-  List<LivraisonList> _livraisonList = [];
   String _id = "";
   final LivraisonService api = LivraisonService();
   @override

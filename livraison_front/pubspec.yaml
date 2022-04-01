@@ -38,6 +38,11 @@ dependencies:
   http:
   shared_preferences: ^2.0.13
   sliding_card: ^0.1.2
+
+
+  path_provider: ^2.0.9
+  image_picker: ^0.8.4+11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
