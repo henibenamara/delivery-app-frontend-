@@ -1,97 +1,107 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import '../utility.dart';
 
-class takephoto extends StatefulWidget {
-  const takephoto({Key? key}) : super(key: key);
+
+class SaveImageDemo extends StatefulWidget {
+  SaveImageDemo() : super();
+
+  final String title = "Flutter Save Image in Preferences";
 
   @override
-  State<takephoto> createState() => _takephotoState();
+  _SaveImageDemoState createState() => _SaveImageDemoState();
 }
 
-class _takephotoState extends State<takephoto> {
+class _SaveImageDemoState extends State<SaveImageDemo> {
+  //
+   Future<File>? imageFile;
+   Image ?imageFromPreferences;
 
-  File? imageFile;
+  pickImageFromGallery(ImageSource source) {
+    setState(() {
+      imageFile = ImagePicker().pickImage(source: source) as Future<File>? ;
+    });
+  }
+
+  loadImageFromPreferences() {
+    ImageSharedPrefs.loadImageFromPrefs().then((img) {
+      if (null == img) {
+        return;
+      }
+      setState(() {
+        imageFromPreferences = ImageSharedPrefs.imageFrom64BaseString(img);
+      });
+    });
+  }
+
+  Widget imageFromGallery() {
+    return FutureBuilder<File>(
+      future: imageFile,
+      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
+          print("teest");
+          print(snapshot.data!.path);
+          ImageSharedPrefs.saveImageToPrefs(
+              ImageSharedPrefs.base64String(snapshot.data!.readAsBytesSync()));
+          return Image.file(
+            snapshot.data!,
+          );
+        } else if (null != snapshot.error) {
+          return const Text(
+            'Error Picking Image',
+            textAlign: TextAlign.center,
+          );
+        } else {
+          return const Text(
+            'No Image Selected',
+            textAlign: TextAlign.center,
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Capturing Images'),
-        centerTitle: true,
+        title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              pickImageFromGallery(ImageSource.gallery);
+              setState(() {
+
+                imageFromPreferences = null;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              loadImageFromPreferences();
+            },
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if(imageFile != null)
-              Container(
-                width: 640,
-                height: 480,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  image: DecorationImage(
-                      image: FileImage(imageFile!),
-                      fit: BoxFit.cover
-                  ),
-                  border: Border.all(width: 8, color: Colors.black),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              )
-            else
-              Container(
-                width: 640,
-                height: 480,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(width: 8, color: Colors.black12),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: const Text('Image should appear here', style: TextStyle(fontSize: 26),),
-              ),
-            const SizedBox(
-              height: 20,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 20.0,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: ()=> getImage(source: ImageSource.camera),
-                      child: const Text('Capture Image', style: TextStyle(fontSize: 18))
-                  ),
-                ),
-                const SizedBox(width: 20,),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: ()=> getImage(source: ImageSource.gallery),
-                      child: const Text('Select Image', style: TextStyle(fontSize: 18))
-                  ),
-                )
-              ],
+            imageFromGallery(),
+            SizedBox(
+              height: 20.0,
             ),
+            null == imageFromPreferences ? Container() : imageFromPreferences!,
           ],
         ),
       ),
     );
-  }
-
-  void getImage({required ImageSource source}) async {
-
-    final file = await ImagePicker().pickImage(
-        source: source,
-        maxWidth: 640,
-        maxHeight: 480,
-        imageQuality: 70 //0 - 100
-    );
-
-    if(file?.path != null){
-      setState(() {
-        imageFile = File(file!.path);
-      });
-    }
   }
 }

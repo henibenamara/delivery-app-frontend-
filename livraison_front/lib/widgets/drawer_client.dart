@@ -18,7 +18,13 @@ Widget clientDrawer(BuildContext context) {
               ),
             ),
           ),
+          ListTile(
+              leading: Icon(Icons.monetization_on),
+              title: Text('Historique'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/LivraisonClient");
 
+              }),
           ListTile(
               leading: Icon(Icons.monetization_on),
               title: Text('Add livraison'),

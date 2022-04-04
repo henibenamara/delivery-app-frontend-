@@ -4,13 +4,16 @@ import 'package:livraison_front/views/camera.dart';
 import 'package:livraison_front/views/client.dart';
 import 'package:livraison_front/views/client/clientList.dart';
 import 'package:livraison_front/views/livraison/AddLivraison.dart';
+import 'package:livraison_front/views/livraison/LivraisonListByClient.dart';
 import 'package:livraison_front/views/livraison/livraisonList.dart';
 import 'package:livraison_front/views/livraisonRequest.dart';
 import 'package:livraison_front/views/livreur.dart';
+import 'package:livraison_front/views/livreur/livreurList.dart';
 import 'package:livraison_front/views/resp.dart';
 
 
 void main() {
+
   runApp(const MyApp());
 }
 
@@ -27,14 +30,14 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoginScreen(),
 
           //'/client': (context) => client(),
-          '/livreur': (context) => livreur(),
+          '/livreur': (context) => LivreurPage(),
           '/livraison': (context) => const LivraisonPage(),
           '/Addlivraison': (context) => AddLivraisonWidget(),
            '/responsable' : (context) => responsable(),
           '/client' : (context) => const ClientPage(),
-          '/livreur' : (context) => LivraisonRequest(),
+          '/livreurReq' : (context) => LivraisonRequest(),
           '/clientHome' : (context) => client(),
-
+          '/LivraisonClient': (context) => LivraisonClient(),
 
         },
       ),

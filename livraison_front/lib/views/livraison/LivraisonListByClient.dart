@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../../constant/message_constants.dart';
@@ -10,27 +11,32 @@ import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 import 'DetailLivraison.dart';
 
-class LivraisonPage extends StatefulWidget {
-  const LivraisonPage({Key? key}) : super(key: key);
+class LivraisonClient extends StatefulWidget {
+  const LivraisonClient({Key? key}) : super(key: key);
 
   @override
-  _LivraisonPageState createState() => _LivraisonPageState();
+  _LivraisonClientState createState() => _LivraisonClientState();
 }
 
-class _LivraisonPageState extends State<LivraisonPage> {
+class _LivraisonClientState extends State<LivraisonClient> {
+
   List<LivraisonList> _livraisonList = [];
   String _id = "";
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
 
       drawer: ResponsableDrawer(context),
       body: FutureBuilder(
-        future: LivraisonService().getAllTLivraison(),
+
+        future: LivraisonService().getLivraisonByIdClient(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+
           print('snapshot is : ${snapshot.data}');
 
           if ((snapshot.hasData)) {
@@ -44,7 +50,7 @@ class _LivraisonPageState extends State<LivraisonPage> {
                   ),
 
                   title: new Text("De :"+
-                    snapshot.data![index]['AdresseExp'],
+                      snapshot.data![index]['AdresseExp'],
                     style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
                   ),
                   subtitle: new Column(
@@ -177,6 +183,16 @@ class _LivraisonPageState extends State<LivraisonPage> {
           },
         ),
       );
+
+  Future<String?> getidClient() async {
+
+      final prefs =
+          await SharedPreferences.getInstance();
+      final String? userId =
+      prefs.getString('userId');
+      print('userId is : $userId');
+      return userId ;
+  }
 }
 
 class TaskPanel extends StatelessWidget {
@@ -225,64 +241,5 @@ class NoSavedData extends StatelessWidget {
       ],
     );
   }
-/*
-class ListLivraison extends StatefulWidget {
-  const ListLivraison({Key? key}) : super(key: key);
-  @override
-  State<ListLivraison> createState() => _ListLivraison();
-}
-class _ListLivraison extends State<ListLivraison> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    var fetchData = Provider.of<getData>(context, listen: false);
-    fetchData.getListData();
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context) {
-    context.read<getData>().getListData();
-    return Scaffold(
-      appBar:AppBar(
-        title: Text("List View Page"),
-      ),
-      body: RefreshIndicator(
-        onRefresh: _onRefresh,
-        child: Center(
-          child: Consumer<getData>(
-              builder:(context,value,child){
-                return value.data.isEmpty
-                    ? const CircularProgressIndicator()
-                    : ListView.builder(
-                    itemCount: value.data.length,
-                    itemBuilder: (context,i){
-                      return ListTile(
-                        title: Text(value.data[i].id),
-                        subtitle: Text(value.data[i].author),
-                        trailing: Icon(Icons.more_vert_outlined),
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context)=>
-                                  detailsView(
-                                      id: (value.data[i].id),
-                                      url: (value.data[i].url),
-                                      author: (value.data[i].author),
-                                      width: (value.data[i].width),
-                                      height: (value.data[i].height))));
-                        },
-                      );
-                    });
-              }
-          ),
-        ),
-      ),
-    );
-  }
-  Future<void> _onRefresh() async{
-    await Future.delayed(const Duration(seconds: 2));
-    await context.read<getData>().getListData();
-    setState(() {
-    });
-  }
-}*/
+
 }

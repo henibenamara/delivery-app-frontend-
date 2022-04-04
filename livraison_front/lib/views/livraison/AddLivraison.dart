@@ -4,12 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
-import '../../widgets/drawer.dart';
 import '../../widgets/drawer_client.dart';
-import '../../widgets/drawer_responsable.dart';
 
 class AddLivraisonWidget extends StatefulWidget {
   AddLivraisonWidget({Key? key}) : super(key: key);

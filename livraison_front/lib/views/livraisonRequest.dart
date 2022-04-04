@@ -17,6 +17,8 @@ class _LivraisonRequest extends State<LivraisonRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: appbar,
+
         drawer: ResponsableDrawer(context),
         body: FutureBuilder(
             future: LivraisonService().getAllTLivraison(),
@@ -38,6 +40,17 @@ class _LivraisonRequest extends State<LivraisonRequest> {
               }
             }));
   }
+  PreferredSize get appbar => PreferredSize(
+    preferredSize: Size(double.infinity, 50),
+    child: AppBar(
+      title: const Text("Livraison disponible"),
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.menu_rounded),
+      ),
+    ),
+  );
 
   Widget buildCard(BuildContext context, int index) {
     return FutureBuilder(

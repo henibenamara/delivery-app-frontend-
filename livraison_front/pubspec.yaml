@@ -45,6 +45,7 @@ dependencies:
   loading: ^1.0.2
   progress_dialog: ^1.2.4
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

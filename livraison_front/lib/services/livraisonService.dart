@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constant/app_constants.dart';
 import '../models/livraison.dart';
 import '../models/livraison_list.dart';
@@ -92,8 +93,13 @@ class LivraisonService {
   }
   //GET LIST LIVRAISON BY ID CLIENT
   Future<List<dynamic>> getLivraisonByIdClient() async {
+      final prefs =
+      await SharedPreferences.getInstance();
+      final String? userId =
+      prefs.getString('userId');
+      print('userId is : $userId');
     final url = Uri.parse(
-      AppConstants.API_URL+"/livraison/client/:client",
+      AppConstants.API_URL+"/livraison/client/$userId",
     );
     final request = await http.get(
       url,
