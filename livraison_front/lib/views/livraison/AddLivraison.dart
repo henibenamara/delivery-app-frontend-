@@ -64,7 +64,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                 isExpanded: true,
                                 iconSize: 30.0,
                                 style: TextStyle(color: Colors.blue),
-                                items: ['type 1', 'type 2', 'type3'].map(
+                                items: ['fragile', 'solide', 'liquide'].map(
                                   (val) {
                                     return DropdownMenuItem<String>(
                                       value: val,
@@ -138,7 +138,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                         SizedBox(height: size.height * 0.03),
                         Container(
                             /**CONTROLLERUR d'etat  **/
-                            alignment: Alignment.center,
+                          /*  alignment: Alignment.center,
                             margin: EdgeInsets.symmetric(horizontal: 40),
                             child: DropdownButton<String>(
                                 hint: _dropDownValue1 == null
@@ -168,7 +168,8 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                       _dropDownValue1 = val!;
                                     },
                                   );
-                                })),
+                                })*/
+                        ),
                         SizedBox(height: size.height * 0.03),
                         SizedBox(height: size.height * 0.03),
                         Container(
@@ -194,7 +195,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                         DesColis: _desColisController.text,
                                         poidsColis: int.parse(
                                             _poidsColisController.text),
-                                        etatLivraison: _dropDownValue1,
+                                        etatLivraison: 'non livrée',
                                         idClient: userId);
                                     print(
                                         'livraison is :${livraison.toString()}');

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:livraison_front/models/livreur.dart';
 
 
 import '../../constant/message_constants.dart';
+import '../../models/livreur.dart';
 import '../../models/livreur_list.dart';
 import '../../services/livreurService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
-import '../../widgets/drawer_responsable.dart';
+
+import 'DetailLivreur.dart';
 
 class LivreurPage extends StatefulWidget {
   const LivreurPage({Key? key}) : super(key: key);
@@ -38,7 +41,34 @@ class _LivreurPageState extends State<LivreurPage> {
                   subtitle: Text(snapshot.data![index]['prenom']),
                     trailing: Icon(Icons.star),
                     leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
-                );
+                   , onTap: () {
+                  UserId user = new UserId(id: snapshot
+                      .data![index]['userId']['_id'],
+                      email: snapshot.data![index]['userId']['email'],
+                      password: snapshot.data![index]['userId']['password'],
+                      role: snapshot.data![index]['userId']['role'],
+                      v: snapshot.data![index]['userId']['__v']);
+                  Livreur livreur = new Livreur(
+                    nom: snapshot.data![index]['nom'],
+                    prenom: snapshot.data![index]['prenom'],
+                    livcin: snapshot.data![index]['livcin'],
+                    livTelephone: snapshot.data![index]['livTelephone'],
+                    livAdresse: snapshot.data![index]['livAdresse'],
+                    livMatVecu: snapshot.data![index]['livMatVecu'],
+                    livMarqVecu: snapshot.data![index]['livMarqVecu'],
+                    v: snapshot.data![index]['__v'],
+                    id: snapshot.data![index]['_id'],
+                    userId: user,
+
+
+                  );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DetailLivreur(livreur)));
+                });
+
               },
               itemCount: snapshot.data?.length,
             );

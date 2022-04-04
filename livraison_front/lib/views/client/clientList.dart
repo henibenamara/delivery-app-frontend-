@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../constant/message_constants.dart';
 import '../../models/client_list.dart';
 import '../../services/clientService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer_responsable.dart';
+import 'DetailClient.dart';
+import '../../models/client.dart';
 
 class ClientPage extends StatefulWidget {
   const ClientPage({Key? key}) : super(key: key);
@@ -35,27 +39,27 @@ class _ClientPageState extends State<ClientPage> {
                   subtitle: Text(snapshot.data![index]['prenom']),
                   trailing: Icon(Icons.star),
                     leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
-                  /*,
+                  ,
                onTap: (){
-                    Client.UserId user = new UserId(id: snapshot.data![index]['id'], email: snapshot.data![index]['email'], password: snapshot.data![index]['password'], role: snapshot.data![index]['role'], v: snapshot.data![index]['v']) as User;
-                 Client client = new Client(
-                     nom: snapshot.data![index]['nom'],
-                     prenom: snapshot.data![index]['prenom'],
-                     clientTel: snapshot.data![index]
-                     ['clientTel'],
-                     clientAdresse: snapshot.data![index]['clientAdresse'],
-                   v: snapshot.data![index]['__v'],
-                   id: snapshot.data![index]['_id'],
-                   userId: user,
+                      UserId user = new UserId(id: snapshot.data![index]['userId']['_id'], email: snapshot.data![index]['userId']['email'], password: snapshot.data![index]['userId']['password'], role: snapshot.data![index]['userId']['role'], v: snapshot.data![index]['userId']['__v']) ;
+                      Client client = new Client(
+                        nom: snapshot.data![index]['nom'],
+                        prenom: snapshot.data![index]['prenom'],
+                        clientTel: snapshot.data![index]
+                        ['clientTel'],
+                        clientAdresse: snapshot.data![index]['clientAdresse'],
+                        v: snapshot.data![index]['__v'],
+                        id: snapshot.data![index]['_id'],
+                        userId: user,
 
 
-                     );
+                      );
                  Navigator.push(
                      context,
                      MaterialPageRoute(
                          builder: (context) =>
                              DetailClient(client)));
-                },*/
+                },
                 );
 
               },

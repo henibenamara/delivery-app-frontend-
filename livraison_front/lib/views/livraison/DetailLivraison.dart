@@ -26,7 +26,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
     return Scaffold(
       drawer: ResponsableDrawer(context),
       appBar: AppBar(
-        title: Text('Details'),
+        title: Text('Detail livraison'),
       ),
       body: SingleChildScrollView(
         child: Container(

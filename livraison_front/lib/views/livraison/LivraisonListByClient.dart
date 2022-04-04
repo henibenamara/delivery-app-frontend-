@@ -8,6 +8,7 @@ import '../../models/livraison_list.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
+import '../../widgets/drawer_client.dart';
 import '../../widgets/drawer_responsable.dart';
 import 'DetailLivraison.dart';
 
@@ -31,7 +32,7 @@ class _LivraisonClientState extends State<LivraisonClient> {
       resizeToAvoidBottomInset: false,
       appBar: appbar,
 
-      drawer: ResponsableDrawer(context),
+      drawer: clientDrawer(context),
       body: FutureBuilder(
 
         future: LivraisonService().getLivraisonByIdClient(),
@@ -49,8 +50,8 @@ class _LivraisonClientState extends State<LivraisonClient> {
                     width: 100.0,
                   ),
 
-                  title: new Text("De :"+
-                      snapshot.data![index]['AdresseExp'],
+                  title: new Text("De  "+
+                      snapshot.data![index]['AdresseExp']+" vers  "+snapshot.data![index]['AdressseDes'],
                     style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
                   ),
                   subtitle: new Column(
@@ -59,10 +60,10 @@ class _LivraisonClientState extends State<LivraisonClient> {
                       children: <Widget>[
                         new Text("Num:"+snapshot.data![index]['numLivraison'].toString(),
                             style: new TextStyle(
-                                fontSize: 13.0, fontWeight: FontWeight.normal)),
-                        new Text('Adresse: ${snapshot.data![index]['AdressseDes']}',
+                                fontSize: 14.0, fontWeight: FontWeight.normal)),
+                        new Text('Description: ${snapshot.data![index]['colisId']['DesColis']}',
                             style: new TextStyle(
-                                fontSize: 11.0, fontWeight: FontWeight.normal)),
+                                fontSize: 14.0, fontWeight: FontWeight.normal)),
                       ]),
                   //    title: Text(snapshot.data![index]['numLivraison'].toString()),
                   //    subtitle: Text(snapshot.data![index]['AdressseDes']),
@@ -101,7 +102,7 @@ class _LivraisonClientState extends State<LivraisonClient> {
   PreferredSize get appbar => PreferredSize(
     preferredSize: Size(double.infinity, 50),
     child: AppBar(
-      title: const Text("liste de livraison"),
+      title: const Text("Historique personel"),
       centerTitle: true,
       leading: IconButton(
         onPressed: () {},

@@ -20,9 +20,9 @@ Widget createDrawer(BuildContext context) {
           ),
           ListTile(
               leading: Icon(Icons.monetization_on),
-              title: Text('livreur'),
+              title: Text('request'),
               onTap: () {
-                Navigator.pushReplacementNamed(context, "/livreur");
+                Navigator.pushReplacementNamed(context, "/livreurReq");
               }),
           ListTile(
               leading: Icon(Icons.pie_chart),

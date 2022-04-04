@@ -4,31 +4,33 @@ import 'package:livraison_front/views/client/EditClient.dart';
 
 import '../../models/client.dart';
 
+import '../../models/livreur.dart';
+import '../../services/LivreurService.dart';
 import '../../services/clientService.dart';
 import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 
 
-class DetailClient extends StatefulWidget {
-  DetailClient(this.client);
+class DetailLivreur extends StatefulWidget {
+  DetailLivreur(this.livreur);
 
-  final Client client;
+  final Livreur livreur;
 
   @override
-  _DetailClientState createState() => _DetailClientState();
+  _DetailLivreurState createState() => _DetailLivreurState();
 }
 
-class _DetailClientState extends State<DetailClient> {
-  _DetailClientState();
+class _DetailLivreurState extends State<DetailLivreur> {
+  _DetailLivreurState();
 
-  final ClientService api = ClientService();
+  final LivreurService api = LivreurService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: ResponsableDrawer(context),
       appBar: AppBar(
-        title: Text('Detail client'),
+        title: Text('Detail Livreur'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -47,7 +49,7 @@ class _DetailClientState extends State<DetailClient> {
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
-                              widget.client.nom.toString(),
+                              widget.livreur.nom.toString(),
                             )
                           ],
                         ),
@@ -60,7 +62,7 @@ class _DetailClientState extends State<DetailClient> {
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
-                              widget.client.prenom.toString(),
+                              widget.livreur.prenom.toString(),
                             )
                           ],
                         ),
@@ -69,11 +71,11 @@ class _DetailClientState extends State<DetailClient> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('clientTel:',
+                            Text('CIN ::',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
-                              widget.client.clientTel.toString(),
+                              widget.livreur.livcin.toString(),
                             )
                           ],
                         ),
@@ -82,11 +84,37 @@ class _DetailClientState extends State<DetailClient> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('clientAdresse:',
+                            Text('Adresse:',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
-                              widget.client.clientAdresse.toString(),
+                              widget.livreur.livAdresse.toString(),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Column(
+                          children: <Widget>[
+                            Text('marque voiture:',
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.8))),
+                            Text(
+                              widget.livreur.livMarqVecu.toString(),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Column(
+                          children: <Widget>[
+                            Text('matricule voiture:',
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.8))),
+                            Text(
+                              widget.livreur.livMatVecu.toString(),
                             )
                           ],
                         ),
