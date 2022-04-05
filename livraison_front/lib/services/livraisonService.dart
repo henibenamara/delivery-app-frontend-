@@ -128,7 +128,8 @@ class LivraisonService {
     final prefs =
     await SharedPreferences.getInstance();
     final String? userId =
-    prefs.getString('userId');
+    prefs.getString('LivreurId');
+    print('livreurId is :$userId');
     print('livreur Id is  : $userId');
     final url = Uri.parse(
       AppConstants.API_URL+"/livraison/livreur/$userId",
