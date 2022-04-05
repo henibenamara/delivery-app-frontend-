@@ -123,4 +123,36 @@ class LivraisonService {
     }
     return listLivraison;
   }
+  //GET LIST LIVRAISON BY ID livreur
+  Future<List<dynamic>> getLivraisonByIdLivreur() async {
+    final prefs =
+    await SharedPreferences.getInstance();
+    final String? userId =
+    prefs.getString('userId');
+    print('livreur Id is  : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/livreur/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listLivraison = x['result'];
+        print('livraisonList is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
 }

@@ -26,17 +26,17 @@ Widget clientDrawer(BuildContext context) {
 
               }),
           ListTile(
-              leading: Icon(Icons.monetization_on),
-              title: Text('Add livraison'),
+              leading: Icon(Icons.add),
+              title: Text('Ajouter livraison'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/Addlivraison");
 
               }),
           ListTile(
-              leading: Icon(Icons.monetization_on),
-              title: Text(''),
+              leading: Icon(Icons.logout),
+              title: Text('Déconnexion '),
               onTap: () {
-                Navigator.pushReplacementNamed(context, "/Addlivraison");
+                Navigator.pushReplacementNamed(context, "/");
 
               }),
 

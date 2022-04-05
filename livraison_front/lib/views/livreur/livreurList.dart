@@ -9,6 +9,8 @@ import '../../services/livreurService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
 
+import '../../widgets/drawer_livreur.dart';
+import '../../widgets/drawer_responsable.dart';
 import 'DetailLivreur.dart';
 
 class LivreurPage extends StatefulWidget {
@@ -27,7 +29,7 @@ class _LivreurPageState extends State<LivreurPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
-      drawer: createDrawer(context),
+      drawer: ResponsableDrawer(context),
       body: FutureBuilder(
         future: LivreurService().getAllLivreur(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {

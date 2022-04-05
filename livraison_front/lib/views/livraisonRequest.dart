@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_responsable.dart';
+import '../widgets/drawer_livreur.dart';
 
 class LivraisonRequest extends StatefulWidget {
   const LivraisonRequest({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
         resizeToAvoidBottomInset: false,
         appBar: appbar,
 
-        drawer: ResponsableDrawer(context),
+        drawer: livreurDrawer(context),
         body: FutureBuilder(
             future: LivraisonService().getAllTLivraison(),
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -94,7 +95,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                               style: new TextStyle(fontSize: 20.0),
                             ),
                             Spacer(),
-                            RaisedButton.icon(
+                            RaisedButton(
                                 onPressed: () async {
                                   final prefs =
                                       await SharedPreferences.getInstance();
@@ -106,8 +107,16 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                   api.updateLivraison(
                                       snapshot.data![index]['_id'], userId!);
                                 },
-                                icon: Icon(Icons.apartment),
-                                label: Text("accepter")),
+                                child: Text('Accepter ',
+                                    style: TextStyle(color: Colors.white)),
+                              color: Colors.blue,
+                            ),
+                            RaisedButton(onPressed: (){
+
+                            },
+                              child: Text('detail client  ',
+                                  style: TextStyle(color: Colors.white)),
+                              color: Colors.blue,)
                           ],
                         ),
                       )

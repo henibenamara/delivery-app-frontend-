@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer.dart';
+import '../widgets/drawer_livreur.dart';
 
 class livreur extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class livreur extends StatelessWidget {
       appBar: AppBar(
         title: Text('livreur'),
       ),
-      drawer: createDrawer(context),
+      drawer: livreurDrawer(context),
       body: Container(
         child: Center(
             child:

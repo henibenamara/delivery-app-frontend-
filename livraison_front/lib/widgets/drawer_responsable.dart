@@ -19,10 +19,10 @@ Widget ResponsableDrawer(BuildContext context) {
             ),
           ),
           ListTile(
-              leading: Icon(Icons.person_outline),
-              title: Text('livreur'),
+              leading: Icon(Icons.person),
+              title: Text('list livreur'),
               onTap: () {
-                Navigator.pushReplacementNamed(context, "/livreur");
+                Navigator.pushReplacementNamed(context, "/LivreurPage");
               }),
           ListTile(
               leading: Icon(Icons.person),
@@ -36,6 +36,12 @@ Widget ResponsableDrawer(BuildContext context) {
               title: Text('livraison'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/livraison");
+              }),
+          ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Déconnexion'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/");
               }),
 
 

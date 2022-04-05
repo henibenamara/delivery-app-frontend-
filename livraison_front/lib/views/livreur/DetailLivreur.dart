@@ -45,7 +45,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('nom:',
+                            Text('Nom :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -58,7 +58,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('prenom:',
+                            Text('Prenom :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -71,7 +71,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('CIN ::',
+                            Text('Cin :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -84,7 +84,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('Adresse:',
+                            Text('Adresse :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -97,7 +97,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('marque voiture:',
+                            Text('Marque Voiture:',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -110,7 +110,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('matricule voiture:',
+                            Text('Matricule Voiture:',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(

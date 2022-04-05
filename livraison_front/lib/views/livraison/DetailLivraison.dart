@@ -41,7 +41,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('numLivraison:',
+                            Text('Numéro livraison:',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -54,7 +54,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('adresseExp:',
+                            Text('Adresse Expéditeur:',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -67,7 +67,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('adressseDes:',
+                            Text('Adresse Destinataire :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -80,7 +80,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('dateDeLivraison:',
+                            Text('Date De Livraison :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -93,7 +93,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('Type colis',
+                            Text('Type De Colis',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -108,7 +108,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                           child: Column(
                             children: <Widget>[
-                              Text('DesColis',
+                              Text('Description de Colis',
                                   style: TextStyle(
                                       color: Colors.black.withOpacity(0.8))),
                               Text(
@@ -122,7 +122,7 @@ class _DetailLivraisonState extends State<DetailLivraison> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('poidsColis',
+                            Text('Poids De Colis',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(

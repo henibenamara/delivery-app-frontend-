@@ -43,7 +43,7 @@ class _DetailClientState extends State<DetailClient> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('nom:',
+                            Text('Nom :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -56,7 +56,7 @@ class _DetailClientState extends State<DetailClient> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('prenom:',
+                            Text('Prenom :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -69,7 +69,7 @@ class _DetailClientState extends State<DetailClient> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('clientTel:',
+                            Text('Client telephone :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
@@ -82,7 +82,7 @@ class _DetailClientState extends State<DetailClient> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Column(
                           children: <Widget>[
-                            Text('clientAdresse:',
+                            Text('Client Adresse :',
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.8))),
                             Text(
