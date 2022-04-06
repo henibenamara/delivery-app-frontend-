@@ -196,7 +196,8 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                         poidsColis: int.parse(
                                             _poidsColisController.text),
                                         etatLivraison: 'non livrée',
-                                        idClient: userId);
+                                        idClient: userId.toString(),
+                                        );
                                     print(
                                         'livraison is :${livraison.toString()}');
                                     api.addNewLivraison(livraison);

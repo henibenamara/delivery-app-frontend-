@@ -42,4 +42,34 @@ class LivreurService {
     }
     return listLivreur;
   }
+
+  Future<List<dynamic>> getLivreurByIdUSer(userId) async {
+
+
+    print('userId is : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livreur/user/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivreur;
+    List<LivreurList> livreurList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listLivreur = x['result'];
+        print('livreur is : $listLivreur');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivreur;
+  }
 }

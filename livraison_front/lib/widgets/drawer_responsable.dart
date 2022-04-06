@@ -26,6 +26,12 @@ Widget ResponsableDrawer(BuildContext context) {
               }),
           ListTile(
               leading: Icon(Icons.person),
+              title: Text('list Livraison'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/LivraisonAdmin');
+              }),
+          ListTile(
+              leading: Icon(Icons.person),
               title: Text('list client'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/client");

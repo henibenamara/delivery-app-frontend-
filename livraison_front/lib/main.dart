@@ -4,6 +4,7 @@ import 'package:livraison_front/views/camera.dart';
 import 'package:livraison_front/views/client.dart';
 import 'package:livraison_front/views/client/clientList.dart';
 import 'package:livraison_front/views/livraison/AddLivraison.dart';
+import 'package:livraison_front/views/livraison/LivraisonListAdmin.dart';
 import 'package:livraison_front/views/livraison/LivraisonListByClient.dart';
 import 'package:livraison_front/views/livraison/LivraisonListBylivreur.dart';
 import 'package:livraison_front/views/livraison/livraisonList.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           '/LivraisonClient': (context) => LivraisonClient(),
           '/LivreurPage': (context) => LivreurPage(),
           '/LivraisonLivreur': (context) => LivraisonLivreur(),
+          '/LivraisonAdmin': (context) => LivraisonAdmin(),
         },
       ),
     );

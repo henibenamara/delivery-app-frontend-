@@ -41,4 +41,33 @@ class ClientService {
     }
     return listClient;
   }
+  Future<List<dynamic>> getClientByIdUSer(userId) async {
+
+
+    print('userId is : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/client/user/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listClient;
+
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listClient = x['result'];
+        print('livreur is : $listClient');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listClient;
+  }
 }
