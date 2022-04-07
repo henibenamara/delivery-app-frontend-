@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/message_constants.dart';
@@ -36,10 +37,7 @@ class _LivraisonAdminState extends State<LivraisonAdmin> {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: new Image.asset(
-                    "images/col.jpg",
-                    fit: BoxFit.cover,
-                    width: 100.0,
+                  leading: Image.network("https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
                   ),
 
                   title: new Text(

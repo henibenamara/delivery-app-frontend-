@@ -68,11 +68,9 @@ class LivraisonService {
     return listLivraison;
   }
   //update livraison
-  Future<Response> updateLivraison(
-
-     String sId,String idLivreur) async {
+  Future<Response> updateLivraison(String sId,String idLivreur,String etatLivraison) async {
     final json =
-        {"sId" : sId,"livreur": idLivreur};
+        {"sId" : sId,"livreur": idLivreur ,"etatLivraison":etatLivraison};
     var data = jsonEncode(json);
     final url =
     Uri.parse(AppConstants.API_URL +" /livraison/$sId");
@@ -81,7 +79,8 @@ class LivraisonService {
     Response response = Response();
 
     try {
-      if (request.statusCode == 201) {
+      if (request.statusCode == 200) {
+        print("etat livraison : $etatLivraison");
         response = responseFromJson(request.body);
       } else {
         print(request.statusCode);

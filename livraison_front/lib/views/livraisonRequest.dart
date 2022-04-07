@@ -58,7 +58,8 @@ class _LivraisonRequest extends State<LivraisonRequest> {
         future: LivraisonService().getAllTLivraison(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           print('snapshot is : ${snapshot.data}');
-          if (snapshot.hasData) {
+          if(snapshot.hasData){
+          if (snapshot.data![index]['etatLivraison'].toString()=="non livrée") {
             return Container(
               child: Card(
                 child: Padding(
@@ -70,7 +71,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                         child: Row(children: <Widget>[
                           Text(
                             "Numero :" +
-                                snapshot.data![index]['numLivraison']
+                                snapshot.data![index]['numLivraison']//(snapshot.data![index]['etatLivraison'].toString()=="en cours")
                                     .toString(),
                             style: new TextStyle(fontSize: 20.0),
                           ),
@@ -99,13 +100,14 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                 onPressed: () async {
                                   final prefs =
                                       await SharedPreferences.getInstance();
+                                  final String etatLivraison ="en cours";
                                   final String? userId =
                                       prefs.getString('LivreurId');
                                   print('livreurId is :$userId');
                                   print(
                                       'sId is : ${snapshot.data![index]['_id']}');
                                   api.updateLivraison(
-                                      snapshot.data![index]['_id'], userId!);
+                                      snapshot.data![index]['_id'], userId!,etatLivraison);
                                 },
                                 child: Text('Accepter ',
                                     style: TextStyle(color: Colors.white)),
@@ -125,11 +127,18 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                 ),
               ),
             );
+          }else {
+            return Container(
+              child: Center(
+                  child: Text(" ",
+                      style: TextStyle(fontSize: 1))), // Center
+            );
+          }
           } else {
             return Container(
               child: Center(
-                  child: Text("data is null",
-                      style: TextStyle(fontSize: 20))), // Center
+                  child: Text(" ",
+                      style: TextStyle(fontSize: 1))), // Center
             );
           }
         });
