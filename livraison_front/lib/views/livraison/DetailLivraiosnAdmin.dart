@@ -32,8 +32,15 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
     return Scaffold(
         drawer: ResponsableDrawer(context),
         appBar: AppBar(
-          title: Text('Detail livraison'),
-        ),
+        title: Text("Detail livraison"),
+    centerTitle: true,
+    leading: new IconButton(
+    icon: new Icon(Icons.arrow_back, color: Colors.white),
+    onPressed: (){
+    Navigator.of(context).pop();
+    },
+    ),
+    ),
         body: Column(children: <Widget>[
 
 

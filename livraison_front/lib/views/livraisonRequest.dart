@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/livraisonService.dart';
-import '../../widgets/drawer_responsable.dart';
 import '../widgets/drawer_livreur.dart';
 
 class LivraisonRequest extends StatefulWidget {
@@ -12,56 +12,54 @@ class LivraisonRequest extends StatefulWidget {
 }
 
 class _LivraisonRequest extends State<LivraisonRequest> {
-  String _id = "";
+  void displayDialog(BuildContext context, String title, String text) =>
+      showDialog(
+        context: context,
+        builder: (context) =>
+            AlertDialog(title: Text(title), content: Text(text)),
+      );
+
   final LivraisonService api = LivraisonService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: appbar,
+        appBar: AppBar(
+          backgroundColor: Colors.lightBlue,
+          title: Text('Livraison Disponible'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            side: BorderSide(color: Colors.blueGrey, width: 1),
 
+          ),
+        ),
         drawer: livreurDrawer(context),
         body: FutureBuilder(
             future: LivraisonService().getAllTLivraison(),
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-              print('snapshot is : ${snapshot.data}');
               if (snapshot.hasData) {
-                return Container(
-                  child: new ListView.builder(
+                return ListView.builder(
                       itemCount: snapshot.data?.length,
                       itemBuilder: (BuildContext context, int index) =>
-                          buildCard(context, index)),
-                );
+                          buildCard(context, index));
               } else {
-                return Container(
-                  child: Center(
-                      child: Text("data is null",
-                          style: TextStyle(fontSize: 20))), // Center
-                );
+                return const Center(
+                    child:  Text("", style: TextStyle(fontSize: 1))); // Center
+
               }
             }));
   }
-  PreferredSize get appbar => PreferredSize(
-    preferredSize: Size(double.infinity, 50),
-    child: AppBar(
-      title: const Text("Livraison disponible"),
-      centerTitle: true,
-      leading: IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.menu_rounded),
-      ),
-    ),
-  );
+
+
 
   Widget buildCard(BuildContext context, int index) {
     return FutureBuilder(
         future: LivraisonService().getAllTLivraison(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-          print('snapshot is : ${snapshot.data}');
-          if(snapshot.hasData){
-          if (snapshot.data![index]['etatLivraison'].toString()=="non livrée") {
-            return Container(
-              child: Card(
+          if (snapshot.hasData){
+          if (snapshot.data![index]['etatLivraison'].toString() ==
+              "non livrée") {
+            return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -71,20 +69,33 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                         child: Row(children: <Widget>[
                           Text(
                             "Numero :" +
-                                snapshot.data![index]['numLivraison']//(snapshot.data![index]['etatLivraison'].toString()=="en cours")
+                                snapshot.data![index][
+                                        'numLivraison'] //(snapshot.data![index]['etatLivraison'].toString()=="en cours")
                                     .toString(),
-                            style: new TextStyle(fontSize: 20.0),
+                            style: const TextStyle(
+                                fontSize: 20.0, color: Colors.white),
                           ),
-                          Spacer(),
+                          const Spacer(),
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 80.0),
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
                         child: Row(children: <Widget>[
                           Text(
-                              "${"de : " + snapshot.data![index]['AdresseExp'].toString()} ----> ${snapshot.data![index]['AdressseDes'].toString()}",
-                              style: new TextStyle(fontSize: 20.0)),
-                          Spacer(),
+                              "${"de  " + snapshot.data![index]['AdresseExp'].toString()} ",
+                              style:  const TextStyle(
+                                  fontSize: 20.0, color: Colors.white)),
+                          const Spacer(),
+                          Text("vers",
+                              style:  const TextStyle(
+                                  fontSize: 20.0, color: Colors.white)),
+                          const Spacer(),
+                          Text(
+
+                                  "${snapshot.data![index]['AdressseDes'].toString()}",
+                              style:  const TextStyle(
+                                  fontSize: 20.0, color: Colors.white)),
+                          const Spacer(),
                         ]),
                       ),
                       Padding(
@@ -93,54 +104,64 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                           children: <Widget>[
                             Text(
                               "${snapshot.data![index]['colisId']['poidsColis']} Kg",
-                              style: new TextStyle(fontSize: 20.0),
+                              style: const TextStyle(
+                                  fontSize: 20.0, color: Colors.white),
                             ),
-                            Spacer(),
-                            RaisedButton(
-                                onPressed: () async {
-                                  final prefs =
-                                      await SharedPreferences.getInstance();
-                                  final String etatLivraison ="en cours";
-                                  final String? userId =
-                                      prefs.getString('LivreurId');
-                                  print('livreurId is :$userId');
-                                  print(
-                                      'sId is : ${snapshot.data![index]['_id']}');
-                                  api.updateLivraison(
-                                      snapshot.data![index]['_id'], userId!,etatLivraison);
-                                },
-                                child: Text('Accepter ',
-                                    style: TextStyle(color: Colors.white)),
-                              color: Colors.blue,
+                            const Spacer(),
+                            FloatingActionButton(
+                              onPressed: () async {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                const String etatLivraison = "en cours";
+                                final String? userId =
+                                    prefs.getString('LivreurId');
+                                api.updateLivraison(
+                                    snapshot.data![index]['_id'],
+                                    userId!,
+                                    etatLivraison);
+                              },
+                              child: const Icon(Icons.check),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.purple,
                             ),
-                            RaisedButton(onPressed: (){
-
-                            },
-                              child: Text('detail client  ',
-                                  style: TextStyle(color: Colors.white)),
-                              color: Colors.blue,)
+                            FloatingActionButton(
+                              onPressed: () {
+                                displayDialog(
+                                    context,
+                                    snapshot.data![index]['client']['_id']
+                                        .toString(),
+                                    snapshot.data![index]['client']['email']
+                                        .toString());
+                              },
+                              child: const Icon(Icons.info_outline),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.purple,
+                            ),
                           ],
                         ),
                       )
                     ],
                   ),
                 ),
-              ),
-            );
-          }else {
-            return Container(
-              child: Center(
-                  child: Text(" ",
-                      style: TextStyle(fontSize: 1))), // Center
-            );
-          }
+                shadowColor: Colors.blueAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(100), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
+                  side: BorderSide(color: Colors.blueGrey, width: 1),
+                ),
+                color: Colors.purple,
+                elevation: 30,
+
+              );
+
           } else {
-            return Container(
-              child: Center(
-                  child: Text(" ",
-                      style: TextStyle(fontSize: 1))), // Center
-            );
-          }
+            return const Center(
+                  child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
+
+          }}else {
+    return const Center(
+    child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
+
+    }
         });
   }
 }

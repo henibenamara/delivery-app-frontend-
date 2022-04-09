@@ -19,107 +19,161 @@ class LivraisonAdmin extends StatefulWidget {
 }
 
 class _LivraisonAdminState extends State<LivraisonAdmin> {
-  List<LivraisonList> _livraisonList = [];
+  List<dynamic> _livraisonList = [];
   String _id = "";
+
+   String? etat ;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appbar,
+        appBar: AppBar(
+          title: Text('List Livraison'),
+        ),
       drawer: ResponsableDrawer(context),
-      body: FutureBuilder(
+      body:Column(
+          children: <Widget>[
+            Container(
+        /**CONTROLLERUR DE etat **/
+          alignment: Alignment.center,
+          margin: EdgeInsets.symmetric(horizontal: 40),
+          child: DropdownButton<String>(
+              hint: etat == null
+                  ? Text('Etat de livraison')
+                  : Text(
+                etat!,
+                style: TextStyle(color: Colors.blue),
+              ),
+              isExpanded: true,
+              iconSize: 30.0,
+              style: TextStyle(color: Colors.blue),
+              items: ['non livrée', 'en cours', 'Livrée'].map(
+                    (val) {
+                  return DropdownMenuItem<String>(
+                    value: val,
+                    child: Text(val),
+                  );
+                },
+              ).toList(),
+              onChanged: (val) {
+                setState(
+                      () {
+                        etat = val!;
+                  },
+                );
+              })),
+      Expanded (
+          child :FutureBuilder(
         future: LivraisonService().getAllTLivraison(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           print('snapshot is : ${snapshot.data}');
 
           if ((snapshot.hasData)) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Image.network("https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
-                  ),
 
-                  title: new Text(
-                    "De :" + snapshot.data![index]['AdresseExp'],
-                    style: new TextStyle(
-                        fontSize: 14.0, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: new Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Text(
-                            "Num:" +
-                                snapshot.data![index]['numLivraison']
-                                    .toString(),
-                            style: new TextStyle(
-                                fontSize: 13.0, fontWeight: FontWeight.normal)),
-                        new Text(
-                            'Adresse: ${snapshot.data![index]['AdressseDes']}',
-                            style: new TextStyle(
-                                fontSize: 11.0, fontWeight: FontWeight.normal)),
-                      ]),
-                  //    title: Text(snapshot.data![index]['numLivraison'].toString()),
-                  //    subtitle: Text(snapshot.data![index]['AdressseDes']),
-                  onTap: () {
-                    Livraison livraison ;
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                if (snapshot.data![index]['etatLivraison'].toString() ==
+                    etat) {
+                  return ListTile(
+                    leading: Image.network(
+                        "https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
+                    ),
 
-                    if (snapshot.data![index]['livreur']==null){
-                      livraison = new Livraison(
-                        adresseExp: snapshot.data![index]['AdresseExp'],
-                        adressseDes: snapshot.data![index]['AdressseDes'],
-                        dateDeLivraison: snapshot.data![index]
-                        ['DateDeLivraison'],
-                        DesColis: snapshot.data![index]['colisId']['DesColis'],
-                        numLivraison: snapshot.data![index]['numLivraison'],
-                        typeColis: snapshot.data![index]['colisId']
-                        ['typeColis'],
-                        poidsColis: snapshot.data![index]['colisId']
-                        ['poidsColis'],
-                        etatLivraison: snapshot.data![index]['etatLivraison'],
-                        sId: snapshot.data![index]['_id'],
-                        idClient :snapshot.data![index]['client']['email'],
-                        idLivreur: "aucun livreur",
-                      );
-                      print("test1");
-                    } else {
-                      livraison = new Livraison(
-                        adresseExp: snapshot.data![index]['AdresseExp'],
-                        adressseDes: snapshot.data![index]['AdressseDes'],
-                        dateDeLivraison: snapshot.data![index]
-                        ['DateDeLivraison'],
-                        DesColis: snapshot.data![index]['colisId']['DesColis'],
-                        numLivraison: snapshot.data![index]['numLivraison'],
-                        typeColis: snapshot.data![index]['colisId']
-                        ['typeColis'],
-                        poidsColis: snapshot.data![index]['colisId']
-                        ['poidsColis'],
-                        etatLivraison: snapshot.data![index]['etatLivraison'],
-                        sId: snapshot.data![index]['_id'],
-                        idClient :snapshot.data![index]['client']['_id'],
-                        idLivreur: snapshot.data![index]['livreur']['_id'],
-                      );
-                      print("test2");
-                    }
+                    title: new Text(
+                      "De :" + snapshot.data![index]['AdresseExp'],
+                      style: new TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: new Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Text(
+                              "Num:" +
+                                  snapshot.data![index]['numLivraison']
+                                      .toString(),
+                              style: new TextStyle(
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.normal)),
+                          new Text(
+                              'Adresse: ${snapshot
+                                  .data![index]['AdressseDes']}',
+                              style: new TextStyle(
+                                  fontSize: 11.0,
+                                  fontWeight: FontWeight.normal)),
+                        ]),
+                    //    title: Text(snapshot.data![index]['numLivraison'].toString()),
+                    //    subtitle: Text(snapshot.data![index]['AdressseDes']),
+                    onTap: () {
+                      Livraison livraison;
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailLivraisonAdmin(livraison)));
-                  },
-                );
-              },
-              itemCount: snapshot.data?.length,
-            );
-          } else {
-            return Center(
-              child: Text('data is null'),
-            );
-          }
-        },
+                      if (snapshot.data![index]['livreur'] == null) {
+                        livraison = new Livraison(
+                          adresseExp: snapshot.data![index]['AdresseExp'],
+                          adressseDes: snapshot.data![index]['AdressseDes'],
+                          dateDeLivraison: snapshot.data![index]
+                          ['DateDeLivraison'],
+                          DesColis: snapshot
+                              .data![index]['colisId']['DesColis'],
+                          numLivraison: snapshot.data![index]['numLivraison'],
+                          typeColis: snapshot.data![index]['colisId']
+                          ['typeColis'],
+                          poidsColis: snapshot.data![index]['colisId']
+                          ['poidsColis'],
+                          etatLivraison: snapshot.data![index]['etatLivraison'],
+                          sId: snapshot.data![index]['_id'],
+                          idClient: snapshot.data![index]['client']['email'],
+                          idLivreur: "aucun livreur",
+                        );
+                        print("test1");
+                      } else {
+                        livraison = new Livraison(
+                          adresseExp: snapshot.data![index]['AdresseExp'],
+                          adressseDes: snapshot.data![index]['AdressseDes'],
+                          dateDeLivraison: snapshot.data![index]
+                          ['DateDeLivraison'],
+                          DesColis: snapshot
+                              .data![index]['colisId']['DesColis'],
+                          numLivraison: snapshot.data![index]['numLivraison'],
+                          typeColis: snapshot.data![index]['colisId']
+                          ['typeColis'],
+                          poidsColis: snapshot.data![index]['colisId']
+                          ['poidsColis'],
+                          etatLivraison: snapshot.data![index]['etatLivraison'],
+                          sId: snapshot.data![index]['_id'],
+                          idClient: snapshot.data![index]['client']['_id'],
+                          idLivreur: snapshot.data![index]['livreur']['_id'],
+                        );
+                        print("test2");
+                      }
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailLivraisonAdmin(livraison)));
+                    },
+                  );
+                }else {
+                  return Center(
+                    child: Text('',
+                      style: TextStyle(fontSize: 1),
+                    ),
+                  );
+                }
+                },
+                itemCount: snapshot.data?.length,
+
+              );
+            } else {
+              return Center(
+                child: Text('data is null'),
+              );
+            }
+          },
       ),
-    );
+      )]));
   }
 
   PreferredSize get appbar => PreferredSize(
@@ -128,7 +182,9 @@ class _LivraisonAdminState extends State<LivraisonAdmin> {
       title: const Text("liste de livraison"),
       centerTitle: true,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
         icon: const Icon(Icons.menu_rounded),
       ),
     ),
@@ -207,6 +263,25 @@ class _LivraisonAdminState extends State<LivraisonAdmin> {
           },
         ),
       );
+}
+
+void _runFilter(String enteredKeyword) {
+ /* List<Map<String, dynamic>> results = [];
+  if (enteredKeyword.isEmpty) {
+    // if the search field is empty or only contains white-space, we'll display all users
+    results = _allUsers;
+  } else {
+    results = _allUsers
+        .where((user) =>
+        user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+        .toList();
+    // we use the toLowerCase() method to make it case-insensitive
+  }
+
+  // Refresh the UI
+  setState(() {
+    _foundUsers = results;
+  });*/
 }
 class TaskPanel extends StatelessWidget {
   final Widget? widget;

@@ -30,7 +30,14 @@ class _DetailLivreurState extends State<DetailLivreur> {
     return Scaffold(
       drawer: ResponsableDrawer(context),
       appBar: AppBar(
-        title: Text('Detail Livreur'),
+        title: Text("Detail Client"),
+        centerTitle: true,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(

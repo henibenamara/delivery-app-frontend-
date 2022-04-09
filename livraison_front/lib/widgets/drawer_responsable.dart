@@ -37,12 +37,7 @@ Widget ResponsableDrawer(BuildContext context) {
                 Navigator.pushReplacementNamed(context, "/client");
               }),
 
-          ListTile(
-              leading: Icon(Icons.add_shopping_cart),
-              title: Text('livraison'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/livraison");
-              }),
+
           ListTile(
               leading: Icon(Icons.logout),
               title: Text('Déconnexion'),

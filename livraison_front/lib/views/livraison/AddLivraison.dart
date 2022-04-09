@@ -136,41 +136,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                           ),
                         ),
                         SizedBox(height: size.height * 0.03),
-                        Container(
-                            /**CONTROLLERUR d'etat  **/
-                          /*  alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(horizontal: 40),
-                            child: DropdownButton<String>(
-                                hint: _dropDownValue1 == null
-                                    ? Text('Etat livraison')
-                                    : Text(
-                                        _dropDownValue1!,
-                                        style: TextStyle(color: Colors.blue),
-                                      ),
-                                isExpanded: true,
-                                iconSize: 30.0,
-                                style: TextStyle(color: Colors.blue),
-                                items: [
-                                  'non livrée',
-                                  'en cours de livraison',
-                                  'livraison livrée'
-                                ].map(
-                                  (val) {
-                                    return DropdownMenuItem<String>(
-                                      value: val,
-                                      child: Text(val),
-                                    );
-                                  },
-                                ).toList(),
-                                onChanged: (val) {
-                                  setState(
-                                    () {
-                                      _dropDownValue1 = val!;
-                                    },
-                                  );
-                                })*/
-                        ),
-                        SizedBox(height: size.height * 0.03),
+
                         SizedBox(height: size.height * 0.03),
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),

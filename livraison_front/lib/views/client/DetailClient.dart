@@ -27,8 +27,15 @@ class _DetailClientState extends State<DetailClient> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: ResponsableDrawer(context),
-      appBar: AppBar(
-        title: Text('Detail client'),
+      appBar:  AppBar(
+        title: Text("Detail Client"),
+        centerTitle: true,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
