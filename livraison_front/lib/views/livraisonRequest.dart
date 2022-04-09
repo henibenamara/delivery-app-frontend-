@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/livraisonService.dart';
+import '../models/livraison.dart';
 import '../widgets/drawer_livreur.dart';
+import 'livraison/DetailLivraiosnAdmin.dart';
 
 class LivraisonRequest extends StatefulWidget {
   const LivraisonRequest({Key? key}) : super(key: key);
@@ -126,12 +128,33 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                             ),
                             FloatingActionButton(
                               onPressed: () {
-                                displayDialog(
+                                Livraison livraison;
+
+                                  livraison = new Livraison(
+                                    adresseExp: snapshot.data![index]['AdresseExp'],
+                                    adressseDes: snapshot.data![index]['AdressseDes'],
+                                    dateDeLivraison: snapshot.data![index]
+                                    ['DateDeLivraison'],
+                                    DesColis: snapshot
+                                        .data![index]['colisId']['DesColis'],
+                                    numLivraison: snapshot.data![index]['numLivraison'],
+                                    typeColis: snapshot.data![index]['colisId']
+                                    ['typeColis'],
+                                    poidsColis: snapshot.data![index]['colisId']
+                                    ['poidsColis'],
+                                    etatLivraison: snapshot.data![index]['etatLivraison'],
+                                    sId: snapshot.data![index]['_id'],
+                                    idClient: snapshot.data![index]['client']['email'],
+                                    idLivreur: "aucun livreur",
+                                  );
+
+
+
+                                Navigator.push(
                                     context,
-                                    snapshot.data![index]['client']['_id']
-                                        .toString(),
-                                    snapshot.data![index]['client']['email']
-                                        .toString());
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            DetailLivraisonAdmin(livraison)));
                               },
                               child: const Icon(Icons.info_outline),
                               backgroundColor: Colors.white,
