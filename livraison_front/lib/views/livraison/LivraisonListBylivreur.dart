@@ -24,7 +24,15 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appbar,
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
+        title: Text('Historique personel'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          side: BorderSide(color: Colors.blueGrey, width: 1),
+
+        ),
+      ),
       drawer: livreurDrawer(context),
       body: FutureBuilder(
         future: LivraisonService().getLivraisonByIdLivreur(),

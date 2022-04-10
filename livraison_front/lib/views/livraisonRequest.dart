@@ -85,7 +85,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                         padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
                         child: Row(children: <Widget>[
                           Text(
-                              "${"de  " + snapshot.data![index]['AdresseExp'].toString()} ",
+                              "${"De " + snapshot.data![index]['AdresseExp'].toString()} ",
                               style:  const TextStyle(
                                   fontSize: 20.0, color: Colors.white)),
                           const Spacer(),
@@ -167,12 +167,12 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                     ],
                   ),
                 ),
-                shadowColor: Colors.blueAccent,
+                shadowColor: Colors.lightBlue,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(100), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
-                  side: BorderSide(color: Colors.blueGrey, width: 1),
+                  side: BorderSide(color: Colors.blue, width: 1),
                 ),
-                color: Colors.purple,
+                color: Colors.lightBlue,
                 elevation: 30,
 
               );
