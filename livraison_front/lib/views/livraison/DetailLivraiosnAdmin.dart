@@ -32,18 +32,16 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
     return Scaffold(
         drawer: ResponsableDrawer(context),
         appBar: AppBar(
-        title: Text("Detail livraison"),
-    centerTitle: true,
-    leading: new IconButton(
-    icon: new Icon(Icons.arrow_back, color: Colors.white),
-    onPressed: (){
-    Navigator.of(context).pop();
-    },
-    ),
-    ),
+          title: Text("Detail livraison"),
+          centerTitle: true,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         body: Column(children: <Widget>[
-
-
           Card(
               child: Container(
                   padding: EdgeInsets.all(10.0),
@@ -108,9 +106,7 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                           Text('Description :',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.8))),
-                          Text(
-                              widget.livraison.DesColis.toString()
-                          )
+                          Text(widget.livraison.DesColis.toString())
                         ],
                       ),
                     ),
@@ -121,16 +117,14 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                           Text('Poids :',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.8))),
-                          Text(
-                            widget.livraison.poidsColis.toString()+" Kg"
-                          )
+                          Text(widget.livraison.poidsColis.toString() + " Kg")
                         ],
                       ),
                     ),
                   ]))),
           Container(
               height: 50,
-              child :FutureBuilder(
+              child: FutureBuilder(
                 future: LivreurService()
                     .getLivreurByIdUSer(widget.livraison.idLivreur.toString()),
                 builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -140,8 +134,8 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                     return ListView.builder(
                       itemBuilder: (context, index) {
                         return ListTile(
-
-                            title: Text("nom Livreur :"),//snapshot.data![index]['nom'].toString()
+                            title: Text(
+                                "nom Livreur :"), //snapshot.data![index]['nom'].toString()
                             //subtitle: Text(snapshot.data![index]['nom']),
                             trailing: Text(snapshot.data![index]['nom']),
                             leading: CircleAvatar(
@@ -150,19 +144,22 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                             onTap: () {
                               liv.UserId user = new liv.UserId(
                                   id: snapshot.data![index]['userId']['_id'],
-                                  email: snapshot.data![index]['userId']['email'],
+                                  email: snapshot.data![index]['userId']
+                                      ['email'],
                                   password: snapshot.data![index]['userId']
-                                  ['password'],
+                                      ['password'],
                                   role: snapshot.data![index]['userId']['role'],
                                   v: snapshot.data![index]['userId']['__v']);
                               liv.Livreur livreur = new liv.Livreur(
                                 nom: snapshot.data![index]['nom'],
                                 prenom: snapshot.data![index]['prenom'],
                                 livcin: snapshot.data![index]['livcin'],
-                                livTelephone: snapshot.data![index]['livTelephone'],
+                                livTelephone: snapshot.data![index]
+                                    ['livTelephone'],
                                 livAdresse: snapshot.data![index]['livAdresse'],
                                 livMatVecu: snapshot.data![index]['livMatVecu'],
-                                livMarqVecu: snapshot.data![index]['livMarqVecu'],
+                                livMarqVecu: snapshot.data![index]
+                                    ['livMarqVecu'],
                                 v: snapshot.data![index]['__v'],
                                 id: snapshot.data![index]['_id'],
                                 userId: user,
@@ -170,7 +167,8 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DetailLivreur(livreur)));
+                                      builder: (context) =>
+                                          DetailLivreur(livreur)));
                             });
                       },
                       itemCount: 1,
@@ -181,56 +179,59 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                     );
                   }
                 },
-
               )),
           Expanded(
+            child: FutureBuilder(
+              future:
+                  ClientService().getClientByIdUSer(widget.livraison.idClient),
+              builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                print('snapshot is : ${snapshot.data}');
 
-              child :FutureBuilder(
-                future: ClientService().getClientByIdUSer(widget.livraison.idClient),
-                builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                  print('snapshot is : ${snapshot.data}');
-
-                  if ((snapshot.hasData)) {
-                    return ListView.builder(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text("nom de Client :"),
-                          //subtitle: Text(snapshot.data![index]['prenom']),
-                          trailing: Text(snapshot.data![index]['nom'].toString()),
-                          leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
-                          ,
-                          onTap: (){
-                            cli.UserId user = new cli.UserId(id: snapshot.data![index]['userId']['_id'], email: snapshot.data![index]['userId']['email'], password: snapshot.data![index]['userId']['password'], role: snapshot.data![index]['userId']['role'], v: snapshot.data![index]['userId']['__v']) ;
-                            cli.Client client = new cli.Client(
-                              nom: snapshot.data![index]['nom'],
-                              prenom: snapshot.data![index]['prenom'],
-                              clientTel: snapshot.data![index]
-                              ['clientTel'],
-                              clientAdresse: snapshot.data![index]['clientAdresse'],
-                              v: snapshot.data![index]['__v'],
-                              id: snapshot.data![index]['_id'],
-                              userId: user,
-
-
-                            );
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailClient(client)));
-                          },
-                        );
-
-                      },
-                      itemCount: snapshot.data?.length,
-                    );
-                  } else {
-                    return Center(
-                      child: Text('data is null'),
-                    );
-                  }
-                },
-              ),),
+                if ((snapshot.hasData)) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text("nom de Client :"),
+                        //subtitle: Text(snapshot.data![index]['prenom']),
+                        trailing: Text(snapshot.data![index]['nom'].toString()),
+                        leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
+                        onTap: () {
+                          cli.UserId user = new cli.UserId(
+                              id: snapshot.data![index]['userId']['_id'],
+                              email: snapshot.data![index]['userId']['email'],
+                              password: snapshot.data![index]['userId']
+                                  ['password'],
+                              role: snapshot.data![index]['userId']['role'],
+                              v: snapshot.data![index]['userId']['__v']);
+                          cli.Client client = new cli.Client(
+                            nom: snapshot.data![index]['nom'],
+                            prenom: snapshot.data![index]['prenom'],
+                            clientTel: snapshot.data![index]['clientTel'],
+                            clientAdresse: snapshot.data![index]
+                                ['clientAdresse'],
+                            v: snapshot.data![index]['__v'],
+                            id: snapshot.data![index]['_id'],
+                            userId: user,
+                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailClient(client)));
+                        },
+                      );
+                    },
+                    itemCount: snapshot.data?.length,
+                  );
+                } else {
+                  return Center(
+                    child: Text('data is null'),
+                  );
+                }
+              },
+            ),
+          ),
         ]));
   }
 }

@@ -7,7 +7,7 @@ import '../../models/livraison_list.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer_livreur.dart';
-import 'DetailLivraison.dart';
+import 'DetailLivraisonLivreur.dart';
 
 class LivraisonLivreur extends StatefulWidget {
   const LivraisonLivreur({Key? key}) : super(key: key);
@@ -30,7 +30,6 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
           side: BorderSide(color: Colors.blueGrey, width: 1),
-
         ),
       ),
       drawer: livreurDrawer(context),
@@ -79,19 +78,20 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
                         adresseExp: snapshot.data![index]['AdresseExp'],
                         adressseDes: snapshot.data![index]['AdressseDes'],
                         dateDeLivraison: snapshot.data![index]
-                        ['DateDeLivraison'],
+                            ['DateDeLivraison'],
                         DesColis: snapshot.data![index]['colisId']['DesColis'],
                         numLivraison: snapshot.data![index]['numLivraison'],
                         typeColis: snapshot.data![index]['colisId']
-                        ['typeColis'],
+                            ['typeColis'],
                         poidsColis: snapshot.data![index]['colisId']
-                        ['poidsColis'],
+                            ['poidsColis'],
                         etatLivraison: snapshot.data![index]['etatLivraison'],
                         sId: snapshot.data![index]['_id']);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DetailLivraison(livraison)));
+                            builder: (context) =>
+                                DetailLivraisonLivreur(livraison)));
                   },
                 );
               },
@@ -108,70 +108,70 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
   }
 
   PreferredSize get appbar => PreferredSize(
-    preferredSize: Size(double.infinity, 50),
-    child: AppBar(
-      title: const Text("Historique personel"),
-      centerTitle: true,
-      leading: IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.menu_rounded),
-      ),
-    ),
-  );
+        preferredSize: Size(double.infinity, 50),
+        child: AppBar(
+          title: const Text("Historique personel"),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.menu_rounded),
+          ),
+        ),
+      );
 
   Widget get showData => Column(
-    children: <Widget>[
-      newTaskPanel,
-      crudPanel,
-    ],
-  );
+        children: <Widget>[
+          newTaskPanel,
+          crudPanel,
+        ],
+      );
 
   Widget get newTaskPanel => TaskPanel(
-    widget: Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 10),
-            _livraisonList.length > 0
-                ? Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return showCard(
-                    index,
-                    _livraisonList[index].numLivraison,
-                    _livraisonList[index].adressseDes,
-                    _livraisonList[index].adresseExp,
-                    _livraisonList[index].dateDeLivraison,
-                    _livraisonList[index].typeColis,
-                    _livraisonList[index].DesColis,
-                    _livraisonList[index].poidsColis,
-                  );
-                },
-                itemCount: _livraisonList.length,
-              ),
-            )
-                : const NoSavedData(),
-          ],
+        widget: Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 10),
+                _livraisonList.length > 0
+                    ? Expanded(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return showCard(
+                              index,
+                              _livraisonList[index].numLivraison,
+                              _livraisonList[index].adressseDes,
+                              _livraisonList[index].adresseExp,
+                              _livraisonList[index].dateDeLivraison,
+                              _livraisonList[index].typeColis,
+                              _livraisonList[index].DesColis,
+                              _livraisonList[index].poidsColis,
+                            );
+                          },
+                          itemCount: _livraisonList.length,
+                        ),
+                      )
+                    : const NoSavedData(),
+              ],
+            ),
+          ),
         ),
-      ),
-    ),
-  );
+      );
 
   Widget get crudPanel => Padding(
-    padding: const EdgeInsets.only(bottom: 15),
-  );
+        padding: const EdgeInsets.only(bottom: 15),
+      );
 
   Widget showCard(
-      int index,
-      String numLivraison,
-      String adressseDes,
-      String adresseExp,
-      String dateDeLivraison,
-      String sId,
-      String desColis,
-      String poidsColis,
-      ) =>
+    int index,
+    String numLivraison,
+    String adressseDes,
+    String adresseExp,
+    String dateDeLivraison,
+    String sId,
+    String desColis,
+    String poidsColis,
+  ) =>
       GestureDetector(
         onTap: () {
           _livraisonList[index].numLivraison;

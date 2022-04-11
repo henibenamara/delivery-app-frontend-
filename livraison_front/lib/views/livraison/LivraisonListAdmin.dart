@@ -9,7 +9,7 @@ import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 import 'DetailLivraiosnAdmin.dart';
-import 'DetailLivraison.dart';
+import 'DetailLivraisonLivreur.dart';
 
 class LivraisonAdmin extends StatefulWidget {
   const LivraisonAdmin({Key? key}) : super(key: key);

@@ -4,8 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/livraisonService.dart';
 import '../models/livraison.dart';
 import '../widgets/drawer_livreur.dart';
-import 'livraison/DetailLivraiosnAdmin.dart';
-import 'livraison/DetailLivraison.dart';
+import 'livraison/DetailLivraisonLivreur.dart';
 
 class LivraisonRequest extends StatefulWidget {
   const LivraisonRequest({Key? key}) : super(key: key);
@@ -146,16 +145,17 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                     etatLivraison: snapshot.data![index]['etatLivraison'],
                                     sId: snapshot.data![index]['_id'],
                                     idClient: snapshot.data![index]['client']['_id'],
+
                                     idLivreur: "aucun livreur",
                                   );
-
+                            print(snapshot.data![index]['client']['_id']);
 
 
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            DetailLivraison(livraison)));
+                                            DetailLivraisonLivreur(livraison)));
                               },
                               child: const Icon(Icons.info_outline),
                               backgroundColor: Colors.white,

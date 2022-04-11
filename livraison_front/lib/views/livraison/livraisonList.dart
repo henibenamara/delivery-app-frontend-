@@ -7,7 +7,8 @@ import '../../services/livraisonService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
-import 'DetailLivraison.dart';
+import 'DetailLivraisonClient.dart';
+import 'DetailLivraisonLivreur.dart';
 
 class LivraisonPage extends StatefulWidget {
   const LivraisonPage({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class _LivraisonPageState extends State<LivraisonPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DetailLivraison(livraison)));
+                            builder: (context) => DetailLivraisonClient(livraison)));
                   },
                 );
               },
