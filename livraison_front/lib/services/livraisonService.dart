@@ -55,9 +55,9 @@ class LivraisonService {
       if (request.statusCode == 200) {
         print('request.body : ${request.body}');
         var x = json.decode(request.body);
-        print('x is : ${x['result']}');
+
         listLivraison = x['result'];
-        print('livraisonList is : $listLivraison');
+
       } else {
         print(request.statusCode);
         return const [];
@@ -69,6 +69,7 @@ class LivraisonService {
   }
   //update livraison
   Future<Response> updateLivraison(String sId,String idLivreur,String etatLivraison) async {
+
     final json =
         {"sId" : sId,"livreur": idLivreur ,"etatLivraison":etatLivraison};
     var data = jsonEncode(json);
@@ -81,6 +82,30 @@ class LivraisonService {
     try {
       if (request.statusCode == 200) {
         print("etat livraison : $etatLivraison");
+        response = responseFromJson(request.body);
+      } else {
+        print(request.statusCode);
+      }
+    } catch (e) {
+      return Response();
+    }
+    return response;
+  }
+  //update livraison
+  Future<Response> updateLivraisonALl(String? sId,String adressseDes,String adresseExp,String dateDeLivraison,String DesColis,int poidsColis) async {
+    print("update called");
+    final json =
+    {"_id" : sId,"AdressseDes":adressseDes,"AdresseExp":adresseExp,"DateDeLivraison":dateDeLivraison,"DesColis":DesColis,"poidsColis":poidsColis};
+    var data = jsonEncode(json);
+    final url =
+    Uri.parse(AppConstants.API_URL +" /livraison/$sId");
+    final request =
+    await http.put(url, body: data, headers: AppConstants.HEADERS);
+    Response response = Response();
+print("DesColis :$DesColis");
+    try {
+      if (request.statusCode == 200) {
+        print("succes");
         response = responseFromJson(request.body);
       } else {
         print(request.statusCode);

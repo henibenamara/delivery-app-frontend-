@@ -11,6 +11,7 @@ import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 import '../client/DetailClient.dart';
 import '../client/EditClient.dart';
+import 'EditLivraisont.dart';
 
 class DetailLivraisonClient extends StatefulWidget {
   DetailLivraisonClient(this.livraison);
@@ -41,8 +42,10 @@ class _DetailLivraisonClientState extends State<DetailLivraisonClient> {
           ),
         ),
         body: Column(children: <Widget>[
+
           Card(
             child: Container(
+
                 padding: EdgeInsets.all(10.0),
                 width: 600,
                 child: Column(children: <Widget>[
@@ -127,14 +130,28 @@ class _DetailLivraisonClientState extends State<DetailLivraisonClient> {
             color: Colors.white,
             elevation: 30,
           ),
-          RaisedButton( child: Text('modifier livraison'),
-            onPressed: (){
 
+          RaisedButton( child: Text('modifier livraison'),
+
+            onPressed: (){
+              var livraison1 = Livraison(
+                sId: widget.livraison.sId,
+                numLivraison: widget.livraison.numLivraison,
+                adressseDes: widget.livraison.adressseDes,
+                adresseExp: widget.livraison.adresseExp,
+                dateDeLivraison: widget.livraison.dateDeLivraison,
+                typeColis: widget.livraison.typeColis,
+                DesColis: widget.livraison.DesColis,
+                poidsColis: widget.livraison.poidsColis,
+                etatLivraison: widget.livraison.etatLivraison,
+                idClient: widget.livraison.idClient.toString(),
+              );
             Navigator.push(
                 context,
                 MaterialPageRoute(
+
                     builder: (context) =>
-                    EditDataWidget()));;
+                        EditLivraison(livraison1)));
 
     }),
 

@@ -19,17 +19,25 @@ Widget clientDrawer(BuildContext context) {
             ),
           ),
           ListTile(
-              leading: Icon(Icons.monetization_on),
-              title: Text('Historique'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/LivraisonClient");
-
-              }),
-          ListTile(
               leading: Icon(Icons.add),
               title: Text('Ajouter livraison'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/Addlivraison");
+
+              }),
+          ListTile(
+              leading: Icon(Icons.list_alt),
+              title: Text('Mes demandes'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/DemandeClient");
+
+              }),
+
+          ListTile(
+              leading: Icon(Icons.monetization_on),
+              title: Text('Mes livraisons'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/LivraisonClient");
 
               }),
           ListTile(

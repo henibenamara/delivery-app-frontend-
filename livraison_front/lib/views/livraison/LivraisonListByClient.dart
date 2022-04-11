@@ -22,84 +22,126 @@ class LivraisonClient extends StatefulWidget {
 class _LivraisonClientState extends State<LivraisonClient> {
   List<LivraisonList> _livraisonList = [];
   String _id = "";
-
+  String? etat ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbar,
       drawer: clientDrawer(context),
-      body: FutureBuilder(
-        future: LivraisonService().getLivraisonByIdClient(),
-        builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-          print('snapshot is : ${snapshot.data}');
+      body: Column(
+          children: <Widget>[
+            Container(
+              /**CONTROLLERUR DE etat **/
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: 40),
+                child: DropdownButton<String>(
+                    hint: etat == null
+                        ? Text('Etat de livraison')
+                        : Text(
+                      etat!,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    isExpanded: true,
+                    iconSize: 30.0,
+                    style: TextStyle(color: Colors.blue),
+                    items: ['en cours', 'Livrée'].map(
+                          (val) {
+                        return DropdownMenuItem<String>(
+                          value: val,
+                          child: Text(val),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (val) {
+                      setState(
+                            () {
+                           etat = val!;
+                        },
+                      );
+                    })),
+      Expanded(
+        child: FutureBuilder(
+          future: LivraisonService().getLivraisonByIdClient(),
+          builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+            print('snapshot is : ${snapshot.data}');
 
-          if ((snapshot.hasData)) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: new Image.asset(
-                    "images/col.jpg",
-                    fit: BoxFit.cover,
-                    width: 100.0,
-                  ),
+            if ((snapshot.hasData)) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  if (snapshot.data![index]['etatLivraison'].toString() ==
+                      etat) {
+                  return ListTile(
+                    leading: new Image.asset(
+                      "images/col.jpg",
+                      fit: BoxFit.cover,
+                      width: 100.0,
+                    ),
 
-                  title: new Text(
-                    "De  " +
-                        snapshot.data![index]['AdresseExp'] +
-                        " vers  " +
-                        snapshot.data![index]['AdressseDes'],
-                    style: new TextStyle(
-                        fontSize: 14.0, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: new Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Text(
-                            "Num:" +
-                                snapshot.data![index]['numLivraison']
-                                    .toString(),
-                            style: new TextStyle(
-                                fontSize: 14.0, fontWeight: FontWeight.normal)),
-                        new Text(
-                            'Description: ${snapshot.data![index]['colisId']['DesColis']}',
-                            style: new TextStyle(
-                                fontSize: 14.0, fontWeight: FontWeight.normal)),
-                      ]),
-                  //    title: Text(snapshot.data![index]['numLivraison'].toString()),
-                  //    subtitle: Text(snapshot.data![index]['AdressseDes']),
-                  onTap: () {
-                    Livraison livraison = new Livraison(
-                        adresseExp: snapshot.data![index]['AdresseExp'],
-                        adressseDes: snapshot.data![index]['AdressseDes'],
-                        dateDeLivraison: snapshot.data![index]
-                            ['DateDeLivraison'],
-                        DesColis: snapshot.data![index]['colisId']['DesColis'],
-                        numLivraison: snapshot.data![index]['numLivraison'],
-                        typeColis: snapshot.data![index]['colisId']
-                            ['typeColis'],
-                        poidsColis: snapshot.data![index]['colisId']
-                            ['poidsColis'],
-                        etatLivraison: snapshot.data![index]['etatLivraison'],
-                        sId: snapshot.data![index]['_id']);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailLivraisonClient(livraison)));
-                  },
-                );
-              },
-              itemCount: snapshot.data?.length,
-            );
-          } else {
-            return Center(
-              child: Text('data is null'),
-            );
-          }
-        },
+                    title: new Text(
+                      "De  " +
+                          snapshot.data![index]['AdresseExp'] +
+                          " vers  " +
+                          snapshot.data![index]['AdressseDes'],
+                      style: new TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: new Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Text(
+                              "Num:" +
+                                  snapshot.data![index]['numLivraison']
+                                      .toString(),
+                              style: new TextStyle(
+                                  fontSize: 14.0, fontWeight: FontWeight.normal)),
+                          new Text(
+                              'Description: ${snapshot.data![index]['colisId']['DesColis']}',
+                              style: new TextStyle(
+                                  fontSize: 14.0, fontWeight: FontWeight.normal)),
+                        ]),
+                    //    title: Text(snapshot.data![index]['numLivraison'].toString()),
+                    //    subtitle: Text(snapshot.data![index]['AdressseDes']),
+                    onTap: () {
+                      Livraison livraison = new Livraison(
+                          adresseExp: snapshot.data![index]['AdresseExp'],
+                          adressseDes: snapshot.data![index]['AdressseDes'],
+                          dateDeLivraison: snapshot.data![index]
+                              ['DateDeLivraison'],
+                          DesColis: snapshot.data![index]['colisId']['DesColis'],
+                          numLivraison: snapshot.data![index]['numLivraison'],
+                          typeColis: snapshot.data![index]['colisId']
+                              ['typeColis'],
+                          poidsColis: snapshot.data![index]['colisId']
+                              ['poidsColis'],
+                          etatLivraison: snapshot.data![index]['etatLivraison'],
+                          sId: snapshot.data![index]['_id']);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailLivraisonClient(livraison)));
+                    },
+                  );
+                  }else {
+                    return Center(
+                      child: Text('',
+                        style: TextStyle(fontSize: 1),
+                      ),
+                    );
+                  }
+                },
+                itemCount: snapshot.data?.length,
+              );
+            } else {
+              return Center(
+                child: Text('data is null'),
+              );
+            }
+          },
+        ),
       ),
-    );
+  ]));
   }
 
   PreferredSize get appbar => PreferredSize(
