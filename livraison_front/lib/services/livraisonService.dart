@@ -180,4 +180,15 @@ print("DesColis :$DesColis");
     }
     return listLivraison;
   }
+  //Delete livraison
+  Future<http.Response> deletelivraison(String id) async {
+    final http.Response response = await http.delete(
+      Uri.parse(AppConstants.API_URL+'/livraison/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    return response;
+  }
 }
