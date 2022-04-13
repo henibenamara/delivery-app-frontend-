@@ -128,7 +128,7 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                 future: LivreurService()
                     .getLivreurByIdUSer(widget.livraison.idLivreur.toString()),
                 builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                  print('snapshot is : ${snapshot.data}');
+                  print('snapshot is: ${snapshot.data}');
 
                   if ((snapshot.hasData)) {
                     return ListView.builder(

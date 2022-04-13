@@ -1,12 +1,13 @@
 import 'dart:math';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:livraison_front/views/livraison/uploadphotoLivraison.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_client.dart';
+import 'package:date_field/date_field.dart';
 
 class AddLivraisonWidget extends StatefulWidget {
   AddLivraisonWidget({Key? key}) : super(key: key);
@@ -21,15 +22,15 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
   Random random = new Random();
   final LivraisonService api = LivraisonService();
   final _addFormKey = GlobalKey<FormState>();
-  final _numController = TextEditingController();
+
   final _adressdesController = TextEditingController();
   final _addressexpController = TextEditingController();
   final _dateController = TextEditingController();
-  final _typeColisController = TextEditingController();
+
   final _desColisController = TextEditingController();
   final _poidsColisController = TextEditingController();
   String? _dropDownValue;
-  String? _dropDownValue1;
+
   File? imageFile;
   @override
   Widget build(BuildContext context) {
@@ -107,6 +108,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                           margin: EdgeInsets.symmetric(horizontal: 40),
                           child: TextField(
                             controller: _dateController,
+                            keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
                               labelText: 'Date de livraison',
                             ),
@@ -136,7 +138,6 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                           ),
                         ),
                         SizedBox(height: size.height * 0.03),
-
                         SizedBox(height: size.height * 0.03),
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -153,20 +154,24 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                   if (_addFormKey.currentState!.validate()) {
                                     _addFormKey.currentState?.save();
                                     var livraison = Livraison(
-                                        numLivraison: random.nextInt(10000),
-                                        adressseDes: _adressdesController.text,
-                                        adresseExp: _addressexpController.text,
-                                        dateDeLivraison: _dateController.text,
-                                        typeColis: _dropDownValue,
-                                        DesColis: _desColisController.text,
-                                        poidsColis: int.parse(
-                                            _poidsColisController.text),
-                                        etatLivraison: 'non livrée',
-                                        idClient: userId.toString(),
-                                        );
+                                      numLivraison: random.nextInt(10000),
+                                      adressseDes: _adressdesController.text,
+                                      adresseExp: _addressexpController.text,
+                                      dateDeLivraison: _dateController.text,
+                                      typeColis: _dropDownValue,
+                                      DesColis: _desColisController.text,
+                                      poidsColis:
+                                          int.parse(_poidsColisController.text),
+                                      etatLivraison: 'non livrée',
+                                      idClient: userId.toString(),
+                                    );
                                     print(
                                         'livraison is :${livraison.toString()}');
                                     api.addNewLivraison(livraison);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => uploadphotoLiv(livraison)));
                                   }
                                 },
                                 child: Text('Ajouter',
@@ -176,7 +181,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                             ],
                           ),
                         ),
-                        if (imageFile != null)
+                        /**  if (imageFile != null)
                           Container(
                             width: 640,
                             height: 480,
@@ -202,8 +207,8 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: const Text(
-                              'Image should appear here',
-                              style: TextStyle(fontSize: 26),
+                              'Image field',
+                              style: TextStyle(fontSize: 15),
                             ),
                           ),
                         const SizedBox(
@@ -228,8 +233,9 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                   child: const Text('Select Image',
                                       style: TextStyle(fontSize: 18))),
                             )
+
                           ],
-                        ),
+                        ),*/
                       ],
                     ))),
           ),
@@ -238,7 +244,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
     );
   }
 
-  void getImage({required ImageSource source}) async {
+  /* void getImage({required ImageSource source}) async {
     final file = await ImagePicker().pickImage(
         source: source,
         maxWidth: 640,
@@ -247,10 +253,12 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
         );
 
     if (file?.path != null) {
+
       setState(() {
         imageFile = File(file!.path);
+
       });
     }
-  }
-  
+  }*/
+
 }

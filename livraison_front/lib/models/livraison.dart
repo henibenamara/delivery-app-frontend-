@@ -11,6 +11,7 @@ class Livraison {
   int? iV;
   String? idClient;
   String? idLivreur;
+  String? imageUrl;
 
   Livraison(
       {this.numLivraison,
@@ -24,7 +25,9 @@ class Livraison {
         this.iV,
         this.etatLivraison,
         this.idClient,
-      this.idLivreur});
+      this.idLivreur,
+        this.imageUrl
+      });
 
   Livraison.fromJson(Map<String, dynamic> json) {
     numLivraison = json['numLivraison'];
@@ -37,6 +40,7 @@ class Livraison {
     etatLivraison=json['etatLivraison'];
     sId = json['_id'];
     iV = json['__v'];
+    imageUrl = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,12 +55,13 @@ class Livraison {
     data['etatLivraison']=this.etatLivraison;
     data['client'] = this.idClient;
     data['livreur'] = this.idLivreur;
+    data['imageUrl'] = this.imageUrl;
     data['__v'] = this.iV;
     return data;
   }
 
   @override
   String toString() {
-    return 'Livraison{numLivraison: $numLivraison, adressseDes: $adressseDes, adresseExp: $adresseExp, dateDeLivraison: $dateDeLivraison, typeColis: $typeColis, DesColis: $DesColis, poidsColis: $poidsColis, etatLivraison: $etatLivraison, sId: $sId, iV: $iV, idClient: $idClient, idLivreur: $idLivreur}';
+    return 'Livraison{numLivraison: $numLivraison, adressseDes: $adressseDes, adresseExp: $adresseExp, dateDeLivraison: $dateDeLivraison, typeColis: $typeColis, DesColis: $DesColis, poidsColis: $poidsColis, etatLivraison: $etatLivraison, sId: $sId, iV: $iV, idClient: $idClient, idLivreur: $idLivreur,imageUrl : $imageUrl}';
   }
 }

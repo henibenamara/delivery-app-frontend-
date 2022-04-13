@@ -1,106 +1,98 @@
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
+import 'dart:async';
+import 'package:async/async.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-import '../utility.dart';
+import 'package:path/path.dart';
 
-
-class SaveImageDemo extends StatefulWidget {
-  SaveImageDemo() : super();
-
-  final String title = "Flutter Save Image in Preferences";
-
+class ImageUpload extends StatefulWidget {
   @override
-  _SaveImageDemoState createState() => _SaveImageDemoState();
+  _ImageUploadState createState() => _ImageUploadState();
 }
 
-class _SaveImageDemoState extends State<SaveImageDemo> {
-  //
-   Future<File>? imageFile;
-   Image ?imageFromPreferences;
+class _ImageUploadState extends State<ImageUpload> {
+  File? _image;
+  final picker = ImagePicker();
 
-  pickImageFromGallery(ImageSource source) {
+  Future<void> getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
     setState(() {
-      imageFile = ImagePicker().pickImage(source: source) as Future<File>? ;
-    });
-  }
-
-  loadImageFromPreferences() {
-    ImageSharedPrefs.loadImageFromPrefs().then((img) {
-      if (null == img) {
-        return;
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
       }
-      setState(() {
-        imageFromPreferences = ImageSharedPrefs.imageFrom64BaseString(img);
-      });
     });
   }
 
-  Widget imageFromGallery() {
-    return FutureBuilder<File>(
-      future: imageFile,
-      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.hasData) {
-          print("teest");
-          print(snapshot.data!.path);
-          ImageSharedPrefs.saveImageToPrefs(
-              ImageSharedPrefs.base64String(snapshot.data!.readAsBytesSync()));
-          return Image.file(
-            snapshot.data!,
-          );
-        } else if (null != snapshot.error) {
-          return const Text(
-            'Error Picking Image',
-            textAlign: TextAlign.center,
-          );
-        } else {
-          return const Text(
-            'No Image Selected',
-            textAlign: TextAlign.center,
-          );
-        }
-      },
-    );
+  upload(File imageFile) async {
+    // open a bytestream
+    var stream =
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // get file length
+    var length = await imageFile.length();
+
+    // string to uri
+    var uri = Uri.parse("http://192.168.1.36:5000/livraison/625610063a97d18f3faf5ef6");
+
+    // create multipart request
+    var request = new http.MultipartRequest("PUT", uri);
+
+    // multipart that takes file
+    var multipartFile = new http.MultipartFile('imageUrl', stream, length,
+        filename: basename(imageFile.path));
+
+    // add file to multipart
+    request.files.add(multipartFile);
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
   }
+
+  bool isloaded = false;
+  var result;
+  /*fetch() async {
+    var response = await http.get("http://192.168.0.8:3000"/image);
+    result = jsonDecode(response.body);
+    print(result[0]['image']);
+    setState(() {
+      isloaded = true;
+    });
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              pickImageFromGallery(ImageSource.gallery);
-              setState(() {
 
-                imageFromPreferences = null;
-              });
-            },
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Text("Select an image"),
+          FlatButton.icon(
+              onPressed: () async => await getImage(),
+              icon: Icon(Icons.upload_file),
+              label: Text("Browse")),
+          SizedBox(
+            height: 20,
           ),
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              loadImageFromPreferences();
-            },
-          ),
+          FlatButton.icon(
+              onPressed: () => upload(_image!),
+              icon: Icon(Icons.upload_rounded),
+              label: Text("Upload now")),
+          isloaded
+              ? Image.network('http://192.168.0.8:3000/${result[0]['image']}')
+              : CircularProgressIndicator(),
         ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 20.0,
-            ),
-            imageFromGallery(),
-            SizedBox(
-              height: 20.0,
-            ),
-            null == imageFromPreferences ? Container() : imageFromPreferences!,
-          ],
-        ),
       ),
     );
   }

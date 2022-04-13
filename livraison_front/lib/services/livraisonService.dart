@@ -1,6 +1,9 @@
 import 'dart:convert';
-
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constant/app_constants.dart';
 import '../models/livraison.dart';
@@ -191,4 +194,36 @@ print("DesColis :$DesColis");
 
     return response;
   }
+
+
+  upload(File imageFile,int? num) async {
+    // open a bytestream
+    var stream =
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // get file length
+    var length = await imageFile.length();
+
+    // string to uri
+    var uri = Uri.parse(AppConstants.API_URL+"/livraison/$num");
+
+    // create multipart request
+    var request = new http.MultipartRequest("PUT", uri);
+
+    // multipart that takes file
+    var multipartFile = new http.MultipartFile('imageUrl', stream, length,
+        filename: basename(imageFile.path));
+
+    // add file to multipart
+    request.files.add(multipartFile);
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+  }
+
 }

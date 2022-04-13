@@ -13,7 +13,7 @@ class LivraisonList {
     required this.DesColis,
     required this.poidsColis,
     required this.etatLivraison,
-
+    required this.imageUrl,
     required this.sId,
 
   });
@@ -26,7 +26,7 @@ class LivraisonList {
   late final String poidsColis;
   late final String etatLivraison;
   late final String sId;
-
+  late final String imageUrl;
 
   LivraisonList.fromJson(Map<String, dynamic> json){
     numLivraison = json['numLivraison'];
@@ -37,6 +37,7 @@ class LivraisonList {
     DesColis = json['DesColis'];
     poidsColis = json['poidsColis'];
     etatLivraison = json['etatLivraison'];
+    imageUrl = json['imageUrl'];
     sId = json['_id'];
 
   }
@@ -51,6 +52,7 @@ class LivraisonList {
     _data['DesColis'] = DesColis;
     _data['poidsColis'] = poidsColis;
     _data['etatLivraison'] = etatLivraison;
+    _data['imageUrl'] = imageUrl;
 
     _data['_id'] = sId;
 
