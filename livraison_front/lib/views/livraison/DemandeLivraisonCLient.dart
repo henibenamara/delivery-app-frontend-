@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constant/message_constants.dart';
 import '../../models/livraison.dart';
@@ -39,7 +40,7 @@ class _DemandeClientState extends State<DemandeClient> {
 
               Expanded(
                   child: FutureBuilder(
-                      future: LivraisonService().getAllTLivraison(),
+                      future: LivraisonService().getLivraisonByIdClient(),
                       builder: (context,
                           AsyncSnapshot<List<dynamic>> snapshot) {
                         if ((snapshot.hasData)) {
@@ -56,14 +57,20 @@ class _DemandeClientState extends State<DemandeClient> {
                       }))
             ]));
   }
+  Future<String?> getidClient() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? userId = prefs.getString('userId');
+    print('userId is : $userId');
+    return userId;
+  }
 
   Widget buildCard(BuildContext context, int index) {
     return FutureBuilder(
-        future: LivraisonService().getAllTLivraison(),
+        future: LivraisonService().getLivraisonByIdClient(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data![index]['etatLivraison'].toString() ==
-                "non livrée") {
+            if ((snapshot.data![index]['etatLivraison'].toString() ==
+                "non livrée")) {
               _id=snapshot.data![index]['_id'];
               return Card(
                 child: Padding(

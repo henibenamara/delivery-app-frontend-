@@ -123,8 +123,8 @@ class _LivraisonAdminState extends State<LivraisonAdmin> {
                           ['poidsColis'],
                           etatLivraison: snapshot.data![index]['etatLivraison'],
                           sId: snapshot.data![index]['_id'],
-                          idClient: snapshot.data![index]['client']['email'],
-                          idLivreur: "aucun livreur",
+                          idClient: snapshot.data![index]['client']['_id']
+
                         );
                         print("test1");
                       } else {

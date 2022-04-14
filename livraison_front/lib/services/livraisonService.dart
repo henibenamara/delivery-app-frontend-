@@ -156,7 +156,7 @@ print("DesColis :$DesColis");
     await SharedPreferences.getInstance();
     final String? userId =
     prefs.getString('LivreurId');
-    print('livreurId is :$userId');
+
     print('livreur Id is  : $userId');
     final url = Uri.parse(
       AppConstants.API_URL+"/livraison/livreur/$userId",
