@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../views/livreur/HomeLivreur.dart';
 Widget livreurDrawer(BuildContext context) {
 
   return Drawer(
@@ -17,6 +19,22 @@ Widget livreurDrawer(BuildContext context) {
                 ),
               ),
             ),
+          ),
+          Container(
+            child: ListTile(
+                leading: Icon(Icons.person_outline),
+                title: Text('Mon profil'),
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  final String? userId = prefs.getString('LivreurId');
+                  print('userId is : $userId');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          (ProfilePageLiv(userId))));
+
+                }),
           ),
           ListTile(
               leading: Icon(Icons.monetization_on),
@@ -36,6 +54,7 @@ Widget livreurDrawer(BuildContext context) {
               leading: Icon(Icons.logout),
               title: Text('Déconnexion '),
               onTap: () {
+
                 Navigator.pushReplacementNamed(context, "/");
 
               }),

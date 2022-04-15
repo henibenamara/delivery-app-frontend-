@@ -42,6 +42,7 @@ Widget ResponsableDrawer(BuildContext context) {
               leading: Icon(Icons.logout),
               title: Text('Déconnexion'),
               onTap: () {
+
                 Navigator.pushReplacementNamed(context, "/");
               }),
 

@@ -49,7 +49,7 @@ class signup extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+String imgurl = "https://cdn-icons-png.flaticon.com/512/146/146031.png";
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Background(
@@ -214,7 +214,9 @@ class signup extends State<RegisterScreen> {
                           Cin.text,
                           _role!.toString(),
                           "",
-                          "");
+                          "",
+                          imgurl.toString()
+                      );
                     } else {
                       userRegister(
                           nom.text,
@@ -226,7 +228,9 @@ class signup extends State<RegisterScreen> {
                           Cin.text,
                           _role!.toString(),
                           Matricule.text,
-                          _dropDownValue!);
+                          _dropDownValue!,
+                          imgurl.toString()
+                      );
                     }
                     /** Navigator.pushNamed(context, '/LoginScreen');**/
 
@@ -307,7 +311,8 @@ class signup extends State<RegisterScreen> {
       String Cin,
       String role,
       String Matricule,
-      String marque) async {
+      String marque,
+      String img) async {
     var url = "";
 
     var data;
@@ -319,7 +324,8 @@ class signup extends State<RegisterScreen> {
         "clientTel": Telephone,
         "clientAdresse": Adresse,
         "email": Email,
-        "password": Mdp
+        "password": Mdp,
+        "image" : img
       };
     } else {
       url = "livreur";
@@ -333,6 +339,8 @@ class signup extends State<RegisterScreen> {
         "livcin": Cin,
         "livMarqVecu": _dropDownValue!,
         "livMatVecu": Matricule,
+        "image" : img
+
       };
     }
     print("$url");

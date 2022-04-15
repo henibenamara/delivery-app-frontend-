@@ -13,20 +13,22 @@ class Client {
     required this.id,
     required this.nom,
     required this.prenom,
-    required this.userId,
+     this.userId,
     required this.clientTel,
     required this.clientAdresse,
 
     required this.v,
+    this.imageUrl
   });
 
   String id;
   String nom;
   String prenom;
-  UserId userId;
+  UserId? userId;
   int clientTel;
   String clientAdresse;
   int v;
+  String? imageUrl;
 
   factory Client.fromJson(Map<String, dynamic> json) => Client(
     id: json["_id"],
@@ -36,16 +38,18 @@ class Client {
     clientTel: json["clientTel"],
     clientAdresse: json["clientAdresse"],
     v: json["__v"],
+    imageUrl :json['image'],
   );
 
   Map<String, dynamic> toJson() => {
     "_id": id,
     "nom": nom,
     "prenom": prenom,
-    "userId": userId.toJson(),
+    "userId": userId?.toJson(),
     "clientTel": clientTel,
     "clientAdresse": clientAdresse,
     "__v": v,
+    "image" : imageUrl
   };
 }
 

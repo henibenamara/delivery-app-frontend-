@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:livraison_front/models/client.dart';
-import 'package:livraison_front/views/client/uploadphotoClient.dart';
-
-import '../../services/clientService.dart';
-import '../client.dart';
-import 'HomeClient.dart';
+import 'package:livraison_front/models/livreur.dart';
+import 'package:livraison_front/services/livreurService.dart';
+import 'package:livraison_front/views/livreur/uploadphotoLivreur.dart';
+import '../livreur.dart';
 
 
 
-class EditProfileClient extends StatefulWidget {
-  EditProfileClient(this.client);
+class EditProfileLivreur extends StatefulWidget {
+  EditProfileLivreur(this.livreur);
 
-  final Client  client;
+  final Livreur  livreur;
 
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _EditProfilePageState extends State<EditProfileClient>  {
+class _EditProfilePageState extends State<EditProfileLivreur>  {
 
   bool showPassword = false;
   @override
   Widget build(BuildContext context)  {
-    final nomC = TextEditingController(text: widget.client.nom.toString());
-    final prenomC = TextEditingController(text: widget.client.prenom.toString());
-    final AdresseC = TextEditingController(text: widget.client.clientAdresse.toString());
-    final numC = TextEditingController(text: widget.client.clientTel.toString());
+    final nomC = TextEditingController(text: widget.livreur.nom.toString());
+    final prenomC = TextEditingController(text: widget.livreur.prenom.toString());
+    final AdresseC = TextEditingController(text: widget.livreur.livAdresse.toString());
+    final numC = TextEditingController(text: widget.livreur.livTelephone.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -87,7 +85,7 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                widget.client.imageUrl.toString(),
+                                widget.livreur.imageUrl.toString(),
                               ))),
                     ),
                     Positioned(
@@ -95,11 +93,11 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                         right: 0,
                         child:InkWell (
                             onTap: (){
-                             String id = widget.client.id.toString();
-                             Navigator.push(
-                                 context,
-                                 MaterialPageRoute(
-                                     builder: (context) => uploadphotoClient(id)));
+                              String id = widget.livreur.id.toString();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => uploadphotoLivreur(id)));
                             },
                             child :Container(
 
@@ -128,10 +126,10 @@ class _EditProfilePageState extends State<EditProfileClient>  {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("nom", widget.client.nom, nomC),
-              buildTextField("prenom", widget.client.prenom, prenomC),
-              buildTextField("numero", widget.client.clientTel.toString(), numC),
-              buildTextField("Location", widget.client.clientAdresse,AdresseC ),
+              buildTextField("nom", widget.livreur.nom, nomC),
+              buildTextField("prenom", widget.livreur.prenom, prenomC),
+              buildTextField("numero", widget.livreur.livTelephone.toString(), numC),
+              buildTextField("Location", widget.livreur.livAdresse,AdresseC ),
               SizedBox(
                 height: 35,
               ),
@@ -154,13 +152,11 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                       String nom = nomC.text;
                       String prenom = prenomC.text;
                       String adresse = AdresseC.text;
-
-
                       String numero = numC.text;
 
-                      ClientService api = ClientService();
-                      api.updateClient(
-                          widget.client.id,
+                      LivreurService api = LivreurService();
+                      api.updateLivreur(
+                          widget.livreur.id,
                           nom,
                           prenom,
                           adresse,
@@ -169,7 +165,7 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => client()));
+                              builder: (context) => livreur()));
                     },
                     color: Colors.green,
                     padding: EdgeInsets.symmetric(horizontal: 50),

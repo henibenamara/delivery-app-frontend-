@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../services/clientService.dart';
+import '../views/client/EditClient.dart';
+import '../views/client/HomeClient.dart';
 
 
 Widget clientDrawer(BuildContext context) {
@@ -7,7 +12,9 @@ Widget clientDrawer(BuildContext context) {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
+
           Container(
+
             color: Theme.of(context).canvasColor,
             child: DrawerHeader(
               child: Text(
@@ -17,6 +24,22 @@ Widget clientDrawer(BuildContext context) {
                 ),
               ),
             ),
+          ),
+
+          Container(
+            child: ListTile(
+                leading: Icon(Icons.person_outline),
+                title: Text('Mon profil'),
+                onTap: () async {
+                  final prefs =await SharedPreferences.getInstance();
+                  final String? userId =prefs.getString('userId');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              (ProfilePage(userId))));
+
+                }),
           ),
           ListTile(
               leading: Icon(Icons.add),
@@ -44,6 +67,7 @@ Widget clientDrawer(BuildContext context) {
               leading: Icon(Icons.logout),
               title: Text('Déconnexion '),
               onTap: () {
+
                 Navigator.pushReplacementNamed(context, "/");
 
               }),

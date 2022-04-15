@@ -2,8 +2,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_client.dart';
@@ -58,36 +57,7 @@ class _EditLivraison extends State<EditLivraison> {
                 width: 440,
                 child: Column(
                   children: <Widget>[
-                    /** Container(
-                          /**CONTROLLERUR DE LA TYPE **/
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(horizontal: 40),
-                            child: DropdownButton<String>(
 
-                                hint: _dropDownValue == null
-                                    ? Text('Type colis')
-                                    : Text(
-                                  _dropDownValue!,
-                                  style: TextStyle(color: Colors.blue),
-                                ),
-                                isExpanded: true,
-                                iconSize: 30.0,
-                                style: TextStyle(color: Colors.blue),
-                                items: ['fragile', 'solide', 'liquide'].map(
-                                      (val) {
-                                    return DropdownMenuItem<String>(
-                                      value: val,
-                                      child: Text(val),
-                                    );
-                                  },
-                                ).toList(),
-                                onChanged: (val) {
-                                  setState(
-                                        () {
-                                      _dropDownValue = val!;
-                                    },
-                                  );
-                                })),*/
                     Container(
                       alignment: Alignment.center,
                       margin: EdgeInsets.symmetric(horizontal: 40),
