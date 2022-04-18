@@ -38,8 +38,8 @@ class _ClientPageState extends State<ClientPage> {
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
                   trailing: Icon(Icons.star),
-                    leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
-                  ,
+                    leading: CircleAvatar(backgroundImage: NetworkImage(snapshot.data![index]['image'].toString())),
+
                onTap: (){
                       UserId user = new UserId(id: snapshot.data![index]['userId']['_id'], email: snapshot.data![index]['userId']['email'], password: snapshot.data![index]['userId']['password'], role: snapshot.data![index]['userId']['role'], v: snapshot.data![index]['userId']['__v']) ;
                       Client client = new Client(
@@ -48,6 +48,7 @@ class _ClientPageState extends State<ClientPage> {
                         clientTel: snapshot.data![index]
                         ['clientTel'],
                         clientAdresse: snapshot.data![index]['clientAdresse'],
+                        imageUrl:snapshot.data![index]['image'],
                         v: snapshot.data![index]['__v'],
                         id: snapshot.data![index]['_id'],
                         userId: user,

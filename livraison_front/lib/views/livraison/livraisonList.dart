@@ -36,11 +36,9 @@ class _LivraisonPageState extends State<LivraisonPage> {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: new Image.asset(
-                    "images/col.jpg",
-                    fit: BoxFit.cover,
-                    width: 100.0,
-                  ),
+                  leading: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(snapshot.data![index]['image'])),
 
                   title: new Text(
                     "De :" + snapshot.data![index]['AdresseExp'],
@@ -82,7 +80,8 @@ class _LivraisonPageState extends State<LivraisonPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DetailLivraisonClient(livraison)));
+                            builder: (context) =>
+                                DetailLivraisonClient(livraison)));
                   },
                 );
               },
@@ -184,6 +183,7 @@ class _LivraisonPageState extends State<LivraisonPage> {
         ),
       );
 }
+
 class TaskPanel extends StatelessWidget {
   final Widget? widget;
 
@@ -193,10 +193,7 @@ class TaskPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return widget ?? const SizedBox.shrink();
   }
-
 }
-
-
 
 class NoSavedData extends StatelessWidget {
   const NoSavedData({Key? key}) : super(key: key);
@@ -222,5 +219,4 @@ class NoSavedData extends StatelessWidget {
       ],
     );
   }
-
 }

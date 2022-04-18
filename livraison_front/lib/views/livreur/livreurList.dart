@@ -42,7 +42,7 @@ class _LivreurPageState extends State<LivreurPage> {
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
                     trailing: Icon(Icons.star),
-                    leading: CircleAvatar(backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/219/219986.png"))
+                    leading: CircleAvatar(backgroundImage: NetworkImage(snapshot.data![index]['image']))
                    , onTap: () {
                   UserId user = new UserId(id: snapshot
                       .data![index]['userId']['_id'],
@@ -58,6 +58,7 @@ class _LivreurPageState extends State<LivreurPage> {
                     livAdresse: snapshot.data![index]['livAdresse'],
                     livMatVecu: snapshot.data![index]['livMatVecu'],
                     livMarqVecu: snapshot.data![index]['livMarqVecu'],
+                    imageUrl:snapshot.data![index]['image'] ,
                     v: snapshot.data![index]['__v'],
                     id: snapshot.data![index]['_id'],
                     userId: user,
