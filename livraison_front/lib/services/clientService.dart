@@ -61,7 +61,7 @@ class ClientService {
         var x = json.decode(request.body);
         print('x is : ${x['result']}');
         listClient = x['result'];
-        print('livreur is : $listClient');
+        print('client is : $listClient');
       } else {
         print(request.statusCode);
         return const [];
@@ -103,7 +103,7 @@ class ClientService {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse(AppConstants.API_URL+"/client/$id");
+    var uri = Uri.parse(AppConstants.API_URL+"/client/image/$id");
 
     // create multipart request
     var request = new http.MultipartRequest("PUT", uri);

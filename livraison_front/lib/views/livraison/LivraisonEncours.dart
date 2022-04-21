@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
-import '../models/livraison.dart';
-import '../widgets/drawer_livreur.dart';
-import 'livraison/DetailLivraisonLivreur.dart';
+import '../../widgets/drawer_livreur.dart';
 
-class LivraisonRequest extends StatefulWidget {
-  const LivraisonRequest({Key? key}) : super(key: key);
+
+
+
+class LivraisonEnCours extends StatefulWidget {
+  const LivraisonEnCours({Key? key}) : super(key: key);
 
   @override
-  _LivraisonRequest createState() => _LivraisonRequest();
+  _LivraisonEnCours createState() => _LivraisonEnCours();
 }
 
-class _LivraisonRequest extends State<LivraisonRequest> {
+class _LivraisonEnCours extends State<LivraisonEnCours> {
   void displayDialog(BuildContext context, String title, String text) =>
       showDialog(
         context: context,
@@ -28,7 +30,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.lightBlue,
-          title: Text('Livraison Disponible'),
+          title: Text('Livraison En Cours'),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
             side: BorderSide(color: Colors.blueGrey, width: 1),
@@ -41,9 +43,9 @@ class _LivraisonRequest extends State<LivraisonRequest> {
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          buildCard(context, index));
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        buildCard(context, index));
               } else {
                 return const Center(
                     child:  Text("", style: TextStyle(fontSize: 1))); // Center
@@ -56,12 +58,12 @@ class _LivraisonRequest extends State<LivraisonRequest> {
 
   Widget buildCard(BuildContext context, int index) {
     return FutureBuilder(
-        future: LivraisonService().getAllTLivraison(),
+        future: LivraisonService().getLivraisonByIdLivreur(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData){
-          if (snapshot.data![index]['etatLivraison'].toString() ==
-              "non livrée") {
-            return Card(
+            if (snapshot.data![index]['etatLivraison'].toString() ==
+                "en cours") {
+              return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -72,10 +74,10 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                           Text(
                             "Numero :" +
                                 snapshot.data![index][
-                                        'numLivraison'] //(snapshot.data![index]['etatLivraison'].toString()=="en cours")
+                                'numLivraison']
                                     .toString(),
                             style: const TextStyle(
-                                fontSize: 20.0, color: Colors.white),
+                                fontSize: 20.0, color: Colors.black),
                           ),
                           const Spacer(),
                         ]),
@@ -86,17 +88,17 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                           Text(
                               "${"De " + snapshot.data![index]['AdresseExp'].toString()} ",
                               style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.white)),
+                                  fontSize: 20.0, color: Colors.black)),
                           const Spacer(),
                           Text("vers",
                               style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.white)),
+                                  fontSize: 20.0, color: Colors.black)),
                           const Spacer(),
                           Text(
 
-                                  "${snapshot.data![index]['AdressseDes'].toString()}",
+                              "${snapshot.data![index]['AdressseDes'].toString()}",
                               style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.white)),
+                                  fontSize: 20.0, color: Colors.black)),
                           const Spacer(),
                         ]),
                       ),
@@ -107,16 +109,18 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                             Text(
                               "${snapshot.data![index]['colisId']['poidsColis']} Kg",
                               style: const TextStyle(
-                                  fontSize: 20.0, color: Colors.white),
+                                  fontSize: 20.0, color: Colors.black),
                             ),
                             const Spacer(),
-                            FloatingActionButton(
+                            RaisedButton(
+                              child: Text('Livraison Complet'),
+                              color: Colors.green,
                               onPressed: () async {
                                 final prefs =
-                                    await SharedPreferences.getInstance();
-                                const String etatLivraison = "en cours";
+                                await SharedPreferences.getInstance();
+                                const String etatLivraison = "Livrée";
                                 final String? userId =
-                                    prefs.getString('LivreurId');
+                                prefs.getString('LivreurId');
                                 print(snapshot.data![index]['_id']);
                                 print(userId);
                                 print(etatLivraison);
@@ -125,45 +129,10 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                     userId!,
                                     etatLivraison);
                               },
-                              child: const Icon(Icons.check),
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.purple,
+
+
                             ),
-                            FloatingActionButton(
-                              onPressed: () {
-                                Livraison livraison;
 
-                                  livraison = new Livraison(
-                                    adresseExp: snapshot.data![index]['AdresseExp'],
-                                    adressseDes: snapshot.data![index]['AdressseDes'],
-                                    dateDeLivraison: snapshot.data![index]
-                                    ['DateDeLivraison'],
-                                    DesColis: snapshot
-                                        .data![index]['colisId']['DesColis'],
-                                    numLivraison: snapshot.data![index]['numLivraison'],
-                                    typeColis: snapshot.data![index]['colisId']
-                                    ['typeColis'],
-                                    poidsColis: snapshot.data![index]['colisId']
-                                    ['poidsColis'],
-                                    etatLivraison: snapshot.data![index]['etatLivraison'],
-                                    sId: snapshot.data![index]['_id'],
-                                    idClient: snapshot.data![index]['client']['_id'],
-
-                                    idLivreur: "aucun livreur",
-                                  );
-                            print(snapshot.data![index]['client']['_id']);
-
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            DetailLivraisonLivreur(livraison)));
-                              },
-                              child: const Icon(Icons.info_outline),
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.purple,
-                            ),
                           ],
                         ),
                       )
@@ -172,23 +141,23 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                 ),
                 shadowColor: Colors.lightBlue,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(100), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
-                  side: BorderSide(color: Colors.blue, width: 1),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
+                  side: BorderSide(color: Colors.green, width: 1),
                 ),
-                color: Colors.lightBlue,
+                color: Colors.white,
                 elevation: 30,
 
               );
 
-          } else {
-            return const Center(
+            } else {
+              return const Center(
                   child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
 
-          }}else {
-    return const Center(
-    child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
+            }}else {
+            return const Center(
+                child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
 
-    }
+          }
         });
   }
 }

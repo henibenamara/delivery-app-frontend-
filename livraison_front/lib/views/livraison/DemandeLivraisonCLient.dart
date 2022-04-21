@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/views/livraison/DetailLivraisonClient_edit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constant/message_constants.dart';
@@ -166,7 +167,7 @@ class _DemandeClientState extends State<DemandeClient> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            DetailLivraisonClient(livraisonA)));
+                                            DetailLivraisonClientEdit(livraisonA)));
                               },
                               child: const Icon(Icons.info_outline),
                               backgroundColor: Colors.white,

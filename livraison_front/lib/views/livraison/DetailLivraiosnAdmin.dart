@@ -140,7 +140,7 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                         trailing: Text(snapshot.data![index]['nom'].toString()),
                         leading: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
+                                snapshot.data![index]['image'])),
                         onTap: () {
                           cli.UserId user = new cli.UserId(
                               id: snapshot.data![index]['userId']['_id'],
@@ -170,7 +170,7 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                   );
                 } else {
                   return Center(
-                    child: Text('data is null'),
+                    child: Text(''),
                   );
                 }
               },
@@ -200,7 +200,7 @@ height: 50,
                               trailing: Text(snapshot.data![index]['nom']),
                               leading: CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                      "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
+                                      snapshot.data![index]['image'])),
                               onTap: () {
                                 liv.UserId user = new liv.UserId(
                                     id: snapshot.data![index]['userId']['_id'],

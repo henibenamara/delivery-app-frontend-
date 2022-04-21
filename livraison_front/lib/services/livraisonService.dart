@@ -183,6 +183,64 @@ print("DesColis :$DesColis");
     }
     return listLivraison;
   }
+  Future<List<dynamic>> getListLivraisonByIdClient(String userId) async {
+
+
+    print('Client Id is  : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/client/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listLivraison = x['result'];
+        print('livraisonList is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
+  Future<List<dynamic>> getListLivraisonByIdLivreur(String userId) async {
+
+
+    print('livreur Id is  : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/livreur/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listLivraison = x['result'];
+        print('livraisonList is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
   //Delete livraison
   Future<http.Response> deletelivraison(String id) async {
     final http.Response response = await http.delete(
@@ -204,7 +262,7 @@ print("DesColis :$DesColis");
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse(AppConstants.API_URL+"/livraison/$num");
+    var uri = Uri.parse(AppConstants.API_URL+"/livraison/image/$num");
 
     // create multipart request
     var request = new http.MultipartRequest("PUT", uri);

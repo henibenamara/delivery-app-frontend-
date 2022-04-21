@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:livraison_front/views/client/DetailCLientAdmin.dart';
 import '../../constant/message_constants.dart';
 import '../../models/client_list.dart';
 import '../../services/clientService.dart';
@@ -59,7 +60,7 @@ class _ClientPageState extends State<ClientPage> {
                      context,
                      MaterialPageRoute(
                          builder: (context) =>
-                             DetailClient(client)));
+                             DetailClientAdmin(client)));
                 },
                 );
 

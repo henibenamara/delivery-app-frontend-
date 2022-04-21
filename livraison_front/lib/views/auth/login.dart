@@ -202,6 +202,7 @@ class _SignInState extends State<LoginScreen> {
       if(u.user.role =="client"){
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('userId', u.user.id);
+        await prefs.setString('emailClient', u.user.email);
        Navigator.of(context).pushNamed('/clientHome');
         debugPrint('data from server is : ${u.toString()}');
 
@@ -209,11 +210,13 @@ class _SignInState extends State<LoginScreen> {
       if(u.user.role =="livreur"){
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('LivreurId', u.user.id);
+        await prefs.setString('emailLivreur', u.user.email);
         Navigator.pushNamed(context, '/livreur');
 
         debugPrint('data from server is : ${u.toString()}');
 
-      }if(u.user.role =="responsable"){
+      }
+      if(u.user.role =="responsable"){
         Navigator.pushNamed(context, '/responsable');
         debugPrint('data from server is : ${u.toString()}');
 

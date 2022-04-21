@@ -73,7 +73,7 @@ class _LivraisonClientState extends State<LivraisonClient> {
                       etat) {
                   return ListTile(
                     leading: new Image.asset(
-                      "images/col.jpg",
+                      "assets/images/col.jpg",
                       fit: BoxFit.cover,
                       width: 100.0,
                     ),
@@ -116,7 +116,10 @@ class _LivraisonClientState extends State<LivraisonClient> {
                           poidsColis: snapshot.data![index]['colisId']
                               ['poidsColis'],
                           etatLivraison: snapshot.data![index]['etatLivraison'],
-                          sId: snapshot.data![index]['_id']);
+                          sId: snapshot.data![index]['_id'],
+                        idLivreur: snapshot.data![index]['livreur']['_id']
+                      );
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(

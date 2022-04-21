@@ -21,7 +21,7 @@ class LivraisonAdmin extends StatefulWidget {
 class _LivraisonAdminState extends State<LivraisonAdmin> {
   List<dynamic> _livraisonList = [];
   String _id = "";
-
+String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576";
    String? etat ;
 
   @override
@@ -73,11 +73,15 @@ class _LivraisonAdminState extends State<LivraisonAdmin> {
 
               return ListView.builder(
                 itemBuilder: (context, index) {
+                 /* if ((snapshot.data![index]['imageUrl'])!=null){
+                    urlImage = snapshot.data![index]['imageUrl'];
+                  }*/
                 if (snapshot.data![index]['etatLivraison'].toString() ==
                     etat) {
+
                   return ListTile(
-                    leading: Image.network(
-                        "https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
+                    leading: Image.network("https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
+
                     ),
 
                     title: new Text(

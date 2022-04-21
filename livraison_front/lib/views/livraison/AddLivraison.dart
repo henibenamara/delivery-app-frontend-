@@ -164,6 +164,8 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                           int.parse(_poidsColisController.text),
                                       etatLivraison: 'non livrée',
                                       idClient: userId.toString(),
+                                      imageUrl:  "https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
+
                                     );
                                     print(
                                         'livraison is :${livraison.toString()}');

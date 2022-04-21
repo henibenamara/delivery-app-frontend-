@@ -105,7 +105,7 @@ class LivreurService {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse(AppConstants.API_URL+"/livreur/$id");
+    var uri = Uri.parse(AppConstants.API_URL+"/livreur/image/$id");
 
     // create multipart request
     var request = new http.MultipartRequest("PUT", uri);

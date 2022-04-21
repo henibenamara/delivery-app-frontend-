@@ -4,13 +4,15 @@ import 'package:livraison_front/services/livreurService.dart';
 
 import '../../models/livraison.dart';
 
-import '../../models/client.dart';
+
+import '../../models/livreur.dart';
 import '../../services/clientService.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer.dart';
 import '../../widgets/drawer_responsable.dart';
 import '../client/DetailClient.dart';
 import '../client/EditClient.dart';
+import '../livreur/DetailLivreur.dart';
 import 'EditLivraisont.dart';
 
 class DetailLivraisonClient extends StatefulWidget {
@@ -131,29 +133,72 @@ class _DetailLivraisonClientState extends State<DetailLivraisonClient> {
             elevation: 30,
           ),
 
-          RaisedButton( child: Text('modifier livraison'),
+          Container(
+              height: 50,
 
-            onPressed: (){
-              var livraison1 = Livraison(
-                sId: widget.livraison.sId,
-                numLivraison: widget.livraison.numLivraison,
-                adressseDes: widget.livraison.adressseDes,
-                adresseExp: widget.livraison.adresseExp,
-                dateDeLivraison: widget.livraison.dateDeLivraison,
-                typeColis: widget.livraison.typeColis,
-                DesColis: widget.livraison.DesColis,
-                poidsColis: widget.livraison.poidsColis,
-                etatLivraison: widget.livraison.etatLivraison,
-                idClient: widget.livraison.idClient.toString(),
-              );
-            Navigator.push(
-                context,
-                MaterialPageRoute(
+              child : FutureBuilder(
 
-                    builder: (context) =>
-                        EditLivraison(livraison1)));
+                future: LivreurService()
+                    .getLivreurByIdUSer(
+                    widget.livraison.idLivreur.toString()),
+                builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                  print('snapshot12 is: ${snapshot.data}');
 
-    }),
+                  if ((snapshot.hasData)) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            title: Text(
+                                "nom Livreur :"),
+                            //snapshot.data![index]['nom'].toString()
+                            //subtitle: Text(snapshot.data![index]['nom']),
+                            trailing: Text(snapshot.data![index]['nom']),
+                            leading: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
+                            onTap: () {
+                              UserId user = new UserId(
+                                  id: snapshot.data![index]['userId']['_id'],
+                                  email: snapshot.data![index]['userId']
+                                  ['email'],
+                                  password: snapshot.data![index]['userId']
+                                  ['password'],
+                                  role: snapshot
+                                      .data![index]['userId']['role'],
+                                  v: snapshot.data![index]['userId']['__v']);
+                             Livreur livreur = new Livreur(
+                                nom: snapshot.data![index]['nom'],
+                                prenom: snapshot.data![index]['prenom'],
+                                livcin: snapshot.data![index]['livcin'],
+                                livTelephone: snapshot.data![index]
+                                ['livTelephone'],
+                                livAdresse: snapshot
+                                    .data![index]['livAdresse'],
+                                livMatVecu: snapshot
+                                    .data![index]['livMatVecu'],
+                                livMarqVecu: snapshot.data![index]
+                                ['livMarqVecu'],
+                                v: snapshot.data![index]['__v'],
+                                id: snapshot.data![index]['_id'],
+                                userId: user,
+                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailLivreur(livreur)));
+                            });
+                      },
+                      itemCount: 1,
+                    );
+                  } else {
+                    return Center(
+                      child: Text('data is null'),
+                    );
+                  }
+                },
+              )
+          ),
 
 
 

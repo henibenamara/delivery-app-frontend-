@@ -8,28 +8,29 @@ import '../../models/client.dart';
 import '../../services/clientService.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer.dart';
-import '../../widgets/drawer_livreur.dart';
 import '../../widgets/drawer_responsable.dart';
 import '../client/DetailClient.dart';
+import '../client/EditClient.dart';
+import 'EditLivraisont.dart';
 
-class DetailLivraisonLivreur extends StatefulWidget {
-  DetailLivraisonLivreur(this.livraison);
+class DetailLivraisonClientEdit extends StatefulWidget {
+  DetailLivraisonClientEdit(this.livraison);
 
   final Livraison livraison;
 
   @override
-  _DetailLivraisonLivreurState createState() => _DetailLivraisonLivreurState();
+  _DetailLivraisonClientEditState createState() => _DetailLivraisonClientEditState();
 }
 
-class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
-  _DetailLivraisonLivreurState();
+class _DetailLivraisonClientEditState extends State<DetailLivraisonClientEdit> {
+  _DetailLivraisonClientEditState();
 
   final LivraisonService api = LivraisonService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: livreurDrawer(context),
+        drawer: ResponsableDrawer(context),
         appBar: AppBar(
           title: Text("Detail livraison"),
           centerTitle: true,
@@ -41,8 +42,10 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
           ),
         ),
         body: Column(children: <Widget>[
+
           Card(
             child: Container(
+
                 padding: EdgeInsets.all(10.0),
                 width: 600,
                 child: Column(children: <Widget>[
@@ -123,61 +126,37 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
                 ])),
             shadowColor: Colors.blueAccent,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             color: Colors.white,
             elevation: 30,
           ),
-          Container(
-            height: 50,
-            child: FutureBuilder(
-              future:
-                  ClientService().getClientByIdUSer(widget.livraison.idClient),
-              builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                if ((snapshot.hasData)) {
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text("nom de Client :"),
-                        //subtitle: Text(snapshot.data![index]['prenom']),
-                        trailing: Text(snapshot.data![index]['nom'].toString()),
-                        leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
-                        onTap: () {
-                          UserId user = new UserId(
-                              id: snapshot.data![index]['userId']['_id'],
-                              email: snapshot.data![index]['userId']['email'],
-                              password: snapshot.data![index]['userId']
-                                  ['password'],
-                              role: snapshot.data![index]['userId']['role'],
-                              v: snapshot.data![index]['userId']['__v']);
-                          Client client = new Client(
-                            nom: snapshot.data![index]['nom'],
-                            prenom: snapshot.data![index]['prenom'],
-                            clientTel: snapshot.data![index]['clientTel'],
-                            clientAdresse: snapshot.data![index]
-                                ['clientAdresse'],
-                            v: snapshot.data![index]['__v'],
-                            id: snapshot.data![index]['_id'],
-                            userId: user,
-                          );
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DetailClient(client)));
-                        },
-                      );
-                    },
-                    itemCount: snapshot.data?.length,
-                  );
-                } else {
-                  return Center(
-                    child: Text(''),
-                  );
-                }
-              },
-            ),
-          ),
+
+          RaisedButton( child: Text('modifier livraison'),
+
+            onPressed: (){
+              var livraison1 = Livraison(
+                sId: widget.livraison.sId,
+                numLivraison: widget.livraison.numLivraison,
+                adressseDes: widget.livraison.adressseDes,
+                adresseExp: widget.livraison.adresseExp,
+                dateDeLivraison: widget.livraison.dateDeLivraison,
+                typeColis: widget.livraison.typeColis,
+                DesColis: widget.livraison.DesColis,
+                poidsColis: widget.livraison.poidsColis,
+                etatLivraison: widget.livraison.etatLivraison,
+                idClient: widget.livraison.idClient.toString(),
+              );
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+
+                    builder: (context) =>
+                        EditLivraison(livraison1)));
+
+    }),
+
+
+
         ]));
   }
 }
