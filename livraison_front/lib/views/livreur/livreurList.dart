@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/models/livreur.dart';
 
 
@@ -42,7 +43,7 @@ class _LivreurPageState extends State<LivreurPage> {
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
                     trailing: Icon(Icons.star),
-                    leading: CircleAvatar(backgroundImage: NetworkImage(snapshot.data![index]['image']))
+                    leading: CircleAvatar(backgroundImage: NetworkImage(AppConstants.API_URL+"/"+snapshot.data![index]['image']))
                    , onTap: () {
                   UserId user = new UserId(id: snapshot
                       .data![index]['userId']['_id'],
@@ -58,7 +59,7 @@ class _LivreurPageState extends State<LivreurPage> {
                     livAdresse: snapshot.data![index]['livAdresse'],
                     livMatVecu: snapshot.data![index]['livMatVecu'],
                     livMarqVecu: snapshot.data![index]['livMarqVecu'],
-                    imageUrl:snapshot.data![index]['image'] ,
+                    imageUrl:AppConstants.API_URL+"/"+snapshot.data![index]['image'] ,
                     v: snapshot.data![index]['__v'],
                     id: snapshot.data![index]['_id'],
                     userId: user,

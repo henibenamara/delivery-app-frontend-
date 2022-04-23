@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_livreur.dart';
@@ -39,7 +41,7 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
         ),
         drawer: livreurDrawer(context),
         body: FutureBuilder(
-            future: LivraisonService().getAllTLivraison(),
+            future: LivraisonService().getLivraisonByIdLivreur(),
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
@@ -128,6 +130,18 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
                                     snapshot.data![index]['_id'],
                                     userId!,
                                     etatLivraison);
+                                showTopSnackBar(
+                                  context,
+                                  CustomSnackBar.success(
+                                    message:
+                                    "bonne travail, cette livraison("+snapshot.data![index]['numLivraison']+" )est livrer avec succées",
+                                  ),
+                                );
+                                await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LivraisonEnCours()));
                               },
 
 
@@ -151,7 +165,7 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
 
             } else {
               return const Center(
-                  child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
+                  child:  Text("", style:  TextStyle(fontSize: 1))); // Center
 
             }}else {
             return const Center(

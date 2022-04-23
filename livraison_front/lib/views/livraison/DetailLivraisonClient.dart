@@ -144,14 +144,15 @@ class _DetailLivraisonClientState extends State<DetailLivraisonClient> {
                 builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
                   print('snapshot12 is: ${snapshot.data}');
 
+                  print('id livreuur is: ${widget.livraison.idLivreur.toString()}');
+
                   if ((snapshot.hasData)) {
                     return ListView.builder(
                       itemBuilder: (context, index) {
                         return ListTile(
                             title: Text(
                                 "nom Livreur :"),
-                            //snapshot.data![index]['nom'].toString()
-                            //subtitle: Text(snapshot.data![index]['nom']),
+
                             trailing: Text(snapshot.data![index]['nom']),
                             leading: CircleAvatar(
                                 backgroundImage: NetworkImage(

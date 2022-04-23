@@ -3,6 +3,7 @@ import 'package:livraison_front/services/livreurService.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constant/app_constants.dart';
 import '../views/livreur/HomeLivreur.dart';
 SharedPreferences? sharedPrefs;
 String? email;
@@ -27,7 +28,7 @@ Widget livreurDrawer(BuildContext context) {
                               itemCount: snapshot.data?.length,
                               itemBuilder: (BuildContext context, int index) {
 
-                                String url = snapshot.data![index]['image'];
+                                String url = AppConstants.API_URL+"/"+ snapshot.data![index]['image'];
                                 String? nom = snapshot.data![index]['nom'];
                                 String? email = snapshot.data![index]['userId']['email'];
                                 print(email);

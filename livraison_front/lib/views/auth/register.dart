@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:livraison_front/constant/app_constants.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../widgets/background.dart';
 import 'login.dart';
@@ -49,7 +51,7 @@ class signup extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-String imgurl = "https://cdn-icons-png.flaticon.com/512/146/146031.png";
+String imgurl = "user.png";
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Background(
@@ -367,6 +369,13 @@ String imgurl = "https://cdn-icons-png.flaticon.com/512/146/146031.png";
       debugPrint('register success');
       displayDialog(
           context, "felicitation", "votre compte est creer avec succes");
+      showTopSnackBar(
+        context,
+        CustomSnackBar.success(
+          message:
+          "Votre Compte est crée avec succée",
+        ),
+      );
 
       Navigator.of(context).pushNamed('/');
     } else {

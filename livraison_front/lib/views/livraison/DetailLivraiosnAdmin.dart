@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:livraison_front/services/livreurService.dart';
 
+import '../../constant/app_constants.dart';
 import '../../models/livraison.dart';
 import '../../models/livreur.dart' as liv;
 import '../../models/client.dart' as cli;
@@ -140,7 +141,7 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                         trailing: Text(snapshot.data![index]['nom'].toString()),
                         leading: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                snapshot.data![index]['image'])),
+                                AppConstants.API_URL+"/"+ snapshot.data![index]['image'])),
                         onTap: () {
                           cli.UserId user = new cli.UserId(
                               id: snapshot.data![index]['userId']['_id'],
@@ -177,6 +178,7 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
             ),
           ),
 
+          if(widget.livraison.idLivreur.toString()!="non")
 
             Container(
 height: 50,
@@ -200,7 +202,7 @@ height: 50,
                               trailing: Text(snapshot.data![index]['nom']),
                               leading: CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                      snapshot.data![index]['image'])),
+                                      AppConstants.API_URL+"/"+ snapshot.data![index]['image'])),
                               onTap: () {
                                 liv.UserId user = new liv.UserId(
                                     id: snapshot.data![index]['userId']['_id'],

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:livraison_front/views/livraison/uploadphotoLivraison.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_client.dart';
@@ -164,12 +166,19 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                           int.parse(_poidsColisController.text),
                                       etatLivraison: 'non livrée',
                                       idClient: userId.toString(),
-                                      imageUrl:  "https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
+                                      imageUrl:  "t.png"
 
                                     );
                                     print(
                                         'livraison is :${livraison.toString()}');
                                     api.addNewLivraison(livraison);
+                                    showTopSnackBar(
+                                      context,
+                                      CustomSnackBar.success(
+                                        message:
+                                        "Votre Livraison est creer avec succee",
+                                      ),
+                                    );
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

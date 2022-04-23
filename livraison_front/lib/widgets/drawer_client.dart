@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:livraison_front/models/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constant/app_constants.dart';
 import '../services/clientService.dart';
 import '../services/livraisonService.dart';
 import '../views/client/EditClient.dart';
@@ -26,47 +27,49 @@ Widget clientDrawer(BuildContext context) {
         padding: EdgeInsets.zero,
         children: <Widget>[
 
-      SizedBox(
-        height: 180,
-        child: FutureBuilder(
-        future: _getPrefs(),
-    builder: (context, snapshot) {
-          return  FutureBuilder(
-              future: ClientService().getClientByIdUSer(userIdC),
-              builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: (BuildContext context, int index) {
+          SizedBox(
+            height: 180,
+            child: FutureBuilder(
+                future: _getPrefs(),
+                builder: (context, snapshot) {
+                  return FutureBuilder(
+                      future: ClientService().getClientByIdUSer(userIdC),
+                      builder: (context,
+                          AsyncSnapshot<List<dynamic>> snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              itemCount: snapshot.data?.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                String url =AppConstants.API_URL+"/"+ snapshot.data![index]['image'];
+                                String? nom = snapshot.data![index]['nom'];
+                                String? email = snapshot
+                                    .data![index]['userId']['email'];
+                                print(email);
+                                return UserAccountsDrawerHeader(
 
-                        String url = snapshot.data![index]['image'];
-                        String? nom = snapshot.data![index]['nom'];
-                        String? email = snapshot.data![index]['userId']['email'];
-                        print(email);
-                        return  UserAccountsDrawerHeader(
+                                    accountName: Text(nom!),
+                                    accountEmail: Text(email!),
+                                    currentAccountPicture:
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                           url.toString()),
 
-                            accountName: Text(nom!),
-                            accountEmail: Text(email!),
-                            currentAccountPicture:
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(url.toString()),
-
-                            ));
-
-                      }
+                                    ));
+                              }
 
 
-                  );
-                } else {
-                  return const Center(
-                      child:  Text("", style: TextStyle(fontSize: 1))); // Center
+                          );
+                        } else {
+                          return const Center(
+                              child: Text("", style: TextStyle(
+                                  fontSize: 1))); // Center
 
+                        }
+                      });
                 }
-              });
-    }
 
-  ),
-      ),
+            ),
+          ),
 
 
 

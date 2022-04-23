@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../services/livraisonService.dart';
 import '../models/livraison.dart';
 import '../widgets/drawer_livreur.dart';
@@ -124,6 +126,18 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                     snapshot.data![index]['_id'],
                                     userId!,
                                     etatLivraison);
+                                showTopSnackBar(
+                                  context,
+                                  CustomSnackBar.success(
+                                    message:
+                                    "vous avez accepter cette livraison!",
+                                  ),
+                                );
+                               await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LivraisonRequest()));
                               },
                               child: const Icon(Icons.check),
                               backgroundColor: Colors.white,

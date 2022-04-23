@@ -34,7 +34,7 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
             Icons.arrow_back,
             color: Colors.green,
           ),
-          onPressed: () {},
+          onPressed: () {Navigator.of(context).pop();},
         ),
         actions: [
           IconButton(

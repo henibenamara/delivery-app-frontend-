@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:livraison_front/views/client/DetailCLientAdmin.dart';
+import '../../constant/app_constants.dart';
 import '../../constant/message_constants.dart';
 import '../../models/client_list.dart';
 import '../../services/clientService.dart';
@@ -39,7 +40,7 @@ class _ClientPageState extends State<ClientPage> {
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
                   trailing: Icon(Icons.star),
-                    leading: CircleAvatar(backgroundImage: NetworkImage(snapshot.data![index]['image'].toString())),
+                    leading: CircleAvatar(backgroundImage: NetworkImage(AppConstants.API_URL+"/"+ snapshot.data![index]['image'])),
 
                onTap: (){
                       UserId user = new UserId(id: snapshot.data![index]['userId']['_id'], email: snapshot.data![index]['userId']['email'], password: snapshot.data![index]['userId']['password'], role: snapshot.data![index]['userId']['role'], v: snapshot.data![index]['userId']['__v']) ;
@@ -49,7 +50,7 @@ class _ClientPageState extends State<ClientPage> {
                         clientTel: snapshot.data![index]
                         ['clientTel'],
                         clientAdresse: snapshot.data![index]['clientAdresse'],
-                        imageUrl:snapshot.data![index]['image'],
+                        imageUrl:AppConstants.API_URL+"/"+ snapshot.data![index]['image'],
                         v: snapshot.data![index]['__v'],
                         id: snapshot.data![index]['_id'],
                         userId: user,

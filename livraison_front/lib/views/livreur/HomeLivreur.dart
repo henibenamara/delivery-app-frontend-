@@ -7,6 +7,7 @@ import 'package:livraison_front/services/livreurService.dart';
 import 'package:livraison_front/views/client/EditClient.dart';
 import 'package:livraison_front/views/livreur/EditLivreur.dart';
 
+import '../../constant/app_constants.dart';
 import '../../services/clientService.dart';
 import '../../widgets/profile_Widget.dart';
 
@@ -100,159 +101,223 @@ class _ProfilePageState extends State<ProfilePageLiv> {
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData){
 
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
+              return SafeArea(
+                child: Column(
 
-
-                      Container(
-
-                        width: 130,
-                        height: 130,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 4,
-                                color: Theme
-                                    .of(context)
-                                    .scaffoldBackgroundColor),
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 10,
-                                  color: Colors.black.withOpacity(0.1),
-                                  offset: Offset(0, 10))
-                            ],
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(snapshot.data![index][
-                                'image'],
-                                ))),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                            "Prenom :   " +
-                                snapshot.data![index][
-                                'prenom'].toString(), style: const TextStyle(fontSize: 25.0, color: Colors.blueAccent),
-                          ),
-                          const Spacer(),
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                            "nom :         " + snapshot.data![index]['nom'].toString(), style: const TextStyle(fontSize: 20.0, color: Colors.blueAccent),
-                          ),
-                          const Spacer(),
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                            "Telephone :" + snapshot.data![index][
-                                'livTelephone'].toString(), style: const TextStyle(fontSize: 20.0, color: Colors.blueAccent),
-                          ),
-                          const Spacer(),
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                              "${"Adresse :" + snapshot.data![index]['livAdresse'].toString()} ",
-                              style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.blueAccent)),
-
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                              "${"Matricule Vehicule :" + snapshot.data![index]['livMatVecu'].toString()} ",
-                              style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.blueAccent)),
-
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                              "${"Marque :" + snapshot.data![index]['livMarqVecu'].toString()} ",
-                              style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.blueAccent)),
-
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: Row(
-                          children: <Widget>[
-
-                            Spacer(),
-                            RaisedButton(
-                              onPressed: () {
-
-
-                                Livreur liv = new Livreur(
-                                  nom: snapshot.data![index]['nom'],
-                                  prenom: snapshot.data![index]['prenom'],
-                                  livTelephone: snapshot.data![index]['livTelephone'],
-                                  livcin: snapshot.data![index]['livcin'],
-                                  livAdresse: snapshot.data![index]['livAdresse'],
-                                  livMatVecu: snapshot.data![index]['livMatVecu'],
-                                  livMarqVecu: snapshot.data![index]['livMarqVecu'],
-                                  id: snapshot.data![index]['_id'],
-                                  imageUrl:snapshot.data![index]['image'] ,
-
-                                  v: snapshot.data![index]['__v'],
-
-
-                                );
-
-
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            EditProfileLivreur(liv)));
-                              },
-                              color: Colors.green,
-                              padding: EdgeInsets.symmetric(horizontal: 50),
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Text(
-                                "Modififer",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 2.2,
-                                    color: Colors.white),
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDihWg7BJ59mXCACdRk0gDNNqu0-1S77xWpA&usqp=CAU"
                               ),
-                            )
+                              fit: BoxFit.cover
+                          )
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        height: 200,
+                        child: Container(
+                          alignment: Alignment(0.0,2.5),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                AppConstants.API_URL+"/"+snapshot.data![index]["image"]
+                            ),
+                            radius: 60.0,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Text(
+                      snapshot.data![index]["nom"]+" "+snapshot.data![index]["prenom"]
+                      ,style: TextStyle(
+                        fontSize: 25.0,
+                        color:Colors.blueGrey,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w400
+                    ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      snapshot.data![index]["livAdresse"]
+                      ,style: TextStyle(
+                        fontSize: 18.0,
+                        color:Colors.black45,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w300
+                    ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "telephone :"+snapshot.data![index]["livTelephone"].toString()
+                      ,style: TextStyle(
+                        fontSize: 15.0,
+                        color:Colors.black45,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w300
+                    ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    Card(
+                      margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Text("Livraisons",
+                                    style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w600
+                                    ),),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  Text("15",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w300
+                                    ),)
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child:
+                              Column(
+                                children: [
+
+                                  Text("Scores",
+                                    style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w600
+                                    ),),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  Text("27",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w300
+                                    ),)
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child:
+                              Column(
+                                children: [
+
+                                  Text("argent",
+                                    style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w600
+                                    ),),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  Text("3k+",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w300
+                                    ),)
+                                ],
+                              ),
+                            ),
 
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                shadowColor: Colors.lightBlue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
-                  side: BorderSide(color: Colors.blue, width: 1),
-                ),
-                color: Colors.white,
-                elevation: 30,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
 
+                        RaisedButton(
+                          onPressed: (){
+                            Livreur liv = new Livreur(
+                              nom: snapshot.data![index]['nom'],
+                              prenom: snapshot.data![index]['prenom'],
+                              livTelephone: snapshot.data![index]['livTelephone'],
+                              livcin: snapshot.data![index]['livcin'],
+                              livAdresse: snapshot.data![index]['livAdresse'],
+                              livMatVecu: snapshot.data![index]['livMatVecu'],
+                              livMarqVecu: snapshot.data![index]['livMarqVecu'],
+                              id: snapshot.data![index]['_id'],
+                              imageUrl:AppConstants.API_URL+"/"+snapshot.data![index]['image'] ,
+
+                              v: snapshot.data![index]['__v'],
+
+
+                            );
+
+
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditProfileLivreur(liv)));
+
+                          },
+                          shape:  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [Colors.pink,Colors.redAccent]
+                              ),
+                              borderRadius: BorderRadius.circular(80.0),
+
+                            ),
+                            child: Container(
+                              constraints: BoxConstraints(maxWidth: 100.0,maxHeight: 40.0,),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Modifier ",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.0,
+                                    letterSpacing: 2.0,
+                                    fontWeight: FontWeight.w300
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               );
 
             }else {

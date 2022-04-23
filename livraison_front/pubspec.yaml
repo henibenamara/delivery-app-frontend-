@@ -47,6 +47,8 @@ dependencies:
   date_field: ^3.0.0
   animated_theme_switcher: ^2.0.6
 
+  top_snackbar_flutter: ^1.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

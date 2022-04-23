@@ -113,6 +113,7 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                       Livraison livraison;
 
                       if (snapshot.data![index]['livreur'] == null) {
+                        print("callTest1");
                         livraison = new Livraison(
                           adresseExp: snapshot.data![index]['AdresseExp'],
                           adressseDes: snapshot.data![index]['AdressseDes'],
@@ -127,10 +128,11 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                           ['poidsColis'],
                           etatLivraison: snapshot.data![index]['etatLivraison'],
                           sId: snapshot.data![index]['_id'],
-                          idClient: snapshot.data![index]['client']['_id']
+                          idClient: snapshot.data![index]['client']['_id'],
+                          idLivreur: "non",
 
                         );
-                        print("test1");
+
                       } else {
                         livraison = new Livraison(
                           adresseExp: snapshot.data![index]['AdresseExp'],
@@ -149,7 +151,7 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                           idClient: snapshot.data![index]['client']['_id'],
                           idLivreur: snapshot.data![index]['livreur']['_id'],
                         );
-                        print("test2");
+                        print("callTest2");
                       }
 
                       Navigator.push(

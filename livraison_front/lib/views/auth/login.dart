@@ -1,27 +1,25 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/views/auth/register.dart';
-import 'package:livraison_front/views/livreur.dart';
 import 'package:livraison_front/widgets/background.dart';
-
-
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 import '../../models/user.dart';
-import '../client.dart';
-
-
-
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
 }
+void notif(String msg){
+  SnackBar(
+
+  content: Text(msg)
+);}
 
 class _SignInState extends State<LoginScreen> {
   void displayDialog(BuildContext context, String title, String text) =>
@@ -110,6 +108,7 @@ class _SignInState extends State<LoginScreen> {
                         else {
 
                           fetchAlbum(email.text,password.text);
+
                         }
                        },
                       shape: RoundedRectangleBorder(
@@ -203,6 +202,7 @@ class _SignInState extends State<LoginScreen> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('userId', u.user.id);
         await prefs.setString('emailClient', u.user.email);
+        notif("Client login avec succée");
        Navigator.of(context).pushNamed('/clientHome');
         debugPrint('data from server is : ${u.toString()}');
 
@@ -211,12 +211,22 @@ class _SignInState extends State<LoginScreen> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('LivreurId', u.user.id);
         await prefs.setString('emailLivreur', u.user.email);
+
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            message:
+            "Good job, your release is successful. Have a nice day",
+          ),
+        );
+
         Navigator.pushNamed(context, '/livreur');
 
         debugPrint('data from server is : ${u.toString()}');
 
       }
       if(u.user.role =="responsable"){
+        notif("admin login avec succée");
         Navigator.pushNamed(context, '/responsable');
         debugPrint('data from server is : ${u.toString()}');
 
@@ -229,3 +239,4 @@ class _SignInState extends State<LoginScreen> {
     }
   }
 }
+

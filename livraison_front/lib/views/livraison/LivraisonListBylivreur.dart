@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constant/message_constants.dart';
@@ -40,8 +41,8 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: new Image.asset(
-                    "assets/images/col.jpg",
+                  leading: new Image.network(
+                    AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],
                     fit: BoxFit.cover,
                     width: 100.0,
                   ),
