@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 
 import '../../constant/message_constants.dart';
 import '../../models/livraison.dart';
@@ -80,12 +81,12 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                     etat) {
 
                   return ListTile(
-                    leading: Image.network("https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2021/05/colis-amazon-carton-boite.jpg?resize=1024,576"
+                    leading: Image.network(AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl']
 
                     ),
 
                     title: new Text(
-                      "De :" + snapshot.data![index]['AdresseExp'],
+                      "Num : " + snapshot.data![index]['numLivraison'].toString(),
                       style: new TextStyle(
                           fontSize: 14.0, fontWeight: FontWeight.bold),
                     ),
@@ -94,14 +95,14 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           new Text(
-                              "Num:" +
-                                  snapshot.data![index]['numLivraison']
+                              "de : " +snapshot.data![index]['AdresseExp']
+
                                       .toString(),
                               style: new TextStyle(
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.normal)),
                           new Text(
-                              'Adresse: ${snapshot
+                              'vers : ${snapshot
                                   .data![index]['AdressseDes']}',
                               style: new TextStyle(
                                   fontSize: 11.0,

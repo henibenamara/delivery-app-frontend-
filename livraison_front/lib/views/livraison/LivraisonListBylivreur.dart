@@ -85,7 +85,10 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
                         poidsColis: snapshot.data![index]['colisId']
                             ['poidsColis'],
                         etatLivraison: snapshot.data![index]['etatLivraison'],
-                        sId: snapshot.data![index]['_id']);
+                        sId: snapshot.data![index]['_id'],
+                    imageUrl:snapshot.data![index]['imageUrl'] );
+                    print(snapshot.data![index]['imageUrl'].toString());
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(

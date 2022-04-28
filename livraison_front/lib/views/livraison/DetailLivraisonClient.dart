@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/services/livreurService.dart';
 
 import '../../models/livraison.dart';
@@ -156,7 +157,7 @@ class _DetailLivraisonClientState extends State<DetailLivraisonClient> {
                             trailing: Text(snapshot.data![index]['nom']),
                             leading: CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                    "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
+                                    AppConstants.API_URL+"/"+snapshot.data![index]['image'])),
                             onTap: () {
                               UserId user = new UserId(
                                   id: snapshot.data![index]['userId']['_id'],

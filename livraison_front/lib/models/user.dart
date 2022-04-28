@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'dart:ffi';
+
 utilisateur welcomeFromJson(String str) => utilisateur.fromJson(json.decode(str));
 
 String welcomeToJson(utilisateur data) => json.encode(data.toJson());
@@ -39,6 +41,7 @@ class User {
     required this.email,
     required this.password,
     required this.role,
+     this.etatCompte,
     required this.v,
   });
 
@@ -46,6 +49,7 @@ class User {
   String email;
   String password;
   String role;
+  String? etatCompte  ;
   int v;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -53,6 +57,7 @@ class User {
     email: json["email"],
     password: json["password"],
     role: json["role"],
+    etatCompte: json["etatCompte"],
     v: json["__v"],
   );
 
@@ -61,11 +66,12 @@ class User {
     "email": email,
     "password": password,
     "role": role,
+    "etatCompte":etatCompte,
     "__v": v,
   };
 
   @override
   String toString() {
-    return 'User{id: $id, email: $email, password: $password, role: $role, v: $v}';
+    return 'User{id: $id, email: $email, password: $password, role: $role,etatCompte: $etatCompte, v: $v}';
   }
 }

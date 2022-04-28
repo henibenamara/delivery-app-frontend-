@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import '../constant/app_constants.dart';
 
-import '../models/livreur_list.dart';
 import '../models/response_model.dart';
 
 
@@ -26,7 +25,7 @@ class LivreurService {
       headers: AppConstants.HEADERS,
     );
     var listLivreur;
-    List<LivreurList> livreurList = [];
+
     try {
       if (request.statusCode == 200) {
         print('request.body : ${request.body}');
@@ -56,7 +55,7 @@ class LivreurService {
       headers: AppConstants.HEADERS,
     );
     var listLivreur;
-    List<LivreurList> livreurList = [];
+
     try {
       if (request.statusCode == 200) {
         print('request.body : ${request.body}');
@@ -72,6 +71,30 @@ class LivreurService {
       return const [];
     }
     return listLivreur;
+  }
+  /// verification compte **/
+  Future<Response> verifCompte(String? sId) async {
+
+    final json =
+    {"etatCompte":true};
+    var data = jsonEncode(json);
+    final url =
+    Uri.parse(AppConstants.API_URL +"/livreur/verification/$sId");
+    final request =
+    await http.put(url, body: data, headers: AppConstants.HEADERS);
+    Response response = Response();
+
+    try {
+      if (request.statusCode == 200) {
+        print("Livreur accepter");
+        response = responseFromJson(request.body);
+      } else {
+        print(request.statusCode);
+      }
+    } catch (e) {
+      return Response();
+    }
+    return response;
   }
   /** update Livreur **/
   Future<Response> updateLivreur(String? sId,String nom,String prenom,String livAdresse,String livTelephone,) async {
@@ -126,4 +149,7 @@ class LivreurService {
       print(value);
     });
   }
+
+
+
 }

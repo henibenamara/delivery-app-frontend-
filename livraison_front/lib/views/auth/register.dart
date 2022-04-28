@@ -51,7 +51,7 @@ class signup extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-String imgurl = "user.png";
+    String imgurl = "user.png";
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Background(
@@ -161,21 +161,21 @@ String imgurl = "user.png";
               if (_livreurFieldVisible) SizedBox(height: size.height * 0.05),
               if (_livreurFieldVisible)
                 Container(
-                    /**CONTROLLERUR DE LA MARQUE **/
+                  /**CONTROLLERUR DE LA MARQUE **/
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: DropdownButton<String>(
                         hint: _dropDownValue == null
                             ? Text('Marque')
                             : Text(
-                                _dropDownValue!,
-                                style: TextStyle(color: Colors.blue),
-                              ),
+                          _dropDownValue!,
+                          style: TextStyle(color: Colors.blue),
+                        ),
                         isExpanded: true,
                         iconSize: 30.0,
                         style: TextStyle(color: Colors.blue),
                         items: ['citroen', 'volkswagen', 'peugeot'].map(
-                          (val) {
+                              (val) {
                             return DropdownMenuItem<String>(
                               value: val,
                               child: Text(val),
@@ -184,7 +184,7 @@ String imgurl = "user.png";
                         ).toList(),
                         onChanged: (val) {
                           setState(
-                            () {
+                                () {
                               _dropDownValue = val!;
                             },
                           );
@@ -217,7 +217,8 @@ String imgurl = "user.png";
                           _role!.toString(),
                           "",
                           "",
-                          imgurl.toString()
+                          imgurl.toString(),
+                          "false"
                       );
                     } else {
                       userRegister(
@@ -231,7 +232,8 @@ String imgurl = "user.png";
                           _role!.toString(),
                           Matricule.text,
                           _dropDownValue!,
-                          imgurl.toString()
+                          imgurl.toString(),
+                          "false"
                       );
                     }
                     /** Navigator.pushNamed(context, '/LoginScreen');**/
@@ -314,7 +316,8 @@ String imgurl = "user.png";
       String role,
       String Matricule,
       String marque,
-      String img) async {
+      String img,
+      String etatCompte ) async {
     var url = "";
 
     var data;
@@ -327,7 +330,8 @@ String imgurl = "user.png";
         "clientAdresse": Adresse,
         "email": Email,
         "password": Mdp,
-        "image" : img
+        "image" : img,
+        "etatCompte":etatCompte
       };
     } else {
       url = "livreur";
@@ -341,7 +345,8 @@ String imgurl = "user.png";
         "livcin": Cin,
         "livMarqVecu": _dropDownValue!,
         "livMatVecu": Matricule,
-        "image" : img
+        "image" : img,
+        "etatCompte":etatCompte
 
       };
     }
@@ -354,7 +359,7 @@ String imgurl = "user.png";
         "Access-Control-Allow-Origin": "*",
         // Required for CORS support to work
         "Access-Control-Allow-Headers":
-            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
         "Access-Control-Allow-Methods": "POST, OPTIONS"
       },
       body: json.encode(data),

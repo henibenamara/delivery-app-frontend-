@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:livraison_front/services/livreurService.dart';
 
+import '../../constant/app_constants.dart';
 import '../../models/livraison.dart';
 
 import '../../models/client.dart';
@@ -46,6 +47,19 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
                 padding: EdgeInsets.all(10.0),
                 width: 600,
                 child: Column(children: <Widget>[
+                  Container(
+                    height: 350.0,
+                    width: 350.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image:NetworkImage(
+                            AppConstants.API_URL+"/"+widget.livraison.imageUrl.toString()
+                        ),
+                        fit: BoxFit.fill,
+                      ),
+                      shape: BoxShape.rectangle,
+                    ),
+                  ),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Column(
@@ -142,7 +156,9 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
                         trailing: Text(snapshot.data![index]['nom'].toString()),
                         leading: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                "https://cdn-icons-png.flaticon.com/512/219/219986.png")),
+                                AppConstants.API_URL+"/"+snapshot.data![index]['image']
+                            ),
+                        ),
                         onTap: () {
                           UserId user = new UserId(
                               id: snapshot.data![index]['userId']['_id'],

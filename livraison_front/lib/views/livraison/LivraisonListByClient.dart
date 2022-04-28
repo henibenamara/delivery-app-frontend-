@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constant/app_constants.dart';
 import '../../constant/message_constants.dart';
 import '../../models/livraison.dart';
 import '../../models/livraison_list.dart';
@@ -72,10 +73,8 @@ class _LivraisonClientState extends State<LivraisonClient> {
                   if (snapshot.data![index]['etatLivraison'].toString() ==
                       etat) {
                   return ListTile(
-                    leading: new Image.asset(
-                      "assets/images/col.jpg",
-                      fit: BoxFit.cover,
-                      width: 100.0,
+                    leading: Image.network(AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],fit:  BoxFit.cover,
+
                     ),
 
                     title: new Text(

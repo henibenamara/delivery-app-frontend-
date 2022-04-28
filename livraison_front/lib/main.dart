@@ -15,6 +15,7 @@ import 'package:livraison_front/views/livraisonRequest.dart';
 import 'package:livraison_front/views/livreur.dart';
 import 'package:livraison_front/views/livreur/livreurList.dart';
 import 'package:livraison_front/views/resp.dart';
+import 'package:livraison_front/views/responsable/demandeLivreur.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,8 +44,8 @@ class MyApp extends StatelessWidget {
           '/LivraisonLivreur': (context) => LivraisonLivreur(),
           '/LivraisonAdmin': (context) => LivraisonAdmin(),
           '/DemandeClient': (context) => DemandeClient(),
-          '/livraisonEncours': (context) => LivraisonEnCours()
-
+          '/livraisonEncours': (context) => LivraisonEnCours(),
+          '/DemandeLivreur':(context)=> DemandeLivreur()
         },
       ),
     );

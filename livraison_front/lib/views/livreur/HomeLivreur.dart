@@ -35,19 +35,9 @@ class _ProfilePageState extends State<ProfilePageLiv> {
             Icons.arrow_back,
             color: Colors.green,
           ),
-          onPressed: () {},
+          onPressed: () {Navigator.of(context).pop();},
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.green,
-            ),
-            onPressed: () {
 
-            },
-          ),
-        ],
       ),
       body: Container(
 

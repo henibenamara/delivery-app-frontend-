@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:livraison_front/services/clientService.dart';
 import 'package:livraison_front/services/livreurService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../models/client.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_client.dart';
@@ -112,6 +114,15 @@ class _uploadphotoLivreur extends State<uploadphotoLivreur> {
 
 
                                 api.upload(imageFile!,widget.id.toString());
+                                showTopSnackBar(
+                                  context,
+                                  CustomSnackBar.success(
+                                    message:
+                                    "photo de profile changée",
+                                  ),
+                                );
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
                               }
                             },
                             child: Text('valider',

@@ -124,4 +124,29 @@ class ClientService {
       print(value);
     });
   }
+
+  /// verification compte **/
+  Future<Response> verifCompte(String? sId,String etat) async {
+
+    final json =
+    {"etatCompte":etat};
+    var data = jsonEncode(json);
+    final url =
+    Uri.parse(AppConstants.API_URL +"/livreur/verification/$sId");
+    final request =
+    await http.put(url, body: data, headers: AppConstants.HEADERS);
+    Response response = Response();
+
+    try {
+      if (request.statusCode == 200) {
+        print("Livreur accepter");
+        response = responseFromJson(request.body);
+      } else {
+        print(request.statusCode);
+      }
+    } catch (e) {
+      return Response();
+    }
+    return response;
+  }
 }

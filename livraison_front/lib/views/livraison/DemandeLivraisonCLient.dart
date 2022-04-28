@@ -160,6 +160,7 @@ class _DemandeClientState extends State<DemandeClient> {
                                       .data![index]['client']['_id'],
 
                                   idLivreur: "aucun livreur",
+                                  imageUrl: snapshot.data![index]['imageUrl'].toString(),
                                 );
 
 

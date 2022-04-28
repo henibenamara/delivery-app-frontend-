@@ -123,29 +123,49 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
                                 const String etatLivraison = "Livrée";
                                 final String? userId =
                                 prefs.getString('LivreurId');
-                                print(snapshot.data![index]['_id']);
-                                print(userId);
-                                print(etatLivraison);
-                                api.updateLivraison(
-                                    snapshot.data![index]['_id'],
-                                    userId!,
-                                    etatLivraison);
-                                showTopSnackBar(
-                                  context,
-                                  CustomSnackBar.success(
-                                    message:
-                                    "bonne travail, cette livraison("+snapshot.data![index]['numLivraison']+" )est livrer avec succées",
-                                  ),
-                                );
-                                await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LivraisonEnCours()));
-                              },
 
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext ctx) {
+                                      return AlertDialog(
+                                        title: const Text('Please Confirm'),
+                                        content: const Text(
+                                            'Vous assurez que cette livraison est bien Livrée ?'),
+                                        actions: [
+                                          // The "Yes" button
+                                          TextButton(
+                                              onPressed: () async {
+                                                api.updateLivraison(
+                                                    snapshot.data![index]['_id'],
+                                                    userId!,
+                                                    etatLivraison);
+                                                showTopSnackBar(
+                                                  context,
+                                                  CustomSnackBar.success(
+                                                    message:
+                                                    "bonne travail, cette livraison est livrer avec succées",
+                                                  ),
+                                                );
+                                                await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            LivraisonEnCours()));
 
-                            ),
+                                              },
+                                              child: const Text('Oui')),
+                                          TextButton(
+                                              onPressed: () {
+                                                // Close the dialog
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('non'))
+                                        ],
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                                      );
+                                    });
+                              }),
 
                           ],
                         ),

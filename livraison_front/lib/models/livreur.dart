@@ -66,6 +66,7 @@ class UserId {
     required this.email,
     required this.password,
     required this.role,
+    this.etatCompte,
     required this.v,
   });
 
@@ -74,12 +75,14 @@ class UserId {
   String password;
   String role;
   int v;
+  String? etatCompte ;
 
   factory UserId.fromJson(Map<String, dynamic> json) => UserId(
     id: json["_id"],
     email: json["email"],
     password: json["password"],
     role: json["role"],
+    etatCompte : json["etatCompte"],
     v: json["__v"],
   );
 
@@ -88,6 +91,7 @@ class UserId {
     "email": email,
     "password": password,
     "role": role,
+    "etatCompte":etatCompte,
     "__v": v,
   };
 }

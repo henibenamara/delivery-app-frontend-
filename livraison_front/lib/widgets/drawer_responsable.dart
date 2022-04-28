@@ -20,6 +20,12 @@ Widget ResponsableDrawer(BuildContext context) {
           ),
           ListTile(
               leading: Icon(Icons.person),
+              title: Text('Les demandes de livreur'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/DemandeLivreur");
+              }),
+          ListTile(
+              leading: Icon(Icons.person),
               title: Text('list livreur'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/LivreurPage");

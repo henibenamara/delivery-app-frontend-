@@ -122,22 +122,49 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                 print(snapshot.data![index]['_id']);
                                 print(userId);
                                 print(etatLivraison);
-                                api.updateLivraison(
-                                    snapshot.data![index]['_id'],
-                                    userId!,
-                                    etatLivraison);
-                                showTopSnackBar(
-                                  context,
-                                  CustomSnackBar.success(
-                                    message:
-                                    "vous avez accepter cette livraison!",
-                                  ),
-                                );
-                               await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LivraisonRequest()));
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext ctx) {
+                                      return AlertDialog(
+                                        title: const Text('Please Confirm'),
+                                        content: const Text("tu es sure d'accepter cette livraison ?"),
+                                        actions: [
+                                          // The "Yes" button
+                                          TextButton(
+                                              onPressed :() async {
+                                                api.updateLivraison(
+                                                    snapshot.data![index]['_id'],
+                                                    userId!,
+                                                    etatLivraison);
+                                                showTopSnackBar(
+                                                  context,
+                                                  CustomSnackBar.success(
+                                                    message:
+                                                    "vous avez accepter cette Livraison (${snapshot.data![index]['numLivraison']})!",
+                                                  ),
+                                                );
+                                                await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            LivraisonRequest()));
+
+                                                // Close the dialog
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('oui')),
+                                          TextButton(
+                                              onPressed: () {
+                                                // Close the dialog
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('non'))
+                                        ],
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                                      );
+                                    });
+
                               },
                               child: const Icon(Icons.check),
                               backgroundColor: Colors.white,
@@ -162,7 +189,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                     etatLivraison: snapshot.data![index]['etatLivraison'],
                                     sId: snapshot.data![index]['_id'],
                                     idClient: snapshot.data![index]['client']['_id'],
-
+                                    imageUrl: snapshot.data![index]['imageUrl'],
                                     idLivreur: "aucun livreur",
                                   );
                             print(snapshot.data![index]['client']['_id']);

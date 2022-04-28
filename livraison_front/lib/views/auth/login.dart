@@ -99,7 +99,7 @@ class _SignInState extends State<LoginScreen> {
                     child: RaisedButton(
 
                       onPressed: () {
-                        var user = email.text;
+                        var user = email.text.toLowerCase();
                         var pass = password.text;
                         if(user.length < 4)
                           displayDialog(context, "Invalid Username", "The username should be at least 4 characters long");
@@ -107,7 +107,7 @@ class _SignInState extends State<LoginScreen> {
                                 displayDialog(context, "Invalid Password", "The password should be at least 4 characters long");
                         else {
 
-                          fetchAlbum(email.text,password.text);
+                          fetchAlbum(email.text.toLowerCase(),password.text);
 
                         }
                        },
@@ -202,30 +202,55 @@ class _SignInState extends State<LoginScreen> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('userId', u.user.id);
         await prefs.setString('emailClient', u.user.email);
-        notif("Client login avec succée");
-       Navigator.of(context).pushNamed('/clientHome');
-        debugPrint('data from server is : ${u.toString()}');
-
-      }
-      if(u.user.role =="livreur"){
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('LivreurId', u.user.id);
-        await prefs.setString('emailLivreur', u.user.email);
 
         showTopSnackBar(
           context,
           CustomSnackBar.success(
             message:
-            "Good job, your release is successful. Have a nice day",
+            "Bienvenue ${u.user.email.split('@')[0]}",
           ),
         );
-
-        Navigator.pushNamed(context, '/livreur');
-
+       Navigator.of(context).pushNamed('/clientHome');
         debugPrint('data from server is : ${u.toString()}');
 
       }
+      if(u.user.role =="livreur") {
+        if (u.user.etatCompte == false) {
+          showTopSnackBar(
+            context,
+            CustomSnackBar.error(
+              message:
+              "votre compte n'est pas encore verifier",
+            ),
+          );
+
+          Navigator.pushNamed(context, '/');
+        }
+        if (u.user.etatCompte == true) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('LivreurId', u.user.id);
+          await prefs.setString('emailLivreur', u.user.email);
+          showTopSnackBar(
+            context,
+            CustomSnackBar.success(
+              message:
+              "Bienvenue ${u.user.email.split('@')[0]}",
+            ),
+          );
+
+          Navigator.pushNamed(context, '/livreur');
+
+          debugPrint('data from server is : ${u.toString()}');
+        }
+      }
       if(u.user.role =="responsable"){
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            message:
+            "Bienvenue ${u.user.email.split('@')[0]}",
+          ),
+        );
         notif("admin login avec succée");
         Navigator.pushNamed(context, '/responsable');
         debugPrint('data from server is : ${u.toString()}');

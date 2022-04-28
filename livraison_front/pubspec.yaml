@@ -46,8 +46,13 @@ dependencies:
   progress_dialog: ^1.2.4
   date_field: ^3.0.0
   animated_theme_switcher: ^2.0.6
-
+  pdf: ^3.7.4
+  open_file: ^3.2.1
   top_snackbar_flutter: ^1.0.2
+  intl: ^0.17.0
+
+  map: ^1.0.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
