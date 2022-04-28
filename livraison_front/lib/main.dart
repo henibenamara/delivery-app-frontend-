@@ -14,6 +14,7 @@ import 'package:livraison_front/views/livraison/livraisonList.dart';
 import 'package:livraison_front/views/livraisonRequest.dart';
 import 'package:livraison_front/views/livreur.dart';
 import 'package:livraison_front/views/livreur/livreurList.dart';
+import 'package:livraison_front/views/onBoarding.dart';
 import 'package:livraison_front/views/resp.dart';
 import 'package:livraison_front/views/responsable/demandeLivreur.dart';
 
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
     return Center(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: '/OnBoardingPage',
         routes: {
+          '/OnBoardingPage':(context)=>OnBoardingPage(),
           '/': (context) => LoginScreen(),
           '/livreur': (context) => livreur(),
           '/livraison': (context) => const LivraisonPage(),

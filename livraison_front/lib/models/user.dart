@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'dart:ffi';
+
 
 utilisateur welcomeFromJson(String str) => utilisateur.fromJson(json.decode(str));
 
