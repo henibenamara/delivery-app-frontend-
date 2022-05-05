@@ -18,46 +18,6 @@ class LivraisonRequest extends StatefulWidget {
 class _LivraisonRequest extends State<LivraisonRequest> {
   TextEditingController _textFieldController = TextEditingController();
 
-  Future<void> _displayTextInputDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('proposer un prix !'),
-            content: TextField(
-              onChanged: (value) {
-                setState(() {
-                  valueText = value;
-                });
-              },
-              controller: _textFieldController,
-              decoration: InputDecoration(hintText: "prix de livraison"),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                color: Colors.red,
-                textColor: Colors.white,
-                child: Text('CANCEL'),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-              FlatButton(
-                color: Colors.green,
-                textColor: Colors.white,
-                child: Text('Confirmer'),
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-            ],
-          );
-        });
-  }
 
    String codeDialog="00";
   late String valueText;
@@ -165,50 +125,13 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                 print(snapshot.data![index]['_id']);
                                 print(userId);
                                 print(etatLivraison);
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('proposer un prix !'),
-                                        content: TextField(
-                                          onChanged: (value) {
-                                            setState(() {
-                                              valueText = value;
-                                            });
-                                          },
-                                          controller: _textFieldController,
-                                          decoration: InputDecoration(hintText: "prix de livraison"),
-                                        ),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            color: Colors.red,
-                                            textColor: Colors.white,
-                                            child: Text('CANCEL'),
-                                            onPressed: () {
-                                              setState(() {
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                          ),
-                                          FlatButton(
-                                            color: Colors.green,
-                                            textColor: Colors.white,
-                                            child: Text('Confirmer'),
-                                            onPressed: () {
-                                              setState(() {
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    });
+
                                 /**------------------**/
                                showDialog(
                                     context: context,
                                     builder: (BuildContext ctx) {
                                       return AlertDialog(
-                                        title: const Text('Please Confirm'),
+                                        title: const Text('Proposer un prix !'),
                                         content: TextField(
                                           onChanged: (value) {
                                             setState(() {
@@ -224,7 +147,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                               onPressed: () async {
                                                 api.updateLivraison(
                                                     snapshot.data![index]
-                                                        ['_id'],
+                                                    ['_id'],
                                                     userId!,
                                                     etatLivraison,
                                                     _textFieldController.text
@@ -233,7 +156,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                                   context,
                                                   CustomSnackBar.success(
                                                     message:
-                                                        "vous avez accepter cette Livraison (${snapshot.data![index]['numLivraison']})!",
+                                                    "vous avez accepter cette Livraison a ${_textFieldController.text} dt !, svp attendez la verfication de notre responsable",
                                                   ),
                                                 );
                                                 await Navigator.push(
@@ -242,16 +165,16 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                                         builder: (context) =>
                                                             LivraisonRequest()));
 
-                                                // Close the dialog
-                                                Navigator.of(context).pop();
+                                                
+
                                               },
-                                              child: const Text('oui')),
+                                              child: const Text('Confirmer')),
                                           TextButton(
                                               onPressed: () {
                                                 // Close the dialog
                                                 Navigator.of(context).pop();
                                               },
-                                              child: const Text('non'))
+                                              child: const Text('cancel'))
                                         ],
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(

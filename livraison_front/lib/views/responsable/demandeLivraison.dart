@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/views/responsable/verificationLivraisonALivreur.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -64,8 +65,8 @@ class _DemandeLivraison extends State<DemandeLivraison> {
         future: LivraisonService().getAllTLivraison(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData){
-            if (snapshot.data![index]['etatLivraison'].toString() ==
-                "non livrée") {
+            if (snapshot.data![index]['verification'].toString() ==
+                "false") {
               return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -77,7 +78,7 @@ class _DemandeLivraison extends State<DemandeLivraison> {
                           Text(
                             "Numero :" +
                                 snapshot.data![index][
-                                'numLivraison'] //(snapshot.data![index]['etatLivraison'].toString()=="en cours")
+                                'numLivraison']
                                     .toString(),
                             style: const TextStyle(
                                 fontSize: 20.0, color: Colors.white),
@@ -136,7 +137,8 @@ class _DemandeLivraison extends State<DemandeLivraison> {
                                   sId: snapshot.data![index]['_id'],
                                   idClient: snapshot.data![index]['client']['_id'],
                                   imageUrl: snapshot.data![index]['imageUrl'],
-                                  idLivreur: "aucun livreur",
+                                  idLivreur: snapshot.data![index]['livreur']['_id'],
+                                  prix : snapshot.data![index]['prix'],
                                 );
                                 print(snapshot.data![index]['client']['_id']);
 
@@ -145,7 +147,7 @@ class _DemandeLivraison extends State<DemandeLivraison> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            AccepterLivraison(livraison)));
+                                            verificationLivraison(livraison)));
                               },
                               child: const Icon(Icons.info_outline),
                               backgroundColor: Colors.white,

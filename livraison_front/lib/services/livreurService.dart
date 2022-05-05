@@ -149,6 +149,64 @@ class LivreurService {
       print(value);
     });
   }
+  permis(File imageFile,String? id) async {
+    // open a bytestream
+    var stream =
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // get file length
+    var length = await imageFile.length();
+
+    // string to uri
+    var uri = Uri.parse(AppConstants.API_URL+"/livreur/permis/$id");
+
+    // create multipart request
+    var request = new http.MultipartRequest("PUT", uri);
+
+    // multipart that takes file
+    var multipartFile = new http.MultipartFile('livpermie', stream, length,
+        filename: basename(imageFile.path));
+
+    // add file to multipart
+    request.files.add(multipartFile);
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+  }
+  carteGrise(File imageFile,String? id) async {
+    // open a bytestream
+    var stream =
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // get file length
+    var length = await imageFile.length();
+
+    // string to uri
+    var uri = Uri.parse(AppConstants.API_URL+"/livreur/cartegrise/$id");
+
+    // create multipart request
+    var request = new http.MultipartRequest("PUT", uri);
+
+    // multipart that takes file
+    var multipartFile = new http.MultipartFile('livcarteGrise', stream, length,
+        filename: basename(imageFile.path));
+
+    // add file to multipart
+    request.files.add(multipartFile);
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+  }
 
 
 

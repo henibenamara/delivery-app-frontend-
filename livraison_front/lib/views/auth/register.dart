@@ -9,6 +9,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../widgets/background.dart';
 import 'login.dart';
+import '../livreur/addpermie.dart';
 
 enum Role { client, livreur }
 
@@ -235,6 +236,7 @@ class signup extends State<RegisterScreen> {
                           imgurl.toString(),
                           "false"
                       );
+
                     }
                     /** Navigator.pushNamed(context, '/LoginScreen');**/
 
@@ -346,7 +348,9 @@ class signup extends State<RegisterScreen> {
         "livMarqVecu": _dropDownValue!,
         "livMatVecu": Matricule,
         "image" : img,
-        "etatCompte":etatCompte
+        "etatCompte":etatCompte,
+        "livcarteGrise":"user.png",
+        "livpermie":"user.png"
 
       };
     }
@@ -372,6 +376,7 @@ class signup extends State<RegisterScreen> {
       // then parse the JSON.
       print("ok");
       debugPrint('register success');
+      if (role == "Role.client"){
       displayDialog(
           context, "felicitation", "votre compte est creer avec succes");
       showTopSnackBar(
@@ -382,7 +387,20 @@ class signup extends State<RegisterScreen> {
         ),
       );
 
-      Navigator.of(context).pushNamed('/');
+      Navigator.of(context).pushNamed('/');}
+      if(role == "Role.livreur"){
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            message:
+            "Votre Compte est crée avec succée, Completez les etapes suivantes!",
+          ),
+        );
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => addpermie(Cin)));
+      }
     } else {
       print("error");
       // If the server did not return a 200 OK response,

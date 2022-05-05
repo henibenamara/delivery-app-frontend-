@@ -12,6 +12,8 @@ class Livraison {
   String? idClient;
   String? idLivreur;
   String? imageUrl;
+  String? prix;
+  String? verfication;
 
   Livraison(
       {this.numLivraison,
@@ -26,7 +28,7 @@ class Livraison {
         this.etatLivraison,
         this.idClient,
       this.idLivreur,
-        this.imageUrl
+        this.imageUrl, this.prix,this.verfication
       });
 
   Livraison.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,8 @@ class Livraison {
     sId = json['_id'];
     iV = json['__v'];
     imageUrl = json['imageUrl'];
+    prix = json['prix'];
+    verfication = json['verfication'];
   }
 
   Map<String, dynamic> toJson() {
@@ -57,6 +61,9 @@ class Livraison {
     data['livreur'] = this.idLivreur;
     data['imageUrl'] = this.imageUrl;
     data['__v'] = this.iV;
+    data['prix'] = this.prix;
+    data['verfication'] = this.verfication;
+
     return data;
   }
 

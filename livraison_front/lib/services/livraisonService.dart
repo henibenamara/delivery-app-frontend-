@@ -284,4 +284,28 @@ print("DesColis :$DesColis");
     });
   }
 
+  Future<Response> verficationliv(String sId,String verification) async {
+
+    final json =
+    {"sId" : sId,"verification":verification};
+    var data = jsonEncode(json);
+    final url =
+    Uri.parse(AppConstants.API_URL +" /livraison/verification/$sId");
+    final request =
+    await http.put(url, body: data, headers: AppConstants.HEADERS);
+    Response response = Response();
+
+    try {
+      if (request.statusCode == 200) {
+
+        response = responseFromJson(request.body);
+      } else {
+        print(request.statusCode);
+      }
+    } catch (e) {
+      return Response();
+    }
+    return response;
+  }
+
 }

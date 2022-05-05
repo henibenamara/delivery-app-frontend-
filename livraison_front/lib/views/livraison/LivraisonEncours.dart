@@ -63,8 +63,9 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
         future: LivraisonService().getLivraisonByIdLivreur(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData){
-            if (snapshot.data![index]['etatLivraison'].toString() ==
-                "en cours") {
+            if ((snapshot.data![index]['etatLivraison'].toString() ==
+                "en cours")&&(snapshot.data![index]['verification'].toString() ==
+          "true")) {
               return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -138,7 +139,8 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
                                                 api.updateLivraison(
                                                     snapshot.data![index]['_id'],
                                                     userId!,
-                                                    etatLivraison);
+                                                    etatLivraison,
+                                                    snapshot.data![index]['prix']);
                                                 showTopSnackBar(
                                                   context,
                                                   CustomSnackBar.success(
