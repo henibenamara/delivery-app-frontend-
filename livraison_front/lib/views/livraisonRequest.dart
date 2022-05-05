@@ -16,6 +16,51 @@ class LivraisonRequest extends StatefulWidget {
 }
 
 class _LivraisonRequest extends State<LivraisonRequest> {
+  TextEditingController _textFieldController = TextEditingController();
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('proposer un prix !'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "prix de livraison"),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.red,
+                textColor: Colors.white,
+                child: Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              FlatButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                child: Text('Confirmer'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+   String codeDialog="00";
+  late String valueText;
   void displayDialog(BuildContext context, String title, String text) =>
       showDialog(
         context: context,
@@ -34,7 +79,6 @@ class _LivraisonRequest extends State<LivraisonRequest> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
             side: BorderSide(color: Colors.blueGrey, width: 1),
-
           ),
         ),
         drawer: livreurDrawer(context),
@@ -43,27 +87,25 @@ class _LivraisonRequest extends State<LivraisonRequest> {
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          buildCard(context, index));
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        buildCard(context, index));
               } else {
                 return const Center(
-                    child:  Text("", style: TextStyle(fontSize: 1))); // Center
+                    child: Text("", style: TextStyle(fontSize: 1))); // Center
 
               }
             }));
   }
 
-
-
   Widget buildCard(BuildContext context, int index) {
     return FutureBuilder(
         future: LivraisonService().getAllTLivraison(),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (snapshot.hasData){
-          if (snapshot.data![index]['etatLivraison'].toString() ==
-              "non livrée") {
-            return Card(
+          if (snapshot.hasData) {
+            if (snapshot.data![index]['etatLivraison'].toString() ==
+                "non livrée") {
+              return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -87,17 +129,16 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                         child: Row(children: <Widget>[
                           Text(
                               "${"De " + snapshot.data![index]['AdresseExp'].toString()} ",
-                              style:  const TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20.0, color: Colors.white)),
                           const Spacer(),
                           Text("vers",
-                              style:  const TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20.0, color: Colors.white)),
                           const Spacer(),
                           Text(
-
-                                  "${snapshot.data![index]['AdressseDes'].toString()}",
-                              style:  const TextStyle(
+                              "${snapshot.data![index]['AdressseDes'].toString()}",
+                              style: const TextStyle(
                                   fontSize: 20.0, color: Colors.white)),
                           const Spacer(),
                         ]),
@@ -112,8 +153,10 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                   fontSize: 20.0, color: Colors.white),
                             ),
                             const Spacer(),
+
                             FloatingActionButton(
                               onPressed: () async {
+
                                 final prefs =
                                     await SharedPreferences.getInstance();
                                 const String etatLivraison = "en cours";
@@ -124,23 +167,73 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                 print(etatLivraison);
                                 showDialog(
                                     context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text('proposer un prix !'),
+                                        content: TextField(
+                                          onChanged: (value) {
+                                            setState(() {
+                                              valueText = value;
+                                            });
+                                          },
+                                          controller: _textFieldController,
+                                          decoration: InputDecoration(hintText: "prix de livraison"),
+                                        ),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            color: Colors.red,
+                                            textColor: Colors.white,
+                                            child: Text('CANCEL'),
+                                            onPressed: () {
+                                              setState(() {
+                                                Navigator.pop(context);
+                                              });
+                                            },
+                                          ),
+                                          FlatButton(
+                                            color: Colors.green,
+                                            textColor: Colors.white,
+                                            child: Text('Confirmer'),
+                                            onPressed: () {
+                                              setState(() {
+                                                Navigator.pop(context);
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                                /**------------------**/
+                               showDialog(
+                                    context: context,
                                     builder: (BuildContext ctx) {
                                       return AlertDialog(
                                         title: const Text('Please Confirm'),
-                                        content: const Text("tu es sure d'accepter cette livraison ?"),
+                                        content: TextField(
+                                          onChanged: (value) {
+                                            setState(() {
+                                              valueText = value;
+                                            });
+                                          },
+                                          controller: _textFieldController,
+                                          decoration: InputDecoration(hintText: "prix de livraison"),
+                                        ),
                                         actions: [
                                           // The "Yes" button
                                           TextButton(
-                                              onPressed :() async {
+                                              onPressed: () async {
                                                 api.updateLivraison(
-                                                    snapshot.data![index]['_id'],
+                                                    snapshot.data![index]
+                                                        ['_id'],
                                                     userId!,
-                                                    etatLivraison);
+                                                    etatLivraison,
+                                                    _textFieldController.text
+                                                );
                                                 showTopSnackBar(
                                                   context,
                                                   CustomSnackBar.success(
                                                     message:
-                                                    "vous avez accepter cette Livraison (${snapshot.data![index]['numLivraison']})!",
+                                                        "vous avez accepter cette Livraison (${snapshot.data![index]['numLivraison']})!",
                                                   ),
                                                 );
                                                 await Navigator.push(
@@ -161,7 +254,8 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                               child: const Text('non'))
                                         ],
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15.0))),
                                       );
                                     });
 
@@ -174,26 +268,30 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                               onPressed: () {
                                 Livraison livraison;
 
-                                  livraison = new Livraison(
-                                    adresseExp: snapshot.data![index]['AdresseExp'],
-                                    adressseDes: snapshot.data![index]['AdressseDes'],
-                                    dateDeLivraison: snapshot.data![index]
-                                    ['DateDeLivraison'],
-                                    DesColis: snapshot
-                                        .data![index]['colisId']['DesColis'],
-                                    numLivraison: snapshot.data![index]['numLivraison'],
-                                    typeColis: snapshot.data![index]['colisId']
-                                    ['typeColis'],
-                                    poidsColis: snapshot.data![index]['colisId']
-                                    ['poidsColis'],
-                                    etatLivraison: snapshot.data![index]['etatLivraison'],
-                                    sId: snapshot.data![index]['_id'],
-                                    idClient: snapshot.data![index]['client']['_id'],
-                                    imageUrl: snapshot.data![index]['imageUrl'],
-                                    idLivreur: "aucun livreur",
-                                  );
-                            print(snapshot.data![index]['client']['_id']);
-
+                                livraison = new Livraison(
+                                  adresseExp: snapshot.data![index]
+                                      ['AdresseExp'],
+                                  adressseDes: snapshot.data![index]
+                                      ['AdressseDes'],
+                                  dateDeLivraison: snapshot.data![index]
+                                      ['DateDeLivraison'],
+                                  DesColis: snapshot.data![index]['colisId']
+                                      ['DesColis'],
+                                  numLivraison: snapshot.data![index]
+                                      ['numLivraison'],
+                                  typeColis: snapshot.data![index]['colisId']
+                                      ['typeColis'],
+                                  poidsColis: snapshot.data![index]['colisId']
+                                      ['poidsColis'],
+                                  etatLivraison: snapshot.data![index]
+                                      ['etatLivraison'],
+                                  sId: snapshot.data![index]['_id'],
+                                  idClient: snapshot.data![index]['client']
+                                      ['_id'],
+                                  imageUrl: snapshot.data![index]['imageUrl'],
+                                  idLivreur: "aucun livreur",
+                                );
+                                print(snapshot.data![index]['client']['_id']);
 
                                 Navigator.push(
                                     context,
@@ -213,23 +311,26 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                 ),
                 shadowColor: Colors.lightBlue,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(100), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(100),
+                      bottomRight: Radius.circular(30),
+                      topLeft: Radius.circular(15),
+                      bottomLeft: Radius.circular(15)),
                   side: BorderSide(color: Colors.blue, width: 1),
                 ),
                 color: Colors.lightBlue,
                 elevation: 30,
-
               );
+            } else {
+              return const Center(
+                  child: Text(" ", style: TextStyle(fontSize: 1))); // Center
 
+            }
           } else {
             return const Center(
-                  child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
+                child: Text(" ", style: TextStyle(fontSize: 1))); // Center
 
-          }}else {
-    return const Center(
-    child:  Text(" ", style:  TextStyle(fontSize: 1))); // Center
-
-    }
+          }
         });
   }
 }

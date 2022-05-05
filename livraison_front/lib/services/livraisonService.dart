@@ -71,10 +71,10 @@ class LivraisonService {
     return listLivraison;
   }
   //update livraison
-  Future<Response> updateLivraison(String sId,String idLivreur,String etatLivraison) async {
+  Future<Response> updateLivraison(String sId,String idLivreur,String etatLivraison,String prix) async {
 
     final json =
-        {"sId" : sId,"livreur": idLivreur ,"etatLivraison":etatLivraison};
+        {"sId" : sId,"livreur": idLivreur ,"etatLivraison":etatLivraison,"prix":prix};
     var data = jsonEncode(json);
     final url =
     Uri.parse(AppConstants.API_URL +" /livraison/$sId");

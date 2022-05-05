@@ -215,7 +215,7 @@ class _SignInState extends State<LoginScreen> {
 
       }
       if(u.user.role =="livreur") {
-        if (u.user.etatCompte == false) {
+        if (u.user.etatCompte == "false") {
           showTopSnackBar(
             context,
             CustomSnackBar.error(
@@ -226,7 +226,7 @@ class _SignInState extends State<LoginScreen> {
 
           Navigator.pushNamed(context, '/');
         }
-        if (u.user.etatCompte == true) {
+        if (u.user.etatCompte == "true") {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('LivreurId', u.user.id);
           await prefs.setString('emailLivreur', u.user.email);

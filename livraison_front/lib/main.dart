@@ -16,6 +16,7 @@ import 'package:livraison_front/views/livreur.dart';
 import 'package:livraison_front/views/livreur/livreurList.dart';
 import 'package:livraison_front/views/onBoarding.dart';
 import 'package:livraison_front/views/resp.dart';
+import 'package:livraison_front/views/responsable/demandeLivraison.dart';
 import 'package:livraison_front/views/responsable/demandeLivreur.dart';
 
 void main() {
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           '/OnBoardingPage':(context)=>OnBoardingPage(),
           '/': (context) => LoginScreen(),
           '/livreur': (context) => livreur(),
+          '/DemandeLivraison': (context) => DemandeLivraison(),
           '/livraison': (context) => const LivraisonPage(),
           '/Addlivraison': (context) => AddLivraisonWidget(),
           '/responsable': (context) => responsable(),

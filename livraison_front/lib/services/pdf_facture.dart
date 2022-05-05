@@ -10,7 +10,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
 class PdfInvoiceApi {
-  static Future<File> generate(Invoice invoice) async {
+  /*static Future<File> generate(Invoice invoice) async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
@@ -249,5 +249,5 @@ class PdfInvoiceApi {
         ],
       ),
     );
-  }
+  }*/
 }
