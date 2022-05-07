@@ -14,7 +14,7 @@ class DashboardClient extends StatefulWidget {
   _DashboardClientState createState() => _DashboardClientState();
 }
 class _DashboardClientState extends State<DashboardClient> {
-  TextEditingController num = TextEditingController(text: "0000");
+  TextEditingController num = TextEditingController();
   String? numliv="1";
   bool pressed = false;
   @override
@@ -28,15 +28,16 @@ class _DashboardClientState extends State<DashboardClient> {
             children: [
               Row(children: [
                 Container(
-                  width: 300,
+                  width: 290,
                   child: TextFormField(
-
+keyboardType: TextInputType.number,
                     controller: num,
                     cursorColor: Theme.of(context).cursorColor,
 
-                    maxLength: 8,
+                    maxLength: 4,
                     decoration: InputDecoration(
 
+                      hintText: "entrer le numero de livraison",
                       labelText: 'suivi colis',
                       labelStyle: TextStyle(
                         color: Color(0xFF6200EE),
@@ -50,7 +51,7 @@ class _DashboardClientState extends State<DashboardClient> {
                   ),
                 ),
                 Container(
-                  width: 100,
+                  width: 120,
                   child: ElevatedButton(
                     onPressed: () {
 
@@ -64,7 +65,7 @@ class _DashboardClientState extends State<DashboardClient> {
                 )
               ]),
               Container(
-                height: 100,
+                height: 200,
 
                 child: FutureBuilder(
                   future: LivraisonService().getListLivraisonByNum(numliv.toString()),
