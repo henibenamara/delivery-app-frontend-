@@ -81,6 +81,13 @@ Widget livreurDrawer(BuildContext context) {
 
               }),
           ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Livraison A livrée (confirmer)'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/LivraisonConfirme");
+
+              }),
+          ListTile(
               leading: Icon(Icons.autorenew_outlined),
               title: Text('Livraison en cours'),
               onTap: () {

@@ -4,6 +4,7 @@ import 'package:livraison_front/views/camera.dart';
 import 'package:livraison_front/views/client.dart';
 import 'package:livraison_front/views/client/EditClient.dart';
 import 'package:livraison_front/views/client/clientList.dart';
+import 'package:livraison_front/views/client/dashboardClient.dart';
 import 'package:livraison_front/views/livraison/AddLivraison.dart';
 import 'package:livraison_front/views/livraison/DemandeLivraisonCLient.dart';
 import 'package:livraison_front/views/livraison/LivraisonEncours.dart';
@@ -13,6 +14,7 @@ import 'package:livraison_front/views/livraison/LivraisonListBylivreur.dart';
 import 'package:livraison_front/views/livraison/livraisonList.dart';
 import 'package:livraison_front/views/livraisonRequest.dart';
 import 'package:livraison_front/views/livreur.dart';
+import 'package:livraison_front/views/livreur/LivraisonConfirmer.dart';
 import 'package:livraison_front/views/livreur/livreurList.dart';
 import 'package:livraison_front/views/onBoarding.dart';
 import 'package:livraison_front/views/resp.dart';
@@ -42,14 +44,15 @@ class MyApp extends StatelessWidget {
           '/responsable': (context) => responsable(),
           '/client': (context) => const ClientPage(),
           '/livreurReq': (context) => LivraisonRequest(),
-          '/clientHome': (context) => client(),
+          '/clientHome': (context) => DashboardClient(),
           '/LivraisonClient': (context) => LivraisonClient(),
           '/LivreurPage': (context) => LivreurPage(),
           '/LivraisonLivreur': (context) => LivraisonLivreur(),
           '/LivraisonAdmin': (context) => LivraisonAdmin(),
           '/DemandeClient': (context) => DemandeClient(),
           '/livraisonEncours': (context) => LivraisonEnCours(),
-          '/DemandeLivreur':(context)=> DemandeLivreur()
+          '/DemandeLivreur':(context)=> DemandeLivreur(),
+          '/LivraisonConfirme':(context)=> LivraisonConfirme()
         },
       ),
     );

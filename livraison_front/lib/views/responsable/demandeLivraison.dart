@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:livraison_front/views/responsable/verificationLivraisonALivreur.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_responsable.dart';
-import '../livraison/DetailLivraisonLivreur.dart';
-import 'AccepterLivraison.dart';
+
 
 
 
@@ -20,12 +16,7 @@ class DemandeLivraison extends StatefulWidget {
 }
 
 class _DemandeLivraison extends State<DemandeLivraison> {
-  void displayDialog(BuildContext context, String title, String text) =>
-      showDialog(
-        context: context,
-        builder: (context) =>
-            AlertDialog(title: Text(title), content: Text(text)),
-      );
+
 
   final LivraisonService api = LivraisonService();
   @override

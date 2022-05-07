@@ -252,6 +252,36 @@ print("DesColis :$DesColis");
 
     return response;
   }
+  //get livraison by num
+  Future<List<dynamic>> getListLivraisonByNum(String num) async {
+
+
+    print('liv num is  : $num');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/num/$num",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['result']}');
+        listLivraison = x['result'];
+        print('livraisonList is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
 
 
   upload(File imageFile,int? num) async {

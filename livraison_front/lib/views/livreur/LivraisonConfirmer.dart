@@ -3,16 +3,16 @@ import 'package:livraison_front/constant/app_constants.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_livreur.dart';
-import 'DetailLivraisonLivreur.dart';
+import '../livraison/DetailLivraisonLivreur.dart';
 
-class LivraisonLivreur extends StatefulWidget {
-  const LivraisonLivreur({Key? key}) : super(key: key);
+class LivraisonConfirme extends StatefulWidget {
+  const LivraisonConfirme({Key? key}) : super(key: key);
 
   @override
-  _LivraisonLivreurState createState() => _LivraisonLivreurState();
+  _LivraisonConfirmeState createState() => _LivraisonConfirmeState();
 }
 
-class _LivraisonLivreurState extends State<LivraisonLivreur> {
+class _LivraisonConfirmeState extends State<LivraisonConfirme> {
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.lightBlue,
-        title: Text('Historique personel'),
+        title: Text('Livraison confirmer'),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
           side: BorderSide(color: Colors.blueGrey, width: 1),
@@ -35,6 +35,8 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
           if ((snapshot.hasData)) {
             return ListView.builder(
               itemBuilder: (context, index) {
+                if (snapshot.data![index]['verification'].toString() ==
+                    "true"){
                 return ListTile(
                   leading: new Image.network(
                     AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],
@@ -72,16 +74,16 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
                         adresseExp: snapshot.data![index]['AdresseExp'],
                         adressseDes: snapshot.data![index]['AdressseDes'],
                         dateDeLivraison: snapshot.data![index]
-                            ['DateDeLivraison'],
+                        ['DateDeLivraison'],
                         DesColis: snapshot.data![index]['colisId']['DesColis'],
                         numLivraison: snapshot.data![index]['numLivraison'],
                         typeColis: snapshot.data![index]['colisId']
-                            ['typeColis'],
+                        ['typeColis'],
                         poidsColis: snapshot.data![index]['colisId']
-                            ['poidsColis'],
+                        ['poidsColis'],
                         etatLivraison: snapshot.data![index]['etatLivraison'],
                         sId: snapshot.data![index]['_id'],
-                    imageUrl:snapshot.data![index]['imageUrl'] );
+                        imageUrl:snapshot.data![index]['imageUrl'] );
                     print(snapshot.data![index]['imageUrl'].toString());
 
                     Navigator.push(
@@ -90,13 +92,17 @@ class _LivraisonLivreurState extends State<LivraisonLivreur> {
                             builder: (context) =>
                                 DetailLivraisonLivreur(livraison)));
                   },
-                );
+                );}else {
+                  return Center(
+                    child: Text("il n'a pas de livraison pour le moment"),
+                  );
+                }
               },
               itemCount: snapshot.data?.length,
             );
           } else {
             return Center(
-              child: Text('No livraison'),
+              child: Text("il n'a pas de livraison pour le moment"),
             );
           }
         },
