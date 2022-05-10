@@ -17,6 +17,8 @@ class Livreur {
     required this.livMarqVecu,
     required this.v,
     this.imageUrl,
+    this.livpermie,
+    this.livcarteGrise,
   });
 
   String id;
@@ -30,6 +32,8 @@ class Livreur {
   String livMarqVecu;
   int v;
   String? imageUrl;
+  String? livpermie;
+  String? livcarteGrise;
 
   factory Livreur.fromJson(Map<String, dynamic> json) => Livreur(
     id: json["_id"],
@@ -43,6 +47,8 @@ class Livreur {
     livMarqVecu: json["livMarqVecu"],
     v: json["__v"],
     imageUrl :json['image'],
+    livpermie :json['livpermie'],
+    livcarteGrise :json['livcarteGrise'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -56,7 +62,9 @@ class Livreur {
     "livMatVecu": livMatVecu,
     "livMarqVecu": livMarqVecu,
     "__v": v,
-    "image" : imageUrl
+    "image" : imageUrl,
+    "livpermie" : livpermie,
+    "livcarteGrise" : livcarteGrise
   };
 }
 

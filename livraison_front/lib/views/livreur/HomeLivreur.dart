@@ -26,14 +26,12 @@ class _ProfilePageState extends State<ProfilePageLiv> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .scaffoldBackgroundColor,
+      title: Text("Mon Profile"),
         elevation: 1,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: Colors.white,
           ),
           onPressed: () {Navigator.of(context).pop();},
         ),
@@ -48,10 +46,7 @@ class _ProfilePageState extends State<ProfilePageLiv> {
           },
           child: ListView(
             children: [
-              Text(
-                "Mon Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
+
               SizedBox(
                 height: 15,
               ),

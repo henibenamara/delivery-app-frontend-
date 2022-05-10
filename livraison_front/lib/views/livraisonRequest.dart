@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/models/offer.dart';
+import 'package:livraison_front/services/offerService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -9,7 +11,9 @@ import '../widgets/drawer_livreur.dart';
 import 'livraison/DetailLivraisonLivreur.dart';
 
 class LivraisonRequest extends StatefulWidget {
-  const LivraisonRequest({Key? key}) : super(key: key);
+  LivraisonRequest(this.id);
+
+  final String?  id;
 
   @override
   _LivraisonRequest createState() => _LivraisonRequest();
@@ -118,7 +122,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                               onPressed: () async {
 
                                 final prefs =
-                                    await SharedPreferences.getInstance();
+                                await SharedPreferences.getInstance();
                                 const String etatLivraison = "en cours";
                                 final String? userId =
                                     prefs.getString('LivreurId');
@@ -131,7 +135,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                     context: context,
                                     builder: (BuildContext ctx) {
                                       return AlertDialog(
-                                        title: const Text('Proposer un prix !'),
+                                        title: const Text('Donner un offre !'),
                                         content: TextField(
                                           onChanged: (value) {
                                             setState(() {
@@ -139,12 +143,20 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                             });
                                           },
                                           controller: _textFieldController,
-                                          decoration: InputDecoration(hintText: "prix de livraison"),
+                                          decoration: InputDecoration(hintText: "Proposer un prix"),
                                         ),
                                         actions: [
                                           // The "Yes" button
                                           TextButton(
                                               onPressed: () async {
+                                                Offer offer = new Offer(
+                                                  livreur:widget.id.toString(),
+                                                  livraison: snapshot.data![index]['_id'].toString(),
+                                                    prix: _textFieldController.text
+                                                );
+                                                OfferService().addNewOffer(
+                                                   offer
+                                                );
                                                 api.updateLivraison(
                                                     snapshot.data![index]
                                                     ['_id'],
@@ -163,7 +175,7 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            LivraisonRequest()));
+                                                            LivraisonRequest(widget.id)));
 
                                                 
 

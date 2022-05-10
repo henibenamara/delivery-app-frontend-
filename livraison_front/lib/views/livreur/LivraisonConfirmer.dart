@@ -94,7 +94,9 @@ class _LivraisonConfirmeState extends State<LivraisonConfirme> {
                   },
                 );}else {
                   return Center(
-                    child: Text("il n'a pas de livraison pour le moment"),
+                    child: Text('',
+                      style: TextStyle(fontSize: 1),
+                    ),
                   );
                 }
               },
@@ -102,7 +104,9 @@ class _LivraisonConfirmeState extends State<LivraisonConfirme> {
             );
           } else {
             return Center(
-              child: Text("il n'a pas de livraison pour le moment"),
+              child:Text('',
+                style: TextStyle(fontSize: 1),
+              ),
             );
           }
         },

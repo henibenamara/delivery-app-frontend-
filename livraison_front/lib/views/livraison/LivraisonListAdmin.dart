@@ -131,6 +131,7 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                           sId: snapshot.data![index]['_id'],
                           idClient: snapshot.data![index]['client']['_id'],
                           idLivreur: "non",
+                          imageUrl: snapshot.data![index]['imageUrl']
 
                         );
 
@@ -151,6 +152,7 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
                           sId: snapshot.data![index]['_id'],
                           idClient: snapshot.data![index]['client']['_id'],
                           idLivreur: snapshot.data![index]['livreur']['_id'],
+                            imageUrl: snapshot.data![index]['imageUrl']
                         );
                         print("callTest2");
                       }

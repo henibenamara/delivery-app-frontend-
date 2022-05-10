@@ -36,7 +36,7 @@ class _verificationLivraison extends State<verificationLivraison> {
     return Scaffold(
         drawer: ResponsableDrawer(context),
         appBar: AppBar(
-          title: Text("affecter livraison"),
+          title: Text("Etude livraison"),
           centerTitle: true,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back, color: Colors.white),
@@ -276,7 +276,7 @@ class _verificationLivraison extends State<verificationLivraison> {
                   context: context,
                   builder: (BuildContext ctx) {
                     return AlertDialog(
-                      title: const Text('verifier cette livraison !'),
+                      title: const Text('Confirmer cette livraison !'),
 
                       actions: [
                         // The "Yes" button
@@ -316,13 +316,13 @@ class _verificationLivraison extends State<verificationLivraison> {
                     );
                   });
             },
-            color: Colors.green,
+            color: Colors.blueAccent,
             padding: EdgeInsets.symmetric(horizontal: 50),
             elevation: 2,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20)),
             child: Text(
-              "Verifier",
+              "Confirmer",
               style: TextStyle(
                   fontSize: 14,
                   letterSpacing: 2.2,

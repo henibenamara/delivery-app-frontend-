@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/models/livreur.dart';
+import 'package:livraison_front/services/ResponsableService.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 
 import '../../constant/message_constants.dart';
@@ -42,7 +45,9 @@ class _LivreurPageState extends State<LivreurPage> {
                 return ListTile(
                   title: Text(snapshot.data![index]['nom'].toString()),
                   subtitle: Text(snapshot.data![index]['prenom']),
-                    trailing: Icon(Icons.star),
+                    trailing: IconButton(onPressed: () {
+                      _showMyDialog(snapshot.data![index]['_id'].toString());
+                    }, icon:  Icon(Icons.delete)),
                     leading: CircleAvatar(backgroundImage: NetworkImage(AppConstants.API_URL+"/"+snapshot.data![index]['image']))
                    , onTap: () {
                   UserId user = new UserId(id: snapshot
@@ -85,7 +90,53 @@ class _LivreurPageState extends State<LivreurPage> {
       ),
     );
   }
+  Future<void> _showMyDialog(String id) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('supprimer Livreur'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
 
+                Text('voulez vous supprimez ce livreur?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('supprimer'),
+              onPressed: () async {
+                print('suprimer');
+                ResponsableService().deletelivreur(id);
+
+                showTopSnackBar(
+                  context,
+                  CustomSnackBar.success(
+                    message:
+                    "Livreur Supprimer avec succée",
+                  ),
+                );
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            LivreurPage()));
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   PreferredSize get appbar => PreferredSize(
         preferredSize: Size(double.infinity, 50),
         child: AppBar(
@@ -175,7 +226,13 @@ class _LivreurPageState extends State<LivreurPage> {
           },
         ),
       );
+
 }
+
+
+
+
+/**------ classe -----**/
 
 class TaskPanel extends StatelessWidget {
   final Widget? widget;
@@ -224,5 +281,7 @@ class NoSavedData extends StatelessWidget {
         ),
       ],
     );
+
   }
+
 }

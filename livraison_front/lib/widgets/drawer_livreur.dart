@@ -4,6 +4,7 @@ import 'package:livraison_front/services/livreurService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/app_constants.dart';
+import '../views/livraisonRequest.dart';
 import '../views/livreur/HomeLivreur.dart';
 SharedPreferences? sharedPrefs;
 String? email;
@@ -14,9 +15,9 @@ Widget livreurDrawer(BuildContext context) {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          SizedBox(
+          Container(
 
-            height: 180,
+            height: 310,
             child: FutureBuilder(
                 future: _getPrefs(),
                 builder: (context, snapshot) {
@@ -26,21 +27,57 @@ Widget livreurDrawer(BuildContext context) {
                         if (snapshot.hasData) {
                           return ListView.builder(
                               itemCount: snapshot.data?.length,
-                              itemBuilder: (BuildContext context, int index) {
+                              itemBuilder: (BuildContext context, int index)   {
 
                                 String url = AppConstants.API_URL+"/"+ snapshot.data![index]['image'];
                                 String? nom = snapshot.data![index]['nom'];
                                 String? email = snapshot.data![index]['userId']['email'];
                                 print(email);
-                                return  UserAccountsDrawerHeader(
 
-                                    accountName: Text(nom!),
-                                    accountEmail: Text(email!),
-                                    currentAccountPicture:
-                                    CircleAvatar(
-                                      backgroundImage: NetworkImage(url.toString()),
 
-                                    ));
+
+                                return  Container(
+                                  child: Column(
+                                      children: <Widget>[
+                                        UserAccountsDrawerHeader(
+
+                                      accountName: Text(nom!),
+                                      accountEmail: Text(email!),
+                                      currentAccountPicture:
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(url.toString()),
+
+                                      )),
+                                        Container(
+                                          child: ListTile(
+                                              leading: Icon(Icons.person_outline),
+                                              title: Text('Mon profil'),
+                                              onTap: () async {
+                                                final prefs = await SharedPreferences.getInstance();
+                                                final String? userId = prefs.getString('LivreurId');
+                                                print('userId is : $userId');
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                        (ProfilePageLiv(userId))));
+
+                                              }),
+                                        ),
+                                        ListTile(
+                                            leading: Icon(Icons.list),
+                                            title: Text('Les Demandes'),
+                                            onTap: () {Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LivraisonRequest(snapshot.data![index]['_id'])));
+
+                                            }),
+
+
+                                      ]),
+                                );
 
                               }
 
@@ -56,6 +93,7 @@ Widget livreurDrawer(BuildContext context) {
 
             ),
           ),
+          /**
           Container(
             child: ListTile(
                 leading: Icon(Icons.person_outline),
@@ -80,6 +118,7 @@ Widget livreurDrawer(BuildContext context) {
                 Navigator.pushReplacementNamed(context, "/livreurReq");
 
               }),
+          */
           ListTile(
               leading: Icon(Icons.list),
               title: Text('Livraison A livrée (confirmer)'),

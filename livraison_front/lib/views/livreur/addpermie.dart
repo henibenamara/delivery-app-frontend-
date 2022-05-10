@@ -34,7 +34,7 @@ class _addpermie extends State<addpermie> {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: clientDrawer(context),
+
       appBar: AppBar(
         title: Text('permie Photo'),
       ),

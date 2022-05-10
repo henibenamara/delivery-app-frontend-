@@ -27,26 +27,16 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
     final numC = TextEditingController(text: widget.livreur.livTelephone.toString());
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
+title:Text("Modifier profile",) ,
+
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: Colors.white,
           ),
           onPressed: () {Navigator.of(context).pop();},
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.green,
-            ),
-            onPressed: () {
 
-            },
-          ),
-        ],
       ),
       body: Container(
 
@@ -57,10 +47,7 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
           },
           child: ListView(
             children: [
-              Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
+
               SizedBox(
                 height: 15,
               ),
@@ -111,7 +98,7 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
                                       .of(context)
                                       .scaffoldBackgroundColor,
                                 ),
-                                color: Colors.green,
+                                color: Colors.blueAccent,
                               ),
                               child: Icon(
                                 Icons.edit,
@@ -140,8 +127,8 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
-                    child: Text("CANCEL",
+                    onPressed: () {Navigator.of(context).pop();},
+                    child: Text("Annuler",
                         style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 2.2,
@@ -167,13 +154,13 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
                           MaterialPageRoute(
                               builder: (context) => livreur()));
                     },
-                    color: Colors.green,
+                    color: Colors.blueAccent,
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     child: Text(
-                      "SAVE",
+                      "Modifier",
                       style: TextStyle(
                           fontSize: 14,
                           letterSpacing: 2.2,

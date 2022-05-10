@@ -49,6 +49,19 @@ class _DetailLivraisonAdminState extends State<DetailLivraisonAdmin> {
                   width: 600,
                   child: Column(children: <Widget>[
                     Container(
+                      height: 250.0,
+                      width: 250.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image:NetworkImage(
+                              AppConstants.API_URL+"/"+widget.livraison.imageUrl.toString()
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                        shape: BoxShape.rectangle,
+                      ),
+                    ),
+                    Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       child: Column(
                         children: <Widget>[

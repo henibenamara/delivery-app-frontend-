@@ -34,7 +34,7 @@ class _addCarteGrise extends State<addCarteGrise> {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: clientDrawer(context),
+
       appBar: AppBar(
         title: Text('carte grise Photo'),
       ),

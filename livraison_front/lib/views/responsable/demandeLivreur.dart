@@ -65,6 +65,8 @@ class _DemandeLivreurState extends State<DemandeLivreur> {
                               snapshot.data![index]['image'],
                           v: snapshot.data![index]['__v'],
                           id: snapshot.data![index]['_id'],
+                          livpermie:snapshot.data![index]['livpermie'],
+                          livcarteGrise:snapshot.data![index]['livcarteGrise'],
                           userId: user,
 
 

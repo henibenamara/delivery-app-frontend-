@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:livraison_front/views/client/EditClient.dart';
+import 'package:livraison_front/services/ResponsableService.dart';
+import 'package:livraison_front/services/livreurService.dart';
+
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 
-import '../../models/client.dart';
+import '../../constant/app_constants.dart';
 
-import '../../models/livraison.dart';
 import '../../models/livreur.dart';
 import '../../services/LivreurService.dart';
 import '../../services/clientService.dart';
-import '../../services/livraisonService.dart';
-import '../../widgets/drawer.dart';
+
+
 import '../../widgets/drawer_responsable.dart';
-import '../livraison/DetailLivraisonLivreur.dart';
-import '../livreur.dart';
+
 import '../resp.dart';
+import 'demandeLivreur.dart';
 
 
 class verifLivreur extends StatefulWidget {
@@ -30,7 +31,7 @@ class verifLivreur extends StatefulWidget {
 class _DetailLivreurState extends State<verifLivreur> {
   _DetailLivreurState();
 
-  final LivreurService api = LivreurService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class _DetailLivreurState extends State<verifLivreur> {
               child: Card(
                   child: Container(
                       padding: EdgeInsets.all(10.0),
-                      width: 440,
+                      width: 500,
                       child: Column(
                         children: <Widget>[
                           Container(
@@ -134,6 +135,55 @@ class _DetailLivreurState extends State<verifLivreur> {
                               ],
                             ),
                           ),
+                          Container(
+
+                            child: Row(
+                              children: <Widget>[
+                            Column(
+                            children: <Widget>[
+                              Text("Photo de Permie", style: TextStyle(fontSize: 16),),
+                                SizedBox(
+                                  height: 20,
+                                ),
+
+                                Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:NetworkImage(
+                                          AppConstants.API_URL+"/"+widget.livreur.livpermie.toString()
+                                      ),
+                                      fit: BoxFit.fill,
+                                    ),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                )
+                            ],),
+                            Spacer(),
+                            Column(
+                              children: <Widget>[
+                                Text("Photo de Carte Gris",style: TextStyle(fontSize: 16)),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:NetworkImage(
+                                          AppConstants.API_URL+"/"+widget.livreur.livcarteGrise.toString()
+                                      ),
+                                      fit: BoxFit.fill,
+                                    ),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                )
+                              ],
+                            )],
+                            ),
+                          ),
 
 
 
@@ -149,7 +199,10 @@ class _DetailLivreurState extends State<verifLivreur> {
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  onPressed: () {},
+                  onPressed: () {_showMyDialog();
+
+
+                  },
                   child: Text("refuser",
                       style: TextStyle(
                           fontSize: 14,
@@ -175,10 +228,7 @@ class _DetailLivreurState extends State<verifLivreur> {
                       ),
                     );
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => responsable()));
+                    Navigator.pop(context);
                   },
                   color: Colors.green,
                   padding: EdgeInsets.symmetric(horizontal: 50),
@@ -198,6 +248,54 @@ class _DetailLivreurState extends State<verifLivreur> {
 
 
           ]),
+    );
+  }
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Demande Livreur'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+
+                Text('voulez vous supprimez cette Demande?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('supprimer'),
+              onPressed: () async {
+                print('suprimer');
+                final ResponsableService api = ResponsableService();
+                api.deletelivreur(
+                    widget.livreur.id);
+                showTopSnackBar(
+                  context,
+                  CustomSnackBar.info(
+                    message:
+                    "Demande refusée",
+                  ),
+                );
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DemandeLivreur()));
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:livraison_front/views/client.dart';
 import 'package:livraison_front/views/client/EditClient.dart';
 import 'package:livraison_front/views/client/clientList.dart';
 import 'package:livraison_front/views/client/dashboardClient.dart';
+import 'package:livraison_front/views/client/livraisonConfirmerParLivreur.dart';
 import 'package:livraison_front/views/livraison/AddLivraison.dart';
 import 'package:livraison_front/views/livraison/DemandeLivraisonCLient.dart';
 import 'package:livraison_front/views/livraison/LivraisonEncours.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           '/Addlivraison': (context) => AddLivraisonWidget(),
           '/responsable': (context) => responsable(),
           '/client': (context) => const ClientPage(),
-          '/livreurReq': (context) => LivraisonRequest(),
+
           '/clientHome': (context) => DashboardClient(),
           '/LivraisonClient': (context) => LivraisonClient(),
           '/LivreurPage': (context) => LivreurPage(),
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
           '/DemandeClient': (context) => DemandeClient(),
           '/livraisonEncours': (context) => LivraisonEnCours(),
           '/DemandeLivreur':(context)=> DemandeLivreur(),
-          '/LivraisonConfirme':(context)=> LivraisonConfirme()
+          '/LivraisonConfirme':(context)=> LivraisonConfirme(),
+          '/LivraisonConfirmerParLivreur':(context)=>LivraisonConfirmerParLivreur()
         },
       ),
     );

@@ -121,7 +121,10 @@ keyboardType: TextInputType.number,
                                   ['poidsColis'],
                                   etatLivraison: snapshot.data![index]['etatLivraison'],
                                   sId: snapshot.data![index]['_id'],
+                                  idLivreur: snapshot.data![index]['livreur']['_id'],
+
                                   imageUrl:snapshot.data![index]['imageUrl'] );
+
                               print(snapshot.data![index]['imageUrl'].toString());
 
                               Navigator.push(

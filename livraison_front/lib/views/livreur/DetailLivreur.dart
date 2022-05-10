@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/views/client/EditClient.dart';
 
 
@@ -149,8 +150,8 @@ class _DetailLivreurState extends State<DetailLivreur> {
                       return ListView.builder(
                         itemBuilder: (context, index) {
                           return ListTile(
-                            leading: new Image.asset(
-                              "assets/images/col.jpg",
+                            leading: new Image.network(
+                              AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],
                               fit: BoxFit.cover,
                               width: 100.0,
                             ),
@@ -192,7 +193,10 @@ class _DetailLivreurState extends State<DetailLivreur> {
                                   poidsColis: snapshot.data![index]['colisId']
                                   ['poidsColis'],
                                   etatLivraison: snapshot.data![index]['etatLivraison'],
+                                  imageUrl :snapshot.data![index]['imageUrl'],
+                                  prix: snapshot.data![index]['prix'],
                                   sId: snapshot.data![index]['_id']);
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -205,7 +209,7 @@ class _DetailLivreurState extends State<DetailLivreur> {
                       );
                     } else {
                       return Center(
-                        child: Text('data is null'),
+                        child: CircularProgressIndicator(),
                       );
                     }
                   },

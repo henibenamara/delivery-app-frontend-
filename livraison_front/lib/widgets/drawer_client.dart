@@ -8,6 +8,7 @@ import '../services/clientService.dart';
 import '../services/livraisonService.dart';
 import '../views/client/EditClient.dart';
 import '../views/client/HomeClient.dart';
+import '../views/client/livraisonConfirmerParLivreur.dart';
 SharedPreferences? sharedPrefs;
 String? email;
 String? userIdC;
@@ -108,6 +109,16 @@ Widget clientDrawer(BuildContext context) {
               title: Text('Mes demandes'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, "/DemandeClient");
+
+              }),
+          ListTile(
+              leading: Icon(Icons.library_add_check),
+              title: Text('Livraison Confirmmer'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LivraisonConfirmerParLivreur()));
 
               }),
 

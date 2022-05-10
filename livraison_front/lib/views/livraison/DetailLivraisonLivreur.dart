@@ -48,8 +48,8 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
                 width: 600,
                 child: Column(children: <Widget>[
                   Container(
-                    height: 350.0,
-                    width: 350.0,
+                    height: 250.0,
+                    width: 250.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image:NetworkImage(
@@ -131,6 +131,17 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.8))),
                         Text(widget.livraison.poidsColis.toString() + " Kg")
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text('Poids :',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.8))),
+                        Text(widget.livraison.prix.toString() + " DT")
                       ],
                     ),
                   ),

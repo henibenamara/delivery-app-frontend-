@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/views/client/EditClient.dart';
 
 
@@ -120,8 +121,8 @@ class _DetailClientState extends State<DetailClientAdmin> {
                         itemBuilder: (context, index) {
 
                             return ListTile(
-                              leading: new Image.asset(
-                                "assets/images/col.jpg",
+                              leading: new Image.network(
+                                AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],
                                 fit: BoxFit.cover,
                                 width: 100.0,
                               ),
@@ -164,7 +165,10 @@ class _DetailClientState extends State<DetailClientAdmin> {
                                     poidsColis: snapshot.data![index]['colisId']
                                     ['poidsColis'],
                                     etatLivraison: snapshot.data![index]['etatLivraison'],
+                                    idLivreur: snapshot.data![index]['livreur']['_id'],
+                                    imageUrl: snapshot.data![index]['imageUrl'],
                                     sId: snapshot.data![index]['_id']);
+
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
