@@ -134,17 +134,7 @@ class _DetailLivraisonLivreurState extends State<DetailLivraisonLivreur> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    child: Column(
-                      children: <Widget>[
-                        Text('Poids :',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.8))),
-                        Text(widget.livraison.prix.toString() + " DT")
-                      ],
-                    ),
-                  ),
+
                 ])),
             shadowColor: Colors.blueAccent,
             shape:

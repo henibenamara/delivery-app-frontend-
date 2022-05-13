@@ -84,7 +84,7 @@ class LivraisonService {
 
     try {
       if (request.statusCode == 200) {
-        print("etat livraison : $etatLivraison");
+        print("id livreur : $idLivreur");
         response = responseFromJson(request.body);
       } else {
         print(request.statusCode);

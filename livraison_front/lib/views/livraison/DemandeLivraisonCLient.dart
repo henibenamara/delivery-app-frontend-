@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/views/livraison/DetailLivraisonClient_edit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -74,6 +75,7 @@ class _DemandeClientState extends State<DemandeClient> {
                 "non livrée")) {
               _id=snapshot.data![index]['_id'];
               return Card(
+
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -93,17 +95,80 @@ class _DemandeClientState extends State<DemandeClient> {
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                        child:  Container(
+                          height: 200,
+
+                            child: Image.network(AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'].toString()))
+                      ),
+
+
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 0.0),
                         child: Row(children: <Widget>[
+                          Icon(Icons.add_location_alt_rounded),
                           Text(
-                              "${"De " + snapshot.data![index]['AdresseExp']
+                              "${snapshot.data![index]['AdresseExp']
                                   .toString()} ",
                               style: const TextStyle(
                                   fontSize: 18.0, color: Colors.white)),
 
-                          Text("    vers    ",
-                              style: const TextStyle(
-                                  fontSize: 18.0, color: Colors.white)),
+
+                        ]),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1.0, bottom: 30.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.airplanemode_on_sharp),
+
 
                           Text(
 
@@ -118,20 +183,15 @@ class _DemandeClientState extends State<DemandeClient> {
                         padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
                         child: Row(
                           children: <Widget>[
-                            Text(
-                              "numero :${snapshot
-                                  .data![index]['numLivraison']}",
-                              style: const TextStyle(
-                                  fontSize: 15.0, color: Colors.white),
-                            ),
-                            const Spacer(),
+
+
                             Text(
                               "Poid :${snapshot
                                   .data![index]['colisId']['poidsColis']} Kg   ",
                               style: const TextStyle(
                                   fontSize: 15.0, color: Colors.white),
                             ),
-
+                            const Spacer(),
 
                             FloatingActionButton(
                               heroTag: "aa",
@@ -197,7 +257,7 @@ class _DemandeClientState extends State<DemandeClient> {
                       bottomLeft: Radius.circular(30)),
                   side: BorderSide(color: Colors.blue, width: 1),
                 ),
-                color: Colors.purpleAccent,
+                color: Colors.lightBlueAccent,
                 elevation: 30,
 
               );

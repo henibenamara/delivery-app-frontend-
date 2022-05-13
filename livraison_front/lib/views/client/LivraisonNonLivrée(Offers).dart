@@ -41,9 +41,8 @@ class _LivraisonOffersState extends State<LivraisonOffers> {
                     if ((snapshot.hasData)) {
                       return ListView.builder(
                         itemBuilder: (context, index) {
-                         /** if ((snapshot.data![index]['etatLivraison'].toString() ==
-                              "en cours")&& (snapshot.data![index]['verification'].toString() ==
-                              "true")) {*/
+                          if ((snapshot.data![index]['etatLivraison'].toString() ==
+                              "non livrée")) {
                             return ListTile(
                               leading: Image.network(AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],fit:  BoxFit.cover,
 
@@ -87,7 +86,7 @@ class _LivraisonOffersState extends State<LivraisonOffers> {
                                   ['poidsColis'],
                                   etatLivraison: snapshot.data![index]['etatLivraison'],
                                   sId: snapshot.data![index]['_id'],
-                                  idLivreur: snapshot.data![index]['livreur']['_id'],
+
                                   imageUrl: snapshot.data![index]['imageUrl'],
 
                                 );
@@ -98,13 +97,13 @@ class _LivraisonOffersState extends State<LivraisonOffers> {
                                         builder: (context) => OffreLivraisonClient(livraison)));
                               },
                             );
-    /**}else {
+   }else {
     return Center(
     child: Text('',
     style: TextStyle(fontSize: 1),
     ),
     );
-    }*/
+    }
                         },
                         itemCount: snapshot.data?.length,
                       );

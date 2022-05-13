@@ -46,10 +46,11 @@ class _uploadphotoLiv extends State<uploadphotoLiv> {
                 width: 440,
                 child: Column(
                   children: <Widget>[
+
                     if (imageFile != null)
                       Container(
-                        width: 640,
-                        height: 480,
+                        width: 400,
+                        height: 400,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: Colors.grey,
@@ -61,8 +62,8 @@ class _uploadphotoLiv extends State<uploadphotoLiv> {
                       )
                     else
                       Container(
-                        width: 300,
-                        height: 300,
+                        width: 400,
+                        height: 400,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: Colors.grey,
@@ -70,7 +71,7 @@ class _uploadphotoLiv extends State<uploadphotoLiv> {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: const Text(
-                          'Image field',
+                          'Image de Colis',
                           style: TextStyle(fontSize: 15),
                         ),
                       ),
@@ -81,28 +82,44 @@ class _uploadphotoLiv extends State<uploadphotoLiv> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.purple,
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+                              ),
                               onPressed: () =>
                                   getImage(source: ImageSource.camera),
-                              child: const Text('Capture Image',
+                              child: const Text('camera',
                                   style: TextStyle(fontSize: 18))),
                         ),
                         const SizedBox(
                           width: 20,
                         ),
+
                         Expanded(
                           child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+                                  ),
                               onPressed: () =>
                                   getImage(source: ImageSource.gallery),
-                              child: const Text('Select Image',
-                                  style: TextStyle(fontSize: 18))),
+                              child: const Text('gallerie',
+                                  style: TextStyle(fontSize: 18,color: Colors.purple))),
                         )
                       ],
+                    ),
+                    const SizedBox(
+                      height: 30,
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       child: Column(
                         children: <Widget>[
                           RaisedButton(
+                            color: Colors.purpleAccent,
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(16.0))),
                             splashColor: Colors.red,
                             onPressed: () async {
 
@@ -127,8 +144,8 @@ class _uploadphotoLiv extends State<uploadphotoLiv> {
                               }
                             },
                             child: Text('valider',
-                                style: TextStyle(color: Colors.white)),
-                            color: Colors.blue,
+                                style: TextStyle(color: Colors.white,fontSize: 20)),
+
                           )
                         ],
                       ),

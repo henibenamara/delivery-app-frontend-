@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../services/livraisonService.dart';
+import '../constant/app_constants.dart';
 import '../models/livraison.dart';
 import '../widgets/drawer_livreur.dart';
 import 'livraison/DetailLivraisonLivreur.dart';
@@ -78,169 +79,216 @@ class _LivraisonRequest extends State<LivraisonRequest> {
                         padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                         child: Row(children: <Widget>[
                           Text(
-                            "Numero :" +
-                                snapshot.data![index][
-                                        'numLivraison'] //(snapshot.data![index]['etatLivraison'].toString()=="en cours")
+                            "Colis : " +
+                                snapshot
+                                    .data![index]['colisId']['DesColis'] //(snapshot.data![index]['etatLivraison'].toString()=="en cours")
                                     .toString(),
                             style: const TextStyle(
-                                fontSize: 20.0, color: Colors.white),
+                                fontSize: 22.0, color: Colors.white),
                           ),
                           const Spacer(),
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                          child:  Container(
+                              height: 200,
+
+                              child: Image.network(AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'].toString()))
+                      ),
+
+
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 0.0),
                         child: Row(children: <Widget>[
+                          Icon(Icons.add_location_alt_rounded),
                           Text(
-                              "${"De " + snapshot.data![index]['AdresseExp'].toString()} ",
+                              "${snapshot.data![index]['AdresseExp']
+                                  .toString()} ",
                               style: const TextStyle(
-                                  fontSize: 20.0, color: Colors.white)),
-                          const Spacer(),
-                          Text("vers",
-                              style: const TextStyle(
-                                  fontSize: 20.0, color: Colors.white)),
-                          const Spacer(),
-                          Text(
-                              "${snapshot.data![index]['AdressseDes'].toString()}",
-                              style: const TextStyle(
-                                  fontSize: 20.0, color: Colors.white)),
-                          const Spacer(),
+                                  fontSize: 18.0, color: Colors.white)),
+
+
+                        ]),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "${snapshot.data![index]['colisId']['poidsColis']} Kg",
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1.0, bottom: 1.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.airplanemode_on_sharp),
+
+
+                          Text(
+
+                              "${snapshot.data![index]['AdressseDes']
+                                  .toString()}",
                               style: const TextStyle(
-                                  fontSize: 20.0, color: Colors.white),
-                            ),
-                            const Spacer(),
+                                  fontSize: 18.0, color: Colors.white)),
+                          const Spacer(),
+                          FloatingActionButton(
+                            onPressed: () async {
 
-                            FloatingActionButton(
-                              onPressed: () async {
+                              final prefs =
+                              await SharedPreferences.getInstance();
 
-                                final prefs =
-                                await SharedPreferences.getInstance();
-                                const String etatLivraison = "en cours";
-                                final String? userId =
-                                    prefs.getString('LivreurId');
-                                print(snapshot.data![index]['_id']);
-                                print(userId);
-                                print(etatLivraison);
+                              final String? userId =
+                              prefs.getString('LivreurId');
+                              print(snapshot.data![index]['_id']);
+                              print(userId);
 
-                                /**------------------**/
-                               showDialog(
-                                    context: context,
-                                    builder: (BuildContext ctx) {
-                                      return AlertDialog(
-                                        title: const Text('Donner un offre !'),
-                                        content: TextField(
-                                          onChanged: (value) {
-                                            setState(() {
-                                              valueText = value;
-                                            });
-                                          },
-                                          controller: _textFieldController,
-                                          decoration: InputDecoration(hintText: "Proposer un prix"),
-                                        ),
-                                        actions: [
-                                          // The "Yes" button
-                                          TextButton(
-                                              onPressed: () async {
-                                                Offer offer = new Offer(
+
+                              /**------------------**/
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      title: const Text('Donner un offre !'),
+                                      content: TextField(
+                                        onChanged: (value) {
+                                          setState(() {
+                                            valueText = value;
+                                          });
+                                        },
+                                        controller: _textFieldController,
+                                        decoration: InputDecoration(hintText: "Proposer un prix"),
+                                      ),
+                                      actions: [
+                                        // The "Yes" button
+                                        TextButton(
+                                            onPressed: () async {
+                                              Offer offer = new Offer(
                                                   livreur:widget.id.toString(),
                                                   livraison: snapshot.data![index]['_id'].toString(),
-                                                    prix: _textFieldController.text
-                                                );
-                                                OfferService().addNewOffer(
-                                                   offer
-                                                );
-                                                api.updateLivraison(
-                                                    snapshot.data![index]
-                                                    ['_id'],
-                                                    userId!,
-                                                    etatLivraison,
-                                                    _textFieldController.text
-                                                );
-                                                showTopSnackBar(
+                                                  prix: _textFieldController.text
+                                              );
+                                              OfferService().addNewOffer(
+                                                  offer
+                                              );
+
+                                              showTopSnackBar(
+                                                context,
+                                                CustomSnackBar.success(
+                                                  message:
+                                                  "votre offre est enregistrer",
+                                                ),
+                                              );
+                                              await Navigator.push(
                                                   context,
-                                                  CustomSnackBar.success(
-                                                    message:
-                                                    "vous avez accepter cette Livraison a ${_textFieldController.text} dt !, svp attendez la verfication de notre responsable",
-                                                  ),
-                                                );
-                                                await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            LivraisonRequest(widget.id)));
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          LivraisonRequest(widget.id)));
 
-                                                
 
-                                              },
-                                              child: const Text('Confirmer')),
-                                          TextButton(
-                                              onPressed: () {
-                                                // Close the dialog
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text('cancel'))
-                                        ],
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15.0))),
-                                      );
-                                    });
 
-                              },
-                              child: const Icon(Icons.check),
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.purple,
-                            ),
-                            FloatingActionButton(
-                              onPressed: () {
-                                Livraison livraison;
+                                            },
+                                            child: const Text('Confirmer')),
+                                        TextButton(
+                                            onPressed: () {
+                                              // Close the dialog
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('cancel'))
+                                      ],
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15.0))),
+                                    );
+                                  });
 
-                                livraison = new Livraison(
-                                  adresseExp: snapshot.data![index]
-                                      ['AdresseExp'],
-                                  adressseDes: snapshot.data![index]
-                                      ['AdressseDes'],
-                                  dateDeLivraison: snapshot.data![index]
-                                      ['DateDeLivraison'],
-                                  DesColis: snapshot.data![index]['colisId']
-                                      ['DesColis'],
-                                  numLivraison: snapshot.data![index]
-                                      ['numLivraison'],
-                                  typeColis: snapshot.data![index]['colisId']
-                                      ['typeColis'],
-                                  poidsColis: snapshot.data![index]['colisId']
-                                      ['poidsColis'],
-                                  etatLivraison: snapshot.data![index]
-                                      ['etatLivraison'],
-                                  sId: snapshot.data![index]['_id'],
-                                  idClient: snapshot.data![index]['client']
-                                      ['_id'],
-                                  imageUrl: snapshot.data![index]['imageUrl'],
-                                  idLivreur: "aucun livreur",
-                                );
-                                print(snapshot.data![index]['client']['_id']);
+                            },
+                            child: const Icon(Icons.check),
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.purple,
+                          ),
+                          FloatingActionButton(
+                            onPressed: () {
+                              Livraison livraison;
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            DetailLivraisonLivreur(livraison)));
-                              },
-                              child: const Icon(Icons.info_outline),
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.purple,
-                            ),
-                          ],
-                        ),
-                      )
+                              livraison = new Livraison(
+                                adresseExp: snapshot.data![index]
+                                ['AdresseExp'],
+                                adressseDes: snapshot.data![index]
+                                ['AdressseDes'],
+                                dateDeLivraison: snapshot.data![index]
+                                ['DateDeLivraison'],
+                                DesColis: snapshot.data![index]['colisId']
+                                ['DesColis'],
+                                numLivraison: snapshot.data![index]
+                                ['numLivraison'],
+                                typeColis: snapshot.data![index]['colisId']
+                                ['typeColis'],
+                                poidsColis: snapshot.data![index]['colisId']
+                                ['poidsColis'],
+                                etatLivraison: snapshot.data![index]
+                                ['etatLivraison'],
+                                sId: snapshot.data![index]['_id'],
+                                idClient: snapshot.data![index]['client']
+                                ['_id'],
+                                imageUrl: snapshot.data![index]['imageUrl'],
+                                idLivreur: "aucun livreur",
+                              );
+                              print(snapshot.data![index]['client']['_id']);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailLivraisonLivreur(livraison)));
+                            },
+                            child: const Icon(Icons.info_outline),
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.purple,
+                          ),
+                        ]),
+                      ),
+
                     ],
                   ),
                 ),
