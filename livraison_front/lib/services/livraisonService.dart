@@ -338,5 +338,33 @@ print("DesColis :$DesColis");
     }
     return response;
   }
+  Future<dynamic> getStatsLivreur(String userId) async {
 
+
+    print('livreur Id is  : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/sum/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['data']}');
+        listLivraison = x['data'];
+        print('Stats is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
 }

@@ -8,6 +8,8 @@ import '../services/clientService.dart';
 import '../services/livraisonService.dart';
 import '../views/client/EditClient.dart';
 import '../views/client/HomeClient.dart';
+import '../views/client/LivraisonNonLivrée(Offers).dart';
+import '../views/client/dashboardClient.dart';
 import '../views/client/livraisonConfirmerParLivreur.dart';
 SharedPreferences? sharedPrefs;
 String? email;
@@ -78,7 +80,11 @@ Widget clientDrawer(BuildContext context) {
           ListTile(
             leading: Icon(Icons.home), title: Text("Home"),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      (DashboardClient())));
             },
           ),
 
@@ -119,6 +125,16 @@ Widget clientDrawer(BuildContext context) {
                     context,
                     MaterialPageRoute(
                         builder: (context) => LivraisonConfirmerParLivreur()));
+
+              }),
+          ListTile(
+              leading: Icon(Icons.library_add_check),
+              title: Text('Les Offers'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LivraisonOffers()));
 
               }),
 

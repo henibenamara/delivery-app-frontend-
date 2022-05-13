@@ -244,6 +244,9 @@ class _SignInState extends State<LoginScreen> {
         }
       }
       if(u.user.role =="responsable"){
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('adminId', u.user.id);
+        await prefs.setString('adminEmail', u.user.email);
         showTopSnackBar(
           context,
           CustomSnackBar.success(
