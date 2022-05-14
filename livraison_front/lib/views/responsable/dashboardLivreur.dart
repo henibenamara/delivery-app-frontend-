@@ -155,9 +155,9 @@ class _DashboardLivreur extends State<DashboardLivreur> with SingleTickerProvide
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    cardDetails('Total revenu', 'images/card.png', snapshot.data!['sumLivrée'].toString()+" DT"),
+                                    cardDetails('Total revenu', 'assets/images/card.png', snapshot.data!['sumLivrée'].toString()+" DT"),
                                     cardDetails(
-                                        'Revenu en attend', 'images/returnbox.png', snapshot.data!['sumEncours'].toString()+" DT"),
+                                        'Revenu en attend', 'assets/images/returnbox.png', snapshot.data!['sumEncours'].toString()+" DT"),
 
                                   ],
                                 ),
@@ -165,8 +165,8 @@ class _DashboardLivreur extends State<DashboardLivreur> with SingleTickerProvide
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    cardDetails('Livrée', 'images/trucks.png', snapshot.data!['livraisonLivrée'].toString()),
-                                    cardDetails('En cours', 'images/box.png', snapshot.data!['livraisonEncours'].toString()),
+                                    cardDetails('Livrée', 'assets/images/trucks.png', snapshot.data!['livraisonLivrée'].toString()),
+                                    cardDetails('En cours', 'assets/images/box.png', snapshot.data!['livraisonEncours'].toString()),
                                   ],
                                 ),
                                 SizedBox(height: 5.0)

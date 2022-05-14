@@ -35,8 +35,8 @@ class _LivraisonConfirmeState extends State<LivraisonConfirme> {
           if ((snapshot.hasData)) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                if (snapshot.data![index]['verification'].toString() ==
-                    "true"){
+                if (snapshot.data![index]['etatLivraison'].toString() ==
+                    "en cours"){
                 return ListTile(
                   leading: new Image.network(
                     AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'],

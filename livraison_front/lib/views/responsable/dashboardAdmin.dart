@@ -158,9 +158,9 @@ class _DashboardAdmin extends State<DashboardAdmin> with SingleTickerProviderSta
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    cardDetails('Total Livreur', 'images/deliveryman.png', snapshot.data!['livreur'].toString()),
+                                    cardDetails('Total Livreur', 'assets/images/deliveryman.png', snapshot.data!['livreur'].toString()),
                                     cardDetails(
-                                        'Total Clients', 'images/client.png', snapshot.data!['client'].toString()),
+                                        'Total Clients', 'assets/images/client.png', snapshot.data!['client'].toString()),
 
                                   ],
                                 ),
@@ -169,8 +169,8 @@ class _DashboardAdmin extends State<DashboardAdmin> with SingleTickerProviderSta
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
 
-                                    cardDetails('Total revenu', 'images/card.png', snapshot.data!['money'].toString()+" DT"),
-                                    cardDetails('Total Livraison', 'images/alldelivery.png', snapshot.data!['totalLivraison'].toString()),
+                                    cardDetails('Total revenu', 'assets/images/card.png', snapshot.data!['money'].toString()+" DT"),
+                                    cardDetails('Total Livraison', 'assets/images/alldelivery.png', snapshot.data!['totalLivraison'].toString()),
 
                                   ],
                                 ),
@@ -178,9 +178,9 @@ class _DashboardAdmin extends State<DashboardAdmin> with SingleTickerProviderSta
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    cardDetails('Livrée', 'images/deliverydone.png', snapshot.data!['livraisonLivree'].toString()),
+                                    cardDetails('Livrée', 'assets/images/deliverydone.png', snapshot.data!['livraisonLivree'].toString()),
 
-                                    cardDetails('Livraison En cours', 'images/deliveryProg.png', snapshot.data!['livraisonEnCours'].toString()),
+                                    cardDetails('Livraison En cours', 'assets/images/deliveryProg.png', snapshot.data!['livraisonEnCours'].toString()),
                                   ],
                                 ),
                                 SizedBox(height: 5.0),
