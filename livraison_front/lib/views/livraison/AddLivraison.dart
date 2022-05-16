@@ -89,7 +89,7 @@ class _AddLivraisonWidget extends State<AddLivraisonWidget> {
                                   controller: dateinput,
                                   decoration: InputDecoration(
                                       icon: Icon(Icons.calendar_today),
-                                      labelText: "Enter Date"
+                                      labelText: "date de livraison"
                                   ),
                                   readOnly: true,
                                   onTap: () async {

@@ -5,6 +5,7 @@ import 'package:livraison_front/views/client/DetailCLientAdmin.dart';
 import '../../constant/app_constants.dart';
 import '../../constant/message_constants.dart';
 import '../../models/client_list.dart';
+
 import '../../services/clientService.dart';
 import '../../widgets/custom_card.dart';
 import '../../widgets/drawer_responsable.dart';

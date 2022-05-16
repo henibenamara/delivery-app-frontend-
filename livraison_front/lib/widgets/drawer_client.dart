@@ -119,16 +119,6 @@ Widget clientDrawer(BuildContext context) {
               }),
           ListTile(
               leading: Icon(Icons.library_add_check),
-              title: Text('Livraison Confirmmer'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LivraisonConfirmerParLivreur()));
-
-              }),
-          ListTile(
-              leading: Icon(Icons.library_add_check),
               title: Text('Les Offers'),
               onTap: () {
                 Navigator.push(
@@ -137,6 +127,8 @@ Widget clientDrawer(BuildContext context) {
                         builder: (context) => LivraisonOffers()));
 
               }),
+
+
 
           ListTile(
               leading: Icon(Icons.monetization_on),
