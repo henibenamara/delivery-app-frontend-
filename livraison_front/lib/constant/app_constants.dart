@@ -1,5 +1,5 @@
 class AppConstants {
-  static const String API_URL = "http://192.168.43.215:5000";
+  static const String API_URL = "http://192.168.43.2:5000";
   static const Map<String, String> HEADERS = {
     "Content-type": "application/json",
   "Access-Control-Allow-Origin" : "*",
