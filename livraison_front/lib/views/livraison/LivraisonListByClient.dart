@@ -139,7 +139,7 @@ class _LivraisonClientState extends State<LivraisonClient> {
               );
             } else {
               return Center(
-                child: Text('data is null'),
+                child: CircularProgressIndicator(),
               );
             }
           },

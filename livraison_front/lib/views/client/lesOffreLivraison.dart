@@ -58,7 +58,8 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                     child: FutureBuilder(
                       future: OfferService().getListOfferBylivraisonId(
                           widget.livraison.sId.toString()),
-                      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                      builder:
+                          (context, AsyncSnapshot<List<dynamic>> snapshot) {
                         if ((snapshot.hasData)) {
                           return ListView.builder(
                             itemBuilder: (context, index) {
@@ -92,7 +93,8 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                   child: FutureBuilder(
                                                     future: LivreurService()
                                                         .getLivreurByIdUSer(
-                                                            snapshot.data![index]
+                                                            snapshot
+                                                                .data![index]
                                                                     ['livreur']
                                                                     ['userId']
                                                                 .toString()),
@@ -123,77 +125,68 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                                     backgroundImage: NetworkImage(AppConstants
                                                                             .API_URL +
                                                                         "/" +
-                                                                        snapshot.data![
-                                                                                index]
+                                                                        snapshot.data![index]
                                                                             [
                                                                             'image'])),
                                                                 onTap: () {
                                                                   UserId user = new UserId(
                                                                       id: snapshot.data![index]
-                                                                              ['userId']
-                                                                          ['_id'],
+                                                                              ['userId'][
+                                                                          '_id'],
                                                                       email: snapshot.data![index]
-                                                                              ['userId']
-                                                                          [
+                                                                              ['userId'][
                                                                           'email'],
-                                                                      password: snapshot.data![index]
+                                                                      password:
+                                                                          snapshot.data![index]['userId'][
+                                                                              'password'],
+                                                                      role: snapshot.data![index]
                                                                               ['userId']
-                                                                          [
-                                                                          'password'],
-                                                                      role: snapshot
-                                                                              .data![index]['userId']
                                                                           ['role'],
                                                                       v: snapshot.data![index]['userId']['__v']);
                                                                   Livreur
                                                                       livreur =
                                                                       new Livreur(
                                                                     nom: snapshot
-                                                                            .data![
-                                                                        index]['nom'],
+                                                                            .data![index]
+                                                                        ['nom'],
                                                                     prenom: snapshot
-                                                                                .data![
-                                                                            index]
+                                                                            .data![index]
                                                                         [
                                                                         'prenom'],
                                                                     livcin: snapshot
-                                                                                .data![
-                                                                            index]
+                                                                            .data![index]
                                                                         [
                                                                         'livcin'],
                                                                     livTelephone:
-                                                                        snapshot.data![
-                                                                                index]
+                                                                        snapshot.data![index]
                                                                             [
                                                                             'livTelephone'],
-                                                                    livAdresse: snapshot
-                                                                                .data![
-                                                                            index]
-                                                                        [
-                                                                        'livAdresse'],
-                                                                    livMatVecu: snapshot
-                                                                                .data![
-                                                                            index]
-                                                                        [
-                                                                        'livMatVecu'],
-                                                                    livMarqVecu: snapshot
-                                                                                .data![
-                                                                            index]
-                                                                        [
-                                                                        'livMarqVecu'],
+                                                                    livAdresse:
+                                                                        snapshot.data![index]
+                                                                            [
+                                                                            'livAdresse'],
+                                                                    livMatVecu:
+                                                                        snapshot.data![index]
+                                                                            [
+                                                                            'livMatVecu'],
+                                                                    livMarqVecu:
+                                                                        snapshot.data![index]
+                                                                            [
+                                                                            'livMarqVecu'],
                                                                     v: snapshot.data![
                                                                             index]
                                                                         ['__v'],
-                                                                    id: snapshot.data![
-                                                                            index]
+                                                                    id: snapshot
+                                                                            .data![index]
                                                                         ['_id'],
-                                                                    userId: user,
+                                                                    userId:
+                                                                        user,
                                                                   );
                                                                   Navigator.push(
                                                                       context,
                                                                       MaterialPageRoute(
-                                                                          builder:
-                                                                              (context) =>
-                                                                                  DetailLivreur(livreur)));
+                                                                          builder: (context) =>
+                                                                              DetailLivreur(livreur)));
                                                                 });
                                                           },
                                                           itemCount: 1,
@@ -212,11 +205,7 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                   top: 8.0, bottom: 4.0),
                                               child: Row(children: <Widget>[
                                                 Text(
-                                                  "Prix :" +
-                                                      snapshot.data![index]
-                                                              ['prix']
-                                                          .toString() +
-                                                      " DT",
+                                                  "Prix :" + snapshot.data![index]['prix'].toString() + " DT",
                                                   style: const TextStyle(
                                                       fontSize: 20.0,
                                                       color: Colors.white),
@@ -224,16 +213,11 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                 const Spacer(),
                                                 FloatingActionButton(
                                                   onPressed: () async {
-                                                    String? prix = snapshot
-                                                        .data![index]['prix'].toString();
-                                                    String? etatLivraison =
-                                                        "en cours";
-                                                    String? idliv = snapshot
-                                                        .data![index]['livreur']['userId'].toString();
+                                                    String? prix = snapshot.data![index]['prix'].toString();
+                                                    String? etatLivraison = "en cours";
+                                                    String? idliv = snapshot.data![index]['livreur']['userId'].toString();
                                                     print("id livreeeeeeu : $idliv");
-                                                    String? idLivraison = widget
-                                                        .livraison.sId
-                                                        .toString();
+                                                    String? idLivraison = widget.livraison.sId.toString();
 
                                                     showDialog(
                                                         context: context,
@@ -242,19 +226,18 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                           return AlertDialog(
                                                             title: const Text(
                                                                 'Confirmer votre choix !'),
-                                                            content: Text("Prix : $prix dt"),
-
+                                                            content: Text(
+                                                                "Prix : $prix dt"),
                                                             actions: [
                                                               // The "Yes" button
                                                               TextButton(
                                                                   onPressed:
                                                                       () async {
-                                                                        LivraisonService()
-                                                                            .updateLivraison(
-                                                                            idLivraison.toString(),
-                                                                            idliv,
-                                                                            etatLivraison.toString(),
-                                                                            prix.toString());
+                                                                    LivraisonService().updateLivraison(
+                                                                        idLivraison.toString(),
+                                                                        idliv,
+                                                                        etatLivraison.toString(),
+                                                                        prix.toString());
                                                                     showTopSnackBar(
                                                                       context,
                                                                       CustomSnackBar
@@ -263,19 +246,41 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                                             "vous avez choisir cette offre avec succée",
                                                                       ),
                                                                     );
-                                                                        Livraison livraison = new Livraison(
-                                                                            adresseExp: widget.livraison.adresseExp,
-                                                                            adressseDes: widget.livraison.adressseDes,
-                                                                            dateDeLivraison:widget.livraison.dateDeLivraison,
-                                                                            DesColis:widget.livraison.DesColis,
-                                                                            numLivraison:widget.livraison.numLivraison,
-                                                                            typeColis: widget.livraison.typeColis,
-                                                                            poidsColis: widget.livraison.poidsColis,
-                                                                            etatLivraison:widget.livraison.etatLivraison ,
-                                                                            sId:widget.livraison.sId ,
-                                                                            idLivreur:idliv ,
-                                                                            prix: prix,
-                                                                            imageUrl:widget.livraison.imageUrl);
+                                                                    Livraison livraison = new Livraison(
+                                                                        adresseExp: widget
+                                                                            .livraison
+                                                                            .adresseExp,
+                                                                        adressseDes: widget
+                                                                            .livraison
+                                                                            .adressseDes,
+                                                                        dateDeLivraison: widget
+                                                                            .livraison
+                                                                            .dateDeLivraison,
+                                                                        DesColis: widget
+                                                                            .livraison
+                                                                            .DesColis,
+                                                                        numLivraison: widget
+                                                                            .livraison
+                                                                            .numLivraison,
+                                                                        typeColis: widget
+                                                                            .livraison
+                                                                            .typeColis,
+                                                                        poidsColis: widget
+                                                                            .livraison
+                                                                            .poidsColis,
+                                                                        etatLivraison: widget
+                                                                            .livraison
+                                                                            .etatLivraison,
+                                                                        sId: widget
+                                                                            .livraison
+                                                                            .sId,
+                                                                        idLivreur:
+                                                                            idliv,
+                                                                        prix:
+                                                                            prix,
+                                                                        imageUrl: widget
+                                                                            .livraison
+                                                                            .imageUrl);
                                                                     await Navigator.push(
                                                                         context,
                                                                         MaterialPageRoute(
@@ -285,7 +290,8 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                                   child: const Text(
                                                                       'Confirmer')),
                                                               TextButton(
-                                                                  onPressed: () {
+                                                                  onPressed:
+                                                                      () {
                                                                     // Close the dialog
                                                                     Navigator.of(
                                                                             context)
@@ -301,11 +307,12 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                                             15.0))),
                                                           );
                                                         });
-
                                                   },
-                                                  child: const Icon(Icons.check),
+                                                  child:
+                                                      const Icon(Icons.check),
                                                   backgroundColor: Colors.white,
-                                                  foregroundColor: Colors.purple,
+                                                  foregroundColor:
+                                                      Colors.purple,
                                                 ),
                                               ]),
                                             ),

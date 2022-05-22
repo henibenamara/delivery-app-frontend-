@@ -71,8 +71,11 @@ class PdfInvoiceApi {
         children: [
           Text("Client :", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,)),
           SizedBox(height: 4 * PdfPageFormat.mm),
-          Text("nom :"+customer.nom +" "+ customer.prenom, style: TextStyle(fontWeight: FontWeight.bold)),
-          Text("adresse "+customer.clientAdresse),
+          Text("nom:"+customer.nom +" "+ customer.prenom, style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 1 * PdfPageFormat.mm),
+          Text("adresse:"+customer.clientAdresse),
+          SizedBox(height: 1 * PdfPageFormat.mm),
+          Text("num°:"+customer.clientTel.toString()),
         ],
       );
 

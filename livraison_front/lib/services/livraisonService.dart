@@ -77,7 +77,7 @@ class LivraisonService {
         {"sId" : sId,"livreur": idLivreur ,"etatLivraison":etatLivraison,"prix":prix};
     var data = jsonEncode(json);
     final url =
-    Uri.parse(AppConstants.API_URL +" /livraison/$sId");
+    Uri.parse(AppConstants.API_URL +"/livraison/$sId");
     final request =
     await http.put(url, body: data, headers: AppConstants.HEADERS);
     Response response = Response();
@@ -344,6 +344,35 @@ print("DesColis :$DesColis");
     print('livreur Id is  : $userId');
     final url = Uri.parse(
       AppConstants.API_URL+"/livraison/sum/$userId",
+    );
+    final request = await http.get(
+      url,
+      headers: AppConstants.HEADERS,
+    );
+    var listLivraison;
+    List<LivraisonList> livraisonList = [];
+    try {
+      if (request.statusCode == 200) {
+        print('request.body : ${request.body}');
+        var x = json.decode(request.body);
+        print('x is : ${x['data']}');
+        listLivraison = x['data'];
+        print('Stats is : $listLivraison');
+      } else {
+        print(request.statusCode);
+        return const [];
+      }
+    } catch (e) {
+      return const [];
+    }
+    return listLivraison;
+  }
+  Future<dynamic> getStatsClient(String userId) async {
+
+
+    print('client user Id is  : $userId');
+    final url = Uri.parse(
+      AppConstants.API_URL+"/livraison/client/sum/$userId",
     );
     final request = await http.get(
       url,

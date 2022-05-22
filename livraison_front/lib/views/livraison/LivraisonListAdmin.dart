@@ -177,7 +177,7 @@ String urlImage ="https://c0.lestechnophiles.com/www.numerama.com/wp-content/upl
               );
             } else {
               return Center(
-                child: Text('data is null'),
+                child: CircularProgressIndicator(),
               );
             }
           },

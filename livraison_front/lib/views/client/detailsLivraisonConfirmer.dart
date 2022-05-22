@@ -5,6 +5,7 @@ import 'package:livraison_front/api/pdf_api.dart';
 import 'package:livraison_front/api/pdf_invoice_api.dart';
 import 'package:livraison_front/constant/app_constants.dart';
 import 'package:livraison_front/services/livreurService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/client.dart' as cli;
 import '../../models/livraison.dart';
 import '../../models/livreur.dart' as liv;
@@ -228,6 +229,11 @@ class _DetailLivraisonConfirmerState extends State<DetailLivraisonConfirmer> {
                                           ),
                                           RaisedButton(
                                             onPressed: () async {
+                                              final prefs = await SharedPreferences.getInstance();
+                                              final String? nomClient = prefs.getString('nomClient');
+                                              final String? prenomClient = prefs.getString("prenomClient");
+                                              final String? numClient = prefs.getString("numClient");
+                                              final String? adresseClient = prefs.getString("adresseClient");
                                               final date = widget.livraison.dateDeLivraison.toString();
                                               final dueDate = widget.livraison.dateDeLivraison.toString();
 
@@ -246,11 +252,11 @@ class _DetailLivraisonConfirmerState extends State<DetailLivraisonConfirmer> {
                                                   id: snapshot.data![index]['_id'],),
                                                 customer: cli.Client(
                                                     v: 0,
-                                                    prenom: 'brahim',
-                                                    nom: 'chebbi',
+                                                    prenom: prenomClient.toString(),
+                                                    nom: nomClient.toString(),
                                                     id: "",
-                                                    clientAdresse: "hhhhhhhhh",
-                                                    clientTel: 55410102),
+                                                    clientAdresse: adresseClient.toString(),
+                                                    clientTel:int.parse(numClient.toString())),
                                                 info: InvoiceInfo(
                                                   date: date,
                                                   dueDate: dueDate,
