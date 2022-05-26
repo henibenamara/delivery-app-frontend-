@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:livraison_front/constant/app_constants.dart';
+import 'package:livraison_front/widgets/drawer_livreur.dart';
 
 import '../../services/livraisonService.dart';
 
@@ -60,6 +61,8 @@ class _DashboardLivreur extends State<DashboardLivreur> with SingleTickerProvide
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: livreurDrawer(context),
+
       body: FutureBuilder(
         future: LivraisonService().getStatsLivreur(widget.id.toString()),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
@@ -142,7 +145,7 @@ class _DashboardLivreur extends State<DashboardLivreur> with SingleTickerProvide
                                     )
                                   ],
                                 ),
-                                SizedBox(width: MediaQuery.of(context).size.width - 300.0),
+
 
                                 SizedBox(height: 15.0)
                               ],

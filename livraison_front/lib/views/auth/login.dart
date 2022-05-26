@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/user.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,11 +31,11 @@ class _SignInState extends State<LoginScreen> {
                 content: Text(text)
             ),
       );
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+
   final _key = GlobalKey<FormState>();
-
-
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  late String _email;
+  late String _password;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _SignInState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Text(
-                      "Email",
+                      "Authentification",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF2661FA),
@@ -67,21 +67,24 @@ class _SignInState extends State<LoginScreen> {
                   Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextField(
-                      controller: email,
-                      decoration: InputDecoration(labelText: "Email"),
-
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: 'Email'),
+                      validator: (val) => !EmailValidator.validate(val!, true)
+                          ? 'Not a valid email.'
+                          : null,
+                      onSaved: (val) => _email = val!,
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
                   Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextField(
-                      controller: password,
-                      decoration: InputDecoration(labelText: "Password"),
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: 'Password'),
+                      validator: (val) =>
+                      val!.length < 4 ? 'Password too short..' : null,
+                      onSaved: (val) => _password = val!,
                       obscureText: true,
-
                     ),
                   ),
                   Container(
@@ -99,16 +102,12 @@ class _SignInState extends State<LoginScreen> {
                     child: RaisedButton(
 
                       onPressed: () {
-                        var user = email.text.toLowerCase();
-                        var pass = password.text;
-                        if(user.length < 4)
-                          displayDialog(context, "Invalid Username", "The username should be at least 4 characters long");
-                        else if(pass.length < 4)
-                                displayDialog(context, "Invalid Password", "The password should be at least 4 characters long");
-                        else {
+                        final form = _key.currentState;
+                        if (form!.validate()) {
+                          form.save();
 
-                          fetchAlbum(email.text.toLowerCase(),password.text);
 
+                          fetchAlbum( _email.toLowerCase(), _password);
                         }
                        },
                       shape: RoundedRectangleBorder(

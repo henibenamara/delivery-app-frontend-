@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:livraison_front/constant/app_constants.dart';
 
 import '../../services/livraisonService.dart';
+import '../../widgets/drawer_client.dart';
 
 
 class Dashboard_Client extends StatefulWidget {
@@ -60,6 +61,8 @@ class _Dashboard_Client extends State<Dashboard_Client> with SingleTickerProvide
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: clientDrawer(context),
+
       body: FutureBuilder(
         future: LivraisonService().getStatsClient(widget.id.toString()),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
