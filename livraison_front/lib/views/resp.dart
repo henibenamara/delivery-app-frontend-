@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/views/responsable/demandeLivreur.dart';
 
 
 
 import '../widgets/drawer_responsable.dart';
+import 'livraison/livraisonList.dart';
 
 
 
@@ -42,6 +44,14 @@ class _responsable extends State<responsable> {
                     color: Colors.black,
                     width: 1.0,
                   ),),
+                  child: InkWell(
+                    onTap: () async {
+                    /*  await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DashboardAdmin()));*/
+                    },
                   child: Row(
                     children: [
                       CircleAvatar(backgroundImage: AssetImage("assets/images/box.png"),radius: 50,backgroundColor: Colors.white,),
@@ -50,7 +60,7 @@ class _responsable extends State<responsable> {
 
                     ],
                   ),
-
+                 ),
                 ),
                 SizedBox(height: 20,),
                 Card(
@@ -60,6 +70,14 @@ class _responsable extends State<responsable> {
                     color: Colors.black,
                     width: 1.0,
                   ),),
+                  child: InkWell(
+                    onTap: () async {
+                      await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DemandeLivreur()));
+                    },
                   child: Row(
                     children: [
                       CircleAvatar(backgroundImage: AssetImage("assets/images/box.png"),radius: 50,backgroundColor: Colors.white,),
@@ -68,6 +86,7 @@ class _responsable extends State<responsable> {
 
                     ],
                   ),
+                ),
                 ),
                 SizedBox(height: 20,),
                 Card(
@@ -80,11 +99,11 @@ class _responsable extends State<responsable> {
                   ),),
                   child: InkWell(
                     onTap: () async {
-                      /**  await Navigator.push(
+                       await Navigator.push(
                           context,
                           MaterialPageRoute(
                           builder: (context) =>
-                          LivraisonClient()));*/
+                          LivraisonPage()));
                     },
                     child: Row(
                       children: [

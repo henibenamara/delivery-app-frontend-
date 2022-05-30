@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:livraison_front/widgets/drawer_livreur.dart';
 
+import 'livraison/LivraisonEncours.dart';
+import 'livraison/LivraisonListBylivreur.dart';
+import 'livraisonRequest.dart';
+
 
 
 class livreur extends StatefulWidget {
@@ -40,6 +44,14 @@ class _livreur extends State<livreur> {
                     color: Colors.black,
                     width: 1.0,
                   ),),
+                  child: InkWell(
+                    onTap: () async {
+                    /*  await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LivraisonRequest()));*/
+                    },
                   child: Row(
                     children: [
                       CircleAvatar(backgroundImage: AssetImage("assets/images/box.png"),radius: 50,backgroundColor: Colors.white,),
@@ -48,7 +60,7 @@ class _livreur extends State<livreur> {
 
                     ],
                   ),
-
+                  ),
                 ),
                 SizedBox(height: 20,),
                 Card(
@@ -58,6 +70,14 @@ class _livreur extends State<livreur> {
                     color: Colors.black,
                     width: 1.0,
                   ),),
+                  child: InkWell(
+                    onTap: () async {
+                      await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LivraisonEnCours()));
+                    },
                   child: Row(
                     children: [
                       CircleAvatar(backgroundImage: AssetImage("assets/images/box.png"),radius: 50,backgroundColor: Colors.white,),
@@ -65,6 +85,7 @@ class _livreur extends State<livreur> {
                       Text("Livraison En cours",style: TextStyle(fontSize: 28),),
 
                     ],
+                  ),
                   ),
                 ),
                 SizedBox(height: 20,),
@@ -78,11 +99,11 @@ class _livreur extends State<livreur> {
                   ),),
                   child: InkWell(
                     onTap: () async {
-                    /**  await Navigator.push(
+                     await Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  LivraisonClient()));*/
+                                  LivraisonLivreur()));
                     },
                     child: Row(
                       children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/views/client/suiviColis.dart';
 import 'package:livraison_front/views/livraison/DetailLivraiosnAdmin.dart';
 import 'package:livraison_front/views/livraison/DetailLivraisonClient.dart';
 
@@ -7,6 +8,7 @@ import '../../constant/app_constants.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_client.dart';
+import '../livraison/AddLivraison.dart';
 import '../livraison/LivraisonListByClient.dart';
 
 class DashboardClient extends StatefulWidget {
@@ -44,6 +46,14 @@ class _DashboardClientState extends State<DashboardClient> {
                   color: Colors.black,
                   width: 1.0,
                 ),),
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AddLivraisonWidget()));
+                  },
                 child: Row(
                   children: [
                     CircleAvatar(backgroundImage: AssetImage("assets/images/box.png"),radius: 50,backgroundColor: Colors.white,),
@@ -51,6 +61,7 @@ class _DashboardClientState extends State<DashboardClient> {
                     Text("Envoyer un Colis",style: TextStyle(fontSize: 28),),
 
                   ],
+                ),
                 ),
 
               ),
@@ -62,6 +73,14 @@ class _DashboardClientState extends State<DashboardClient> {
                   color: Colors.black,
                   width: 1.0,
                 ),),
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                suiviColis()));
+                  },
                 child: Row(
                   children: [
                     CircleAvatar(backgroundImage: AssetImage("assets/images/box.png"),radius: 50,backgroundColor: Colors.white,),
@@ -69,6 +88,7 @@ class _DashboardClientState extends State<DashboardClient> {
                     Text("Suivi votre Colis",style: TextStyle(fontSize: 28),),
 
                   ],
+                ),
                 ),
               ),
               SizedBox(height: 20,),
