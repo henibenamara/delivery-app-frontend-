@@ -169,7 +169,7 @@ class _DashboardAdmin extends State<DashboardAdmin> with SingleTickerProviderSta
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
 
-                                    cardDetails('Total revenu', 'assets/images/card.png', snapshot.data!['money'].toString()+" DT"),
+                                    cardDetails('Total revenue(10%)', 'assets/images/card.png', snapshot.data!['money'].toString()+" DT"),
                                     cardDetails('Total Livraison', 'assets/images/alldelivery.png', snapshot.data!['totalLivraison'].toString()),
 
                                   ],

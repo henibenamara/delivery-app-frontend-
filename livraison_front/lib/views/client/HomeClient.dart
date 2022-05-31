@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:livraison_front/models/client.dart';
+import 'package:livraison_front/services/livraisonService.dart';
 import 'package:livraison_front/views/client/EditClient.dart';
 
 import '../../constant/app_constants.dart';
@@ -153,60 +154,72 @@ class _ProfilePageState extends State<ProfilePage> {
                       fontWeight: FontWeight.w300
                   ),
                   ),
-                  Card(
-                    margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Text("Livraisons",
-                                  style: TextStyle(
-                                      color: Colors.blueAccent,
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600
-                                  ),),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                Text("15",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w300
-                                  ),)
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child:
-                            Column(
-                              children: [
-                                Text("Scores",
-                                  style: TextStyle(
-                                      color: Colors.blueAccent,
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600
-                                  ),),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                Text("27",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w300
-                                  ),)
-                              ],
-                            ),
-                          ),
-                        ],
+                      FutureBuilder(
+    future: LivraisonService().getStatsClient(widget.userId.toString()),
+    builder: (context, AsyncSnapshot<dynamic> snapshot) {
+      print('snapshot is : ${snapshot.data}');
+
+      if (snapshot.hasData) {
+        return Card(
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text("Livraisons",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      SizedBox(
+                        height: 7,
                       ),
-                    ),
+                      Text(snapshot.data!['livraisonLivrée'].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.w300
+                        ),)
+                    ],
                   ),
+                ),
+                Expanded(
+                  child:
+                  Column(
+                    children: [
+                      Text("Scores",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Text("0",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.w300
+                        ),)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+
+
+
+      }else return Text("");
+      }),
+
                   SizedBox(
                     height: 50,
                   ),

@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livraison_front/constant/app_constants.dart';
+import 'package:livraison_front/views/livraison/verificationLivraisonQrCode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../models/livraison.dart';
 import '../../services/livraisonService.dart';
 import '../../widgets/drawer_livreur.dart';
+import 'DetailLivraisonLivreur.dart';
 
 
 
@@ -64,8 +67,7 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData){
             if ((snapshot.data![index]['etatLivraison'].toString() ==
-                "en cours")&&(snapshot.data![index]['verification'].toString() ==
-          "true")) {
+                "en cours")) {
               return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -75,103 +77,183 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
                         padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                         child: Row(children: <Widget>[
                           Text(
-                            "Numero :" +
-                                snapshot.data![index][
-                                'numLivraison']
+                            "Colis : " +
+                                snapshot
+                                    .data![index]['colisId']['DesColis'] //(snapshot.data![index]['etatLivraison'].toString()=="en cours")
                                     .toString(),
                             style: const TextStyle(
-                                fontSize: 20.0, color: Colors.black),
+                                fontSize: 22.0, color: Colors.white),
                           ),
                           const Spacer(),
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 30.0),
-                        child: Row(children: <Widget>[
-                          Text(
-                              "${"De " + snapshot.data![index]['AdresseExp'].toString()} ",
-                              style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.black)),
-                          const Spacer(),
-                          Text("vers",
-                              style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.black)),
-                          const Spacer(),
-                          Text(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                          child:  Container(
+                              height: 200,
 
-                              "${snapshot.data![index]['AdressseDes'].toString()}",
-                              style:  const TextStyle(
-                                  fontSize: 20.0, color: Colors.black)),
-                          const Spacer(),
+                              child: Image.network(AppConstants.API_URL+"/"+snapshot.data![index]['imageUrl'].toString()))
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_location_alt_rounded),
+                          Text(
+                              "${snapshot.data![index]['AdresseExp']
+                                  .toString()} ",
+                              style: const TextStyle(
+                                  fontSize: 18.0, color: Colors.white)),
+
+
                         ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "${snapshot.data![index]['colisId']['poidsColis']} Kg",
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.add_road),
+
+
+
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 1.0, bottom: 1.0),
+                        child: Row(children: <Widget>[
+                          Icon(Icons.airplanemode_on_sharp),
+
+
+                          Text(
+
+                              "${snapshot.data![index]['AdressseDes']
+                                  .toString()}",
                               style: const TextStyle(
-                                  fontSize: 20.0, color: Colors.black),
-                            ),
-                            const Spacer(),
-                            RaisedButton(
-                              child: Text('Livraison Complet'),
-                              color: Colors.green,
-                              onPressed: () async {
-                                final prefs =
-                                await SharedPreferences.getInstance();
-                                const String etatLivraison = "Livrée";
-                                final String? userId =
-                                prefs.getString('LivreurId');
+                                  fontSize: 18.0, color: Colors.white)),
+                          const Spacer(),
+                          FloatingActionButton(
+                            onPressed: () async {
 
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext ctx) {
-                                      return AlertDialog(
-                                        title: const Text('Please Confirm'),
-                                        content: const Text(
-                                            'Vous assurez que cette livraison est bien Livrée ?'),
-                                        actions: [
-                                          // The "Yes" button
-                                          TextButton(
-                                              onPressed: () async {
-                                                api.updateLivraison(
-                                                    snapshot.data![index]['_id'],
-                                                    userId!,
-                                                    etatLivraison,
-                                                    snapshot.data![index]['prix']);
-                                                showTopSnackBar(
+                              final prefs =
+                              await SharedPreferences.getInstance();
+                              const String etatLivraison = "livrée";
+                              final String? userId =
+                              prefs.getString('LivreurId');
+
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      title: const Text('Please Confirm'),
+                                      content: const Text(
+                                          'Vous assurez que cette livraison est bien Livrée ?'),
+                                      actions: [
+                                        // The "Yes" button
+                                        TextButton(
+                                            onPressed: () async {
+
+                                              await Navigator.push(
                                                   context,
-                                                  CustomSnackBar.success(
-                                                    message:
-                                                    "bonne travail, cette livraison est livrer avec succées",
-                                                  ),
-                                                );
-                                                await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            LivraisonEnCours()));
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ScanScreen(snapshot.data![index]['_id'].toString(),snapshot.data![index]['numLivraison'].toString(),userId.toString(),etatLivraison.toString(),snapshot.data![index]['prix'].toString())));
 
-                                              },
-                                              child: const Text('Oui')),
-                                          TextButton(
-                                              onPressed: () {
-                                                // Close the dialog
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text('non'))
-                                        ],
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                                      );
-                                    });
-                              }),
+                                            },
+                                            child: const Text('Oui')),
+                                        TextButton(
+                                            onPressed: () {
+                                              // Close the dialog
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('non'))
+                                      ],
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                                    );
+                                  });
 
-                          ],
-                        ),
-                      )
+
+                            },
+                            child: const Icon(Icons.check),
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.purple,
+                          ),
+                          FloatingActionButton(
+                            onPressed: () {
+                              Livraison livraison;
+
+                              livraison = new Livraison(
+                                adresseExp: snapshot.data![index]
+                                ['AdresseExp'],
+                                adressseDes: snapshot.data![index]
+                                ['AdressseDes'],
+                                dateDeLivraison: snapshot.data![index]
+                                ['DateDeLivraison'],
+                                DesColis: snapshot.data![index]['colisId']
+                                ['DesColis'],
+                                numLivraison: snapshot.data![index]
+                                ['numLivraison'],
+                                typeColis: snapshot.data![index]['colisId']
+                                ['typeColis'],
+                                poidsColis: snapshot.data![index]['colisId']
+                                ['poidsColis'],
+                                etatLivraison: snapshot.data![index]
+                                ['etatLivraison'],
+                                sId: snapshot.data![index]['_id'],
+                                idClient: snapshot.data![index]['client']
+                                ['_id'],
+                                imageUrl: snapshot.data![index]['imageUrl'],
+                                idLivreur: "aucun livreur",
+                              );
+                              print(snapshot.data![index]['client']['_id']);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailLivraisonLivreur(livraison)));
+                            },
+                            child: const Icon(Icons.info_outline),
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.purple,
+                          ),
+                        ]),
+                      ),
+
                     ],
                   ),
                 ),
@@ -180,7 +262,7 @@ class _LivraisonEnCours extends State<LivraisonEnCours> {
                   borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30),topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
                   side: BorderSide(color: Colors.green, width: 1),
                 ),
-                color: Colors.white,
+                color: Colors.blue,
                 elevation: 30,
 
               );

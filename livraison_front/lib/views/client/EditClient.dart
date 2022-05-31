@@ -5,6 +5,7 @@ import 'package:livraison_front/views/client/uploadphotoClient.dart';
 import '../../services/clientService.dart';
 import '../client.dart';
 import 'HomeClient.dart';
+import 'dashboardClient.dart';
 
 
 
@@ -29,26 +30,16 @@ class _EditProfilePageState extends State<EditProfileClient>  {
     final numC = TextEditingController(text: widget.client.clientTel.toString());
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
+        title:Text("Modifier profil",) ,
+
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.green,
+            color: Colors.white,
           ),
-          onPressed: () { Navigator.of(context).pop();},
+          onPressed: () {Navigator.of(context).pop();},
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.green,
-            ),
-            onPressed: () {
 
-            },
-          ),
-        ],
       ),
       body: Container(
 
@@ -59,10 +50,7 @@ class _EditProfilePageState extends State<EditProfileClient>  {
           },
           child: ListView(
             children: [
-              Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
+
               SizedBox(
                 height: 15,
               ),
@@ -113,7 +101,7 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                                       .of(context)
                                       .scaffoldBackgroundColor,
                                 ),
-                                color: Colors.green,
+                                color: Colors.blue,
                               ),
                               child: Icon(
                                 Icons.edit,
@@ -130,8 +118,8 @@ class _EditProfilePageState extends State<EditProfileClient>  {
               ),
               buildTextField("nom", widget.client.nom, nomC),
               buildTextField("prenom", widget.client.prenom, prenomC),
-              buildTextField("numero", widget.client.clientTel.toString(), numC),
-              buildTextField("Location", widget.client.clientAdresse,AdresseC ),
+              buildTextField("telephone", widget.client.clientTel.toString(), numC),
+              buildTextField("Adresse", widget.client.clientAdresse,AdresseC ),
               SizedBox(
                 height: 35,
               ),
@@ -142,8 +130,8 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
-                    child: Text("CANCEL",
+                    onPressed: () {Navigator.of(context).pop();},
+                    child: Text("Annuler",
                         style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 2.2,
@@ -169,15 +157,15 @@ class _EditProfilePageState extends State<EditProfileClient>  {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => client()));
+                              builder: (context) => DashboardClient()));
                     },
-                    color: Colors.green,
+                    color: Colors.blue,
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     child: Text(
-                      "SAVE",
+                      "Modifier",
                       style: TextStyle(
                           fontSize: 14,
                           letterSpacing: 2.2,

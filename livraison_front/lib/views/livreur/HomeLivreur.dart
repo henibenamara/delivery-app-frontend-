@@ -9,6 +9,7 @@ import 'package:livraison_front/views/livreur/EditLivreur.dart';
 
 import '../../constant/app_constants.dart';
 import '../../services/clientService.dart';
+import '../../services/livraisonService.dart';
 import '../../widgets/profile_Widget.dart';
 
 class ProfilePageLiv extends StatefulWidget {
@@ -157,86 +158,94 @@ class _ProfilePageState extends State<ProfilePageLiv> {
                     SizedBox(
                       height: 15,
                     ),
+    FutureBuilder(
+    future: LivraisonService().getStatsLivreur(widget.userId.toString()),
+    builder: (context, AsyncSnapshot<dynamic> snapshot) {
+      print('snapshot is : ${snapshot.data}');
 
-                    Card(
-                      margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Text("Livraisons",
-                                    style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600
-                                    ),),
-                                  SizedBox(
-                                    height: 7,
-                                  ),
-                                  Text("15",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w300
-                                    ),)
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child:
-                              Column(
-                                children: [
-
-                                  Text("Scores",
-                                    style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600
-                                    ),),
-                                  SizedBox(
-                                    height: 7,
-                                  ),
-                                  Text("27",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w300
-                                    ),)
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child:
-                              Column(
-                                children: [
-
-                                  Text("argent",
-                                    style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600
-                                    ),),
-                                  SizedBox(
-                                    height: 7,
-                                  ),
-                                  Text("3k+",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w300
-                                    ),)
-                                ],
-                              ),
-                            ),
-
-                          ],
-                        ),
+      if (snapshot.hasData) {
+        return Card(
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text("Livraisons",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      SizedBox(
+                        height: 7,
                       ),
-                    ),
+                      Text(snapshot.data!["livraisonLivrée"].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w300
+                        ),)
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child:
+                  Column(
+                    children: [
+
+                      Text("Scores",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Text("0",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w300
+                        ),)
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child:
+                  Column(
+                    children: [
+
+                      Text("Revenue",
+                        style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Text(snapshot.data!["sumLivrée"].toString()+"dt",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w300
+                        ),)
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        );
+      }else return Text("");
+      } ),
+
                     SizedBox(
                       height: 50,
                     ),

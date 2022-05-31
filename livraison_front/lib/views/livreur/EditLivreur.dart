@@ -27,7 +27,7 @@ class _EditProfilePageState extends State<EditProfileLivreur>  {
     final numC = TextEditingController(text: widget.livreur.livTelephone.toString());
     return Scaffold(
       appBar: AppBar(
-title:Text("Modifier profile",) ,
+title:Text("Modifier profil",) ,
 
         leading: IconButton(
           icon: Icon(
@@ -115,8 +115,8 @@ title:Text("Modifier profile",) ,
               ),
               buildTextField("nom", widget.livreur.nom, nomC),
               buildTextField("prenom", widget.livreur.prenom, prenomC),
-              buildTextField("numero", widget.livreur.livTelephone.toString(), numC),
-              buildTextField("Location", widget.livreur.livAdresse,AdresseC ),
+              buildTextField("telephone", widget.livreur.livTelephone.toString(), numC),
+              buildTextField("Adresse", widget.livreur.livAdresse,AdresseC ),
               SizedBox(
                 height: 35,
               ),

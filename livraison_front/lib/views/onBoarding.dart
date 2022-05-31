@@ -14,15 +14,15 @@ class OnBoardingPage extends StatelessWidget {
 
 
         PageViewModel(
-          title: 'Today a reader, tomorrow a leader',
-          body: 'Start your journey',
-          footer: Text("TEEEEEEEXT"),
+          title: 'bienvenue sur notre application',
+          body: '',
+
           image: buildImage('assets/images/livraison1.jpg'),
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Today a reader, tomorrow a leader',
-          body: 'Start your journey',
+          title: 'Votre colis livré en toute sécurité',
+          body: 'Rejoignez-nous',
           footer: Column(
             children: [
               RaisedButton(

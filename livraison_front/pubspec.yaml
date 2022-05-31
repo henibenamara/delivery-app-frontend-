@@ -54,6 +54,8 @@ dependencies:
   map: ^1.0.0
   cached_network_image: ^3.2.0
   introduction_screen: ^3.0.2
+  flutter_barcode_scanner: ^2.0.0
+  barcode_widget: ^2.0.2
 
 dev_dependencies:
   flutter_test:
