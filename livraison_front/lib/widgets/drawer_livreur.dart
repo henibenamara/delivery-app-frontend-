@@ -82,7 +82,7 @@ Widget livreurDrawer(BuildContext context) {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                         (snapshot.data![index]['_id'])));
+                                                        LivraisonRequest(snapshot.data![index]['_id'])));
 
                                             }),
 

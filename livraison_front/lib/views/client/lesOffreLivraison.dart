@@ -40,7 +40,7 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
     return Scaffold(
         drawer: clientDrawer(context),
         appBar: AppBar(
-          title: Text("Les Offre"),
+          title: Text("Les Offres"),
           centerTitle: true,
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back, color: Colors.white),
@@ -243,7 +243,7 @@ class _OffreLivraisonClientState extends State<OffreLivraisonClient> {
                                                                       CustomSnackBar
                                                                           .success(
                                                                         message:
-                                                                            "vous avez choisir cette offre avec succée",
+                                                                            "vous avez choisir cette offre avec succès",
                                                                       ),
                                                                     );
                                                                     Livraison livraison = new Livraison(

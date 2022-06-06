@@ -133,7 +133,7 @@ class _uploadphotoLiv extends State<uploadphotoLiv> {
                                   context,
                                   CustomSnackBar.success(
                                     message:
-                                    "Photo ajouter avec sucée",
+                                    "Photo ajouter avec succès",
                                   ),
                                 );
                                 Navigator.push(
